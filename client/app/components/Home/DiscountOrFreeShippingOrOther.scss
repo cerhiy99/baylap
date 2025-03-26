@@ -1,0 +1,20 @@
+.discount-or-free-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  div {
+    padding: 5px;
+    font-family: Roboto;
+    font-size: 12.68px;
+    font-weight: 700;
+    line-height: 9.29px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #ffffff;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    border-radius: 9338.17px;
+  }
+}

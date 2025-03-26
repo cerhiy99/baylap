@@ -1,0 +1,16 @@
+@import '../../App.scss';
+
+.select-goods-container {
+  @include responsive-width;
+  margin-bottom: 60px;
+  h1 {
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 550;
+    line-height: 30px;
+    letter-spacing: -0.531000018119812px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+  }
+}

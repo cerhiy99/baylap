@@ -1,0 +1,184 @@
+@import '../Admin.scss';
+
+.admin-user-container {
+  .filter-container {
+    display: flex;
+    align-items: center;
+    background-color: #05172fcc;
+    .filters {
+      padding: 10px 0;
+      @include admin-responsive-width;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      height: 30px;
+      .filter {
+        font-family: Roboto;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: #ffffff;
+        border-bottom: 1px solid #bfc1c0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+      }
+      .select {
+        border-bottom: 2px solid #269569;
+      }
+    }
+    .admin-reviews-search {
+      display: flex;
+
+      position: relative;
+      height: 35px;
+      input {
+        margin-left: 15px;
+        width: 800px;
+        border-radius: 5px;
+        padding: 0;
+        height: 35px;
+        border: none;
+        outline: none;
+      }
+      .search-svg {
+        position: absolute;
+        right: 2px;
+        top: 0px;
+      }
+    }
+  }
+  .list-reviews {
+    @include admin-responsive-width;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    .review-header {
+      background-color: #a5a1a11a;
+      div {
+        font-family: Lora;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 20.8px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: #05172f;
+      }
+      .up {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 5px;
+      }
+    }
+    .review {
+      display: flex;
+      flex-direction: row;
+      padding: 15px;
+      border-bottom: 1px solid #269569;
+      gap: 20px;
+
+      div {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+      }
+      .select-and-tema {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        width: 260px;
+      }
+      .tema {
+        width: 20.53%;
+      }
+      .author {
+        width: 4.89%;
+        min-width: 20px;
+      }
+      .published {
+        width: 52.79%;
+      }
+      .date {
+        width: 13.2%;
+      }
+      .operations {
+        width: 200px;
+      }
+      .count-orders {
+        width: 160px;
+      }
+      .date-register {
+        width: 150px;
+      }
+    }
+    .selects-adn-input {
+      margin-top: 20px;
+      border-top: 2px solid #269569;
+      padding-top: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 225px;
+      select {
+        background-color: #269569;
+        border-radius: 7px;
+        color: #ffffff;
+        font-family: Roboto;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 20.8px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        border: none;
+        outline: none;
+      }
+      button {
+        background-color: #2695694d;
+        font-family: Roboto;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 20.8px;
+        text-align: center;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: #ffffff;
+        border: none;
+        height: 26px;
+        width: 101px;
+        border-radius: 7px;
+      }
+    }
+  }
+  .pagination {
+    margin-top: 30px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
+    div {
+      width: 40px;
+      height: 40px;
+      border: 2px solid #269569;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .select {
+      background-color: #269569;
+      color: #ffffff;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+@import '../../[lang]/App.scss';
+
+.my-swiper-container {
+  @include responsive-width;
+  width: 100%;
+  height: 100%;
+  margin-top: 30px;
+  overflow: hidden;
+  height: calc(60vh + 50px);
+
+  .swiper {
+    position: relative;
+    overflow: unset;
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+
+    img {
+      width: 100%;
+      border-radius: 20px;
+
+      height: 60vh; // Висота зображення
+      object-fit: cover; // Масштабування зображення без спотворення
+    }
+  }
+
+  .swiper-pagination {
+    position: absolute;
+    bottom: -50px; // Опускаємо кружки нижче картинки
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 8px; // Відстань між кружками
+    z-index: 3;
+    .swiper-pagination-bullet {
+      width: 12px;
+      height: 12px;
+      background-color: #e0e0e0; // Колір кулі
+      border-radius: 50%;
+      content: '';
+      opacity: 1;
+    }
+    .swiper-pagination-bullet-active {
+      background-color: #fe680a; // Колір активної кулі
+    }
+  }
+}

@@ -1,0 +1,7 @@
+export const FacebookURL = 'gsdsd'
+export const InstagramURL = ''
+export const YouTubeURL = ''
+export const TikTokURL = ''
+export const ViberURL = ''
+export const TelegramURL = ''
+export const VatcapURL = ''

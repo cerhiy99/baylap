@@ -1,0 +1,20 @@
+.my-rating {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  span {
+    color: #ff671f;
+  }
+  p {
+    margin: 0;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #808080;
+  }
+}

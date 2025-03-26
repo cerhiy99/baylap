@@ -1,0 +1,290 @@
+@import '../Admin.scss';
+
+.orders-container {
+  .orders-header-container {
+    background-color: #05172fcc;
+    .order-header {
+      @include admin-responsive-width;
+      h3 {
+        margin: 0;
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 20.8px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: #ffffff;
+        padding: 20px 0;
+      }
+      .filters {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        color: #ffffff;
+        padding-bottom: 20px;
+        align-items: center;
+        div {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 5px;
+          text-wrap: nowrap;
+        }
+        input[type='date'] {
+          border-color: #ffffff;
+          outline: none;
+          color: #c4c4c4;
+          background-color: transparent;
+          border-radius: 5px;
+          padding: 2px;
+        }
+        input[type='date']::-webkit-calendar-picker-indicator {
+          color: #c4c4c4; /* Колір тексту всередині календаря (де це можливо) */
+          border-radius: 4px; /* Радіус для закруглення */
+        }
+        select {
+          background-color: transparent;
+          color: #ffffff;
+          outline: none;
+          border-color: #ffffff;
+          border-radius: 5px;
+        }
+        button {
+          background-color: #269569;
+          width: 160px;
+          text-align: center;
+          height: 35px;
+          border-radius: 5px;
+          color: #ffffff;
+          font-family: Roboto;
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 20.8px;
+          text-underline-position: from-font;
+          text-decoration-skip-ink: none;
+          border: none;
+        }
+        .search {
+          width: 100%;
+          input[type='text'] {
+            width: 100%;
+          }
+          display: flex;
+
+          position: relative;
+          height: 31px;
+          input {
+            margin-left: 15px;
+            border-radius: 5px;
+            height: 100%;
+            padding-left: 10px;
+          }
+          .search-svg {
+            position: absolute;
+            right: -2px;
+            top: -1px;
+          }
+        }
+      }
+    }
+  }
+  .list-reviews {
+    @include admin-responsive-width;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    .review-header {
+      background-color: #a5a1a11a;
+      div {
+        font-family: Lora;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 15px;
+        text-align: center;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: #05172f;
+      }
+    }
+    .review {
+      display: flex;
+      flex-direction: row;
+      padding: 15px;
+      border-bottom: 1px solid #269569;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+      .order-list-basket {
+        display: flex;
+        flex-direction: column;
+        .order-list-basket-header {
+          padding: 5px;
+          div {
+            font-family: Lora;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 15px;
+            text-align: center;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+            color: #05172f;
+          }
+          display: flex;
+          flex-direction: row;
+          gap: 10px;
+          background-color: #a5a1a11a;
+          justify-content: space-between;
+        }
+        .list-basket {
+          display: flex;
+          flex-direction: row;
+          background-color: #a5a1a10d;
+          justify-content: space-between;
+        }
+        div {
+          font-family: Roboto;
+          font-size: 10px;
+          font-weight: 400;
+          line-height: 15px;
+          text-align: left;
+          text-underline-position: from-font;
+          text-decoration-skip-ink: none;
+        }
+
+        .title {
+          width: 30%;
+        }
+      }
+      .contact-info {
+        .info {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          p {
+            margin: 0;
+            font-family: Lora;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 15px;
+            text-align: left;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+            color: #000000;
+            margin-right: 3px;
+          }
+          span {
+            font-family: Lora;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 15px;
+            text-align: left;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+            color: #000000;
+          }
+        }
+      }
+      div {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 20.8px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: #05172f;
+      }
+      .id {
+        width: 3.83%;
+      }
+      .date {
+        width: 5.75%;
+      }
+      .name {
+        width: 6.71%;
+      }
+      .email {
+        width: 11.51%;
+        word-break: break-word; /* Дозволяє розривати слова */
+        overflow-wrap: break-word;
+      }
+      .contact-info {
+        width: 15.34%;
+      }
+      .order-list-basket {
+        width: 30.68%;
+      }
+      .status {
+        width: 12.94%;
+      }
+      .meneger {
+        width: 7.48%;
+      }
+      .coment-meneger {
+        width: 5.75%;
+      }
+    }
+    .selects-adn-input {
+      margin-top: 20px;
+      border-top: 2px solid #269569;
+      padding-top: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 225px;
+      select {
+        background-color: #269569;
+        border-radius: 7px;
+        color: #ffffff;
+        font-family: Roboto;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 20.8px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        border: none;
+        outline: none;
+      }
+      button {
+        background-color: #2695694d;
+        font-family: Roboto;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 20.8px;
+        text-align: center;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: #ffffff;
+        border: none;
+        height: 26px;
+        width: 101px;
+        border-radius: 7px;
+      }
+    }
+  }
+  .pagination {
+    margin-top: 30px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
+    div {
+      width: 40px;
+      height: 40px;
+      border: 2px solid #269569;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .select {
+      background-color: #269569;
+      color: #ffffff;
+    }
+  }
+}

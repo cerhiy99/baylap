@@ -1,0 +1,45 @@
+.sort-container {
+  width: calc(100% - 30px);
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+  p {
+    margin: 0;
+    font-family: Roboto;
+    font-size: 18px;
+    line-height: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    color: #616e82;
+  }
+  .list-sort-for {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    span {
+      font-family: Roboto;
+      font-size: 14px;
+      line-height: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      color: #293358;
+      cursor: pointer;
+      &:hover {
+        font-size: 16px;
+        line-height: 16px;
+        font-weight: 600;
+      }
+    }
+    .active {
+      font-size: 16px;
+      line-height: 16px;
+      font-weight: 600;
+    }
+  }
+}

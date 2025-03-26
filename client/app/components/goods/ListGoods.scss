@@ -1,0 +1,36 @@
+.list-goods-container4 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  justify-content: space-between;
+  @media (max-width: 1500px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 1300px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+.list-goods-container4-no-filter {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+  @media (max-width: 1400px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  @media (max-width: 1124px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 950px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 670px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

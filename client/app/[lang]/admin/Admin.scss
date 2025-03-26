@@ -1,0 +1,52 @@
+@mixin admin-responsive-width {
+  margin: 0 auto;
+  width: 95%;
+}
+
+.admin-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: #fafbff;
+  z-index: 3;
+  .header-admin-cont {
+    background-color: #269569;
+    padding: 20px 0;
+  }
+  .header-admin {
+    @include admin-responsive-width;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    justify-content: space-between;
+    .left {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 15px;
+    }
+    .right {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 15px;
+    }
+    a {
+      text-decoration: none;
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 19.36px;
+      text-align: left;
+      color: #ffffff;
+    }
+  }
+  .children {
+    display: flex;
+    flex-direction: column;
+    background-color: #fafbff;
+    min-height: 100vh;
+  }
+}

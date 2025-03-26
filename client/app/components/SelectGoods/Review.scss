@@ -1,0 +1,122 @@
+.review-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+  width: 100%;
+  margin: 20px 0;
+
+  .rating-and-additional-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .date {
+      font-family: Roboto;
+      font-size: 10.88px;
+      font-weight: 500;
+      line-height: 11px;
+      text-align: left;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+      color: #616161;
+      text-wrap: nowrap;
+    }
+    .basket-true {
+      margin-top: 3px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 5px;
+      font-family: Roboto;
+      font-size: 11.25px;
+      font-weight: 500;
+      line-height: 12px;
+      text-align: left;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+      color: #43b02a;
+    }
+  }
+  .review {
+    display: flex;
+    flex-direction: column;
+    h4 {
+      font-family: Roboto;
+      font-size: 14.38px;
+      font-weight: 700;
+      line-height: 20px;
+      text-align: left;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+      color: #000000;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    p {
+      margin: 0;
+      font-family: Roboto;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      text-align: justify;
+      color: #333333;
+    }
+    .review-img {
+      object-fit: cover;
+      margin-top: 10px;
+    }
+    .disadvantages {
+      margin-top: 10px;
+      font-family: Roboto;
+      font-size: 12.58px;
+      font-weight: 700;
+      line-height: 17px;
+      text-align: left;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+      color: #000000;
+      gap: 7.5px;
+      span {
+        font-family: Roboto;
+        font-size: 12.91px;
+        font-weight: 400;
+        line-height: 17px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+      }
+    }
+    .reaction {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      p {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-family: Roboto;
+        font-size: 13.13px;
+        font-weight: 400;
+        line-height: 21px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: #999999;
+        cursor: pointer;
+      }
+      .reaction-thumbs {
+        display: flex;
+        flex-direction: row;
+        gap: 7.5px;
+        .line {
+          height: 16px;
+          width: 1px;
+          background-color: #e5e5e5;
+        }
+        svg {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
