@@ -69,11 +69,11 @@ const page = ({ params: { lang } }: { params: { lang: Locale } }) => {
     <>
       <AdminHeader url='reviews' name='Користувачі' lang={lang} />
       <div className='admin-user-container'>
-        <div className='filter-container'>
+        {/* <div className='filter-container'>
           <div className='filters'>
             <div className='select filter'></div>
           </div>
-        </div>
+        </div> */}
         <div className='list-reviews'>
           <div className='review review-header'>
             <div className='tema'>Імя</div>
@@ -96,7 +96,7 @@ const page = ({ params: { lang } }: { params: { lang: Locale } }) => {
               <div className='operations'>{x.stayActive}</div>
               <div className='date-register'>{x.dateRegister}</div>
               <div className='count-orders'>{x.countOrders}</div>
-              <div className='operations'>{x.sumOrders}</div>
+              <div className='operations'>{x.sumOrders} грн.</div>
             </div>
           ))}
           <div className='pagination'>

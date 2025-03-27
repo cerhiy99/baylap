@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/app/store'
 import Image from 'next/image'
 import DelSVG from '../../assest/Header/Del.svg'
-import { removeFromLike } from '@/app/store/reducers/cartReducer'
+import { addToBasket, removeFromLike } from '@/app/store/reducers/cartReducer'
 import Link from 'next/link'
 
 type Props = {
@@ -61,6 +61,12 @@ const HeaderLike = ({ dictionary, lang }: Props) => {
     setPrice(sum)
   }, [like])
 
+  const handlerAddToCart = (id: number) => {
+    const currentLike = like.filter(currentItem => currentItem.id === id)
+    dispatch(addToBasket({ ...currentLike[0], count: 1 }))
+    dispatch(removeFromLike(id))
+  }
+
   return (
     <div
       onMouseEnter={() => setIsOpen(true)}
@@ -83,59 +89,64 @@ const HeaderLike = ({ dictionary, lang }: Props) => {
           <div className='liked-container'>
             <p>Обране</p>
             {like.map(x => (
-              <Link key={x.id} href={`/${lang}/select-goods/${x.id}`}>
-                <div className='liked-basket'>
-                  <div className='basket-goods-img'>
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_SERVER}${x.volume.img}`}
-                      width={82}
-                      height={82}
-                      alt={x.nameUA}
-                    />
-                  </div>
-                  <div className='basket-goods-text'>
-                    <h3>{x.nameUA}</h3>
-                    <div className='price-count-volume'>
-                      <div className='volume-and-count'>
-                        <div className='volume'>{x.volume.volume}</div>
-                      </div>
-                      <div className='price-container'>
-                        <div className='price-no-discount'>
-                          {x.volume.price} ₴
+              <>
+                <Link key={x.id} href={`/${lang}/select-goods/${x.id}`}>
+                  <div className='liked-basket'>
+                    <div className='basket-goods-img'>
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_SERVER}${x.volume.img}`}
+                        width={82}
+                        height={82}
+                        alt={x.nameUA}
+                      />
+                    </div>
+                    <div className='basket-goods-text'>
+                      <h3>{x.nameUA}</h3>
+                      <div className='price-count-volume'>
+                        <div className='volume-and-count'>
+                          <div className='volume'>{x.volume.volume}</div>
                         </div>
-                        <div className='price-with-discount'>
-                          {x.volume.priceWithDiscount} ₴
+                        <div className='price-container'>
+                          <div className='price-no-discount'>
+                            {x.volume.price} ₴
+                          </div>
+                          <div className='price-with-discount'>
+                            {x.volume.priceWithDiscount} ₴
+                          </div>
                         </div>
                       </div>
                     </div>
+                    <div
+                      onClick={e => {
+                        e.preventDefault()
+                        delWithLike(x.id)
+                      }}
+                      className='del'
+                    >
+                      <DelSVG />
+                    </div>
                   </div>
-                  <div
-                    onClick={e => {
-                      e.preventDefault()
-                      delWithLike(x.id)
-                    }}
-                    className='del'
-                  >
-                    <DelSVG />
+                </Link>
+                <div className='button-with-price'>
+                  <div className='price'>
+                    <p>Вместе, без доставки</p>
+                    <div className='price-grn'>
+                      {price} <span className='grn'>₴</span>
+                    </div>
+                  </div>
+                  <div className='in-basket'>
+                    <button onClick={() => handlerAddToCart(x.id)}>
+                      Добавити в корзину
+                    </button>
                   </div>
                 </div>
-              </Link>
+              </>
             ))}
           </div>
         )}
-        {like.length > 0 && (
-          <div className='button-with-price'>
-            <div className='price'>
-              <p>Вмaесте, без доставки</p>
-              <div className='price-grn'>
-                {price} <span className='grn'>₴</span>
-              </div>
-            </div>
-            <div className='in-basket'>
-              <button>Добавити в корзину</button>
-            </div>
-          </div>
-        )}
+        {/* {like.length > 0 && ( */}
+
+        {/* )} */}
       </div>
     </div>
   )

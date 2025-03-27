@@ -52,6 +52,9 @@ const ListNewPost = ({
     setSearchCityes(res)
   }
   useEffect(() => {
+    setIsOpenLocality(false)
+  }, [typeDelivery])
+  useEffect(() => {
     getDefaultCities()
   }, [])
 

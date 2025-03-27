@@ -6,13 +6,40 @@ import FacebookSVG from '../../assest/Header/Facebook.svg'
 import GoogleSVG from '../../assest/Header/Google.svg'
 
 type Props = {
-  register: () => void
+  onRegisterModal: () => void
   close: () => void
 }
 
-const LogIn = ({ register, close }: Props) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+const LogIn = ({ onRegisterModal, close }: Props) => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+  const [errors, setErrors] = useState<{
+    email?: string
+    password?: string
+  }>({})
+
+  const handleSubmitLogin = () => {
+    console.log(formData)
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value
+    })
+
+    // Clear error when user types
+    if (errors[name as keyof typeof errors]) {
+      setErrors({
+        ...errors,
+        [name]: undefined
+      })
+    }
+  }
+
   return (
     <div className='logIn-container'>
       <div className='log-in'>
@@ -23,17 +50,13 @@ const LogIn = ({ register, close }: Props) => {
           </div>
         </div>
         <label>Електронна пошта</label>
-        <input
-          type='text'
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
+        <input type='text' value={formData.email} onChange={handleChange} />
         <br />
         <label>Пароль</label>
         <input
           type='password'
-          value={password}
-          onChange={e => setPassword(e.target.value)}
+          value={formData.password}
+          onChange={handleChange}
         />
         <div
           style={{
@@ -54,9 +77,11 @@ const LogIn = ({ register, close }: Props) => {
           className='row'
         >
           <div className='forgot-password'>Забули пароль?</div>
-          <button className='button-log-in'>Увійти</button>
+          <button className='button-log-in' onClick={handleSubmitLogin}>
+            Увійти
+          </button>
         </div>
-        <div className='register' onClick={register}>
+        <div className='register' onClick={onRegisterModal}>
           Зареєструватися
         </div>
         <br />
@@ -66,13 +91,13 @@ const LogIn = ({ register, close }: Props) => {
 
         <div className='buttons-log-in'>
           <div className='button-facebook'>
-            <button>
+            <button onClick={handleSubmitLogin}>
               <FacebookSVG />
               <div className='button-text'>Facebook</div>
             </button>
           </div>
           <div className='button-google'>
-            <button>
+            <button onClick={handleSubmitLogin}>
               <GoogleSVG />
               <div className='button-text'>Google</div>
             </button>

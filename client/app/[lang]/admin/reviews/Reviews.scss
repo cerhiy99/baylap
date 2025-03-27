@@ -34,22 +34,22 @@
     }
     .admin-reviews-search {
       display: flex;
-
-      position: relative;
       height: 35px;
+      box-sizing: border-box;
       input {
         margin-left: 15px;
         width: 800px;
-        border-radius: 5px;
+        border-radius: 5px 0 0 5px;
         padding: 0;
-        height: 35px;
+
         border: none;
         outline: none;
       }
       .search-svg {
-        position: absolute;
-        right: 2px;
-        top: 0px;
+        height: 35px;
+        width: 52px;
+        background-color: #269569;
+        border-radius: 0 5px 5px 0;
       }
     }
   }

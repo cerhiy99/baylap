@@ -34,10 +34,13 @@ const CurierOrPosOrDepartament = ({
   const [apartment, setApartment] = useState('')
   const [selectInfoDelivery, setSelectFilterDeilvery] =
     useState<WarehouseData | null>(null)
+
+  const [isSubList, setSubList] = useState<boolean>(true)
   const selectDelivery = (value: WarehouseData) => {
     setIsFinishSelect(true)
     setSelectFilterDeilvery(value)
     setSearchPostOrDepartament(value.Description)
+    setSubList(false)
   }
   const changeSearchPost = async (value: string) => {
     setSearchPostOrDepartament(value)
@@ -91,6 +94,9 @@ const CurierOrPosOrDepartament = ({
       setFilterInfoDelivery(res)
     }
   }
+  useEffect(() => {
+    setSubList(false)
+  }, [typeDelivery])
 
   useEffect(() => {
     getInfoForDelivery()
@@ -140,26 +146,31 @@ const CurierOrPosOrDepartament = ({
           </p>
           <input
             value={searchPostOrDepartament}
+            onClick={() => {
+              setSubList(true)
+            }}
             onChange={e => changeSearchPost(e.target.value)}
             type='text'
             placeholder={
               typeDelivery == 'department' ? 'Віділення' : 'поштомат'
             }
           />
-          <ul>
-            {filterInfoDelivery.map(x => (
-              <li
-                key={x.Ref}
-                onClick={e => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  selectDelivery(x)
-                }}
-              >
-                {x.Description}
-              </li>
-            ))}
-          </ul>
+          {isSubList && (
+            <ul>
+              {filterInfoDelivery.map(x => (
+                <li
+                  key={x.Ref}
+                  onClick={e => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    selectDelivery(x)
+                  }}
+                >
+                  {x.Description}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       ) : (
         <div className='curier'>

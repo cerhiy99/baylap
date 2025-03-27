@@ -48,7 +48,7 @@ const AboutForm: React.FC = () => {
     // Очищуємо форму
     setFormData({
       name: '',
-      phone: '',
+      phone: '+380',
       email: '',
       message: ''
     })
@@ -83,9 +83,15 @@ const AboutForm: React.FC = () => {
           </label>
           <PhoneInput
             country={'ua'}
+            placeholder=''
             value={formData.phone}
             onChange={handlePhoneChange}
-            inputProps={{ required: true }}
+            inputProps={{
+              name: 'phone',
+              required: true,
+              pattern:
+                '^\\+380 \\(\\d{2}\\\\) \\d{3} \\d{2} \\d{2}$|^(?!\\+380).{7,20}$'
+            }}
           />
         </div>
 

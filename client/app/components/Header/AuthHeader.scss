@@ -57,12 +57,17 @@
     transform: translateX(-50%);
     padding: 8px 11px; /* Внутрішні відступи */
     gap: 7.5px;
+    .dropdownBtn {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
     div {
       margin: 0;
       padding: 0;
       font-family: Roboto;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 400;
       line-height: 16.94px;
       text-align: left;
       text-underline-position: from-font;

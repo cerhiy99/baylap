@@ -44,10 +44,15 @@ const AuthHeader = ({ dictionary, lang }: Props) => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [isOpen])
-  const register = () => {
+  const handleLogin = () => {
     setLogIsOpen(false)
     setIsRegisterOpen(true)
   }
+  const handleRegister = () => {
+    setLogIsOpen(true)
+    setIsRegisterOpen(false)
+  }
+
   const closeLogIn = () => {
     setLogIsOpen(false)
   }
@@ -70,16 +75,22 @@ const AuthHeader = ({ dictionary, lang }: Props) => {
           <p>{dictionary.logIn}</p>
         </div>
         <div className={`dropdown ${isOpen ? 'show' : ''}`}>
-          <div className='log-in' onClick={() => setLogIsOpen(true)}>
+          <div
+            className='log-in dropdownBtn'
+            onClick={() => setLogIsOpen(true)}
+          >
             {dictionary.logIn}
           </div>
-          <div className='register' onClick={() => setIsRegisterOpen(true)}>
+          <div
+            className='register dropdownBtn'
+            onClick={() => setIsRegisterOpen(true)}
+          >
             {dictionary.register}
           </div>
         </div>
       </div>
-      {logIsOpen && <LogIn register={register} close={closeLogIn} />}
-      {isRegisterOpen && <Register logIn={register} close={closeRegister} />}
+      {logIsOpen && <LogIn onRegisterModal={handleLogin} close={closeLogIn} />}
+      {isRegisterOpen && <Register onClose={closeRegister} />}
     </>
   )
 }

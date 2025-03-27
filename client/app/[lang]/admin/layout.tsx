@@ -7,6 +7,9 @@ import './Admin.scss'
 import HomeSVG from '../../assest/Admin/Home.svg'
 import ExitSVG from '../../assest/Admin/Exit.svg'
 
+type TypeofRole = 'admin' | 'manager'
+const isRole: TypeofRole = 'admin'
+
 export default function RootLayout({
   children,
   params: { lang }
@@ -29,20 +32,32 @@ export default function RootLayout({
             <Link href={`/${lang}`}>
               <HomeSVG />
             </Link>
-            <Link href={`/${lang}/admin/goods`}>Товари</Link>
-            <Link href={`/${lang}/admin/category`}>Категорії</Link>
-            <Link href={`/${lang}/admin/orders`}>Замовлення</Link>
+            {isRole === 'admin' && (
+              <>
+                <Link href={`/${lang}/admin/goods`}>Товари</Link>
+                <Link href={`/${lang}/admin/category`}>Категорії</Link>
+                <Link href={`/${lang}/admin/orders`}>Замовлення</Link>
+              </>
+            )}
             <Link href={`/${lang}/admin/orders-for-meneger`}>
               Замовлення для менеджера
             </Link>
-            <Link href={`/${lang}/admin/reviews`}>Коментарі</Link>
-            <Link href={`/${lang}/admin/users`}>Користувачі</Link>
+            {isRole === 'admin' && (
+              <>
+                <Link href={`/${lang}/admin/reviews`}>Коментарі</Link>
+                <Link href={`/${lang}/admin/users`}>Користувачі</Link>
+              </>
+            )}
           </div>
+
           <div className='right'>
-            <Link href={'#'}>Добрий день, Manager</Link>
-            <Link href={`/${lang}/admin/exit`}>
-              Вихід <ExitSVG />
+            <Link href={'#'}>
+              Добрий день, {isRole === 'admin' ? 'Admin' : 'Manager'}
             </Link>
+            <div className='right__wrapper'>
+              <Link href={`/${lang}/admin/exit`}>Вихід</Link>
+              <ExitSVG />
+            </div>
           </div>
         </div>
       </div>

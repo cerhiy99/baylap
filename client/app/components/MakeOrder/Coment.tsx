@@ -32,7 +32,7 @@ const Coment = (props: Props) => {
           type='button'
           onClick={() => setIsOpen(false)}
         >
-          Збеоегти
+          Зберегти
         </button>
       </div>
     </div>

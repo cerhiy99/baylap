@@ -76,7 +76,7 @@ const page = ({ params: { lang } }: { params: { lang: Locale } }) => {
             <div className='select filter'>Опубліковані коментарі</div>
             <div className='filter'>Несхвалені коментарі (1)</div>
             <div className='admin-reviews-search'>
-              <input type='text' />.
+              <input type='text' />
               <div className='search-svg'>
                 <SearchSVG />
               </div>

@@ -302,16 +302,8 @@
           text-underline-position: from-font;
           text-decoration-skip-ink: none;
           color: #333333;
-          div {
-            font-family: Roboto;
-            font-size: 13.23px;
-            font-weight: 400;
-            line-height: 20.01px;
-            text-align: left;
-            text-underline-position: from-font;
-            text-decoration-skip-ink: none;
-            color: #333333;
-          }
+          align-items: center;
+
           .svg {
             cursor: pointer;
           }

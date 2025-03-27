@@ -96,7 +96,6 @@
       overflow-y: auto;
       padding: 15px;
       padding-top: 0;
-
       scrollbar-width: thin; /* Для Firefox */
       scrollbar-color: #797f8b #f0f0f0; /* Колір смуги та фону */
 
@@ -138,6 +137,7 @@
         align-items: center;
         gap: 10px;
         .basket-goods-text {
+          position: relative;
           display: flex;
           flex-direction: column;
           gap: 5px;
@@ -218,9 +218,7 @@
       }
     }
     .button-with-price {
-      padding: 5px 15px;
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
       .price {
         display: flex;
