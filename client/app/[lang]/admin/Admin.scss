@@ -27,6 +27,37 @@
       flex-direction: row;
       align-items: center;
       gap: 15px;
+      .goods-dropdown-container {
+        position: relative;
+        display: inline-block; /* inline-block для компактного розташування */
+
+        .goods-dropdown {
+          display: none; /* Ховаємо підменю за замовчуванням */
+          position: absolute;
+          top: 100%; /* Щоб підменю було під основним пунктом */
+          left: 0;
+          background-color: #ffffff;
+          padding: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Додаємо тінь */
+        }
+
+        /* З'являється при наведенні на контейнер */
+        &:hover .goods-dropdown {
+          display: block;
+        }
+
+        /* Додаткові стилі для посилань у випадаючому меню */
+        .goods-dropdown a {
+          display: block;
+          padding: 5px 10px;
+          color: #333;
+          white-space: nowrap;
+        }
+
+        .goods-dropdown a:hover {
+          background-color: #f0f0f0; /* Зміна фону при наведенні */
+        }
+      }
     }
     .right {
       display: flex;

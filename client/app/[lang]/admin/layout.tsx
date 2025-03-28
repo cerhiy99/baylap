@@ -34,7 +34,15 @@ export default function RootLayout({
             </Link>
             {isRole === 'admin' && (
               <>
-                <Link href={`/${lang}/admin/goods`}>Товари</Link>
+                <div className='goods-dropdown-container'>
+                  <Link href={`/${lang}/admin/goods`}>Товари</Link>
+                  <div className='goods-dropdown'>
+                    <Link href={`/${lang}/admin/add-product`}>
+                      Добавити товар
+                    </Link>
+                  </div>
+                </div>
+
                 <Link href={`/${lang}/admin/category`}>Категорії</Link>
                 <Link href={`/${lang}/admin/orders`}>Замовлення</Link>
               </>

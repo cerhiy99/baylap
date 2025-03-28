@@ -51,6 +51,14 @@ class BrednController {
         }
     };
     
+    static Get=async(req,resp,next)=>{
+        try{
+            const res=await Brends.findAll();
+            return resp.json(res);
+        }catch(err){
+            return next(ErrorApi.badRequest(err));
+        }
+    }
 
     static GetFirstLetters=async(req,resp,next)=>{
         try{

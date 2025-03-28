@@ -2,6 +2,7 @@
 import { $authHost } from '@/app/http'
 import React, { useState } from 'react'
 import { Button, Alert } from '@mui/material'
+import './AddCategory.scss'
 
 const AddCategory = () => {
   const [nameUA, setNameUA] = useState<string>('')
