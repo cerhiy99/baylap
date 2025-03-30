@@ -2,6 +2,14 @@
 // @import '@/app/[lang]/(admin-layout)/admin/App.scss';
 
 .orders-container {
+  // input {
+  //   margin: 0;
+  //   padding: 0;
+  //   border: none;
+  //   outline: none;
+  //   box-sizing: border-box;
+  //   appearance: none; /* Убирает стандартный вид в мобильных браузерах */
+  // }
   .orders-header-container {
     background-color: #05172fcc;
     .order-header {
@@ -57,7 +65,7 @@
           height: 35px;
           border-radius: 5px;
           color: #ffffff;
-          font-family: Roboto;
+
           font-size: 12px;
           font-weight: 400;
           line-height: 20.8px;
@@ -74,9 +82,13 @@
           }
           display: flex;
           gap: 0;
-
-          height: 31px;
+          height: 35px;
           input {
+            margin: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+            box-sizing: border-box;
             margin-left: 15px;
             border-radius: 5px;
             height: 100%;
@@ -84,11 +96,11 @@
           }
           .search-svg {
             position: absolute;
-            right: 2px;
-            height: 33px;
+            right: 0px;
+            height: 35px;
             width: 52px;
             background-color: #269569;
-            border-radius: 0 2px 2px 0;
+            border-radius: 0 5px 5px 0;
           }
         }
       }
@@ -102,7 +114,6 @@
     .review-header {
       background-color: #a5a1a11a;
       div {
-        font-family: Lora;
         font-size: 14px;
         font-weight: 600;
         line-height: 15px;
@@ -126,7 +137,6 @@
         .order-list-basket-header {
           padding: 5px;
           div {
-            font-family: Lora;
             font-size: 12px;
             font-weight: 600;
             line-height: 15px;
@@ -148,7 +158,6 @@
           justify-content: space-between;
         }
         div {
-          font-family: Roboto;
           font-size: 10px;
           font-weight: 400;
           line-height: 15px;
@@ -169,7 +178,7 @@
           align-items: center;
           p {
             margin: 0;
-            font-family: Lora;
+
             font-size: 12px;
             font-weight: 700;
             line-height: 15px;
@@ -180,7 +189,6 @@
             margin-right: 3px;
           }
           span {
-            font-family: Lora;
             font-size: 12px;
             font-weight: 500;
             line-height: 15px;
@@ -192,7 +200,6 @@
         }
       }
       div {
-        font-family: Roboto;
         font-size: 13px;
         font-weight: 400;
         line-height: 20.8px;
@@ -243,7 +250,7 @@
         background-color: #269569;
         border-radius: 7px;
         color: #ffffff;
-        font-family: Roboto;
+
         font-size: 12px;
         font-weight: 400;
         line-height: 20.8px;
@@ -255,7 +262,7 @@
       }
       button {
         background-color: #2695694d;
-        font-family: Roboto;
+
         font-size: 12px;
         font-weight: 400;
         line-height: 20.8px;
