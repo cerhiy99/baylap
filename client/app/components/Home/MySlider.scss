@@ -1,4 +1,4 @@
-@import '../../[lang]/App.scss';
+@import '@/app/[lang]/(basic-layout)/App.scss';
 
 .my-swiper-container {
   @include responsive-width;

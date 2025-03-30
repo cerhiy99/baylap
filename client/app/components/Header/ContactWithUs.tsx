@@ -53,31 +53,33 @@ const ContactWithUs = ({ lang, dictionary }: Props) => {
       className='header-contact'
       ref={dropdownRef}
     >
-      <p className={isOpen ? 'open' : ''}>
+      <div className={`contactUs ${isOpen ? 'open' : ''}`}>
         <CallSVG />
-        {dictionary.title}
+        <p>{dictionary.title}</p>
         <DownSVG className='arrow' />
-      </p>
-
+      </div>
       <div className={`dropdown ${isOpen ? 'show' : ''}`}>
         <p>{dictionary.timeWorkTitle}</p>
         <span>{dictionary.timeWorkDescription1}</span>
         <span>{dictionary.timeWorkDescription2}</span>
         <div className='list-icon'>
-          <a href={process.env.NEXT_PUBLIC_VIBER} className='icon'>
+          <div className='list__item'>
             <ViberSVG />
             <p>Viber</p>
-          </a>
-          <a href={process.env.NEXT_PUBLIC_TELEGRAM} className='icon'>
+            <a href={process.env.NEXT_PUBLIC_VIBER}></a>
+          </div>
+          <div className='list__item'>
             <TelegramSVG />
             <p>Telegram</p>
-          </a>
-          <a href={process.env.NEXT_PUBLIC_WHATSAPP} className='icon'>
+            <a href={process.env.NEXT_PUBLIC_TELEGRAM}></a>
+          </div>
+          <div className='list__item'>
             <WhatccapSVG />
             <p>Whatsapp</p>
-          </a>
+            <a href={process.env.NEXT_PUBLIC_WHATSAPP}></a>
+          </div>
           <div className='icon2'>
-            <PhoneSVG />
+            <PhoneSVG color={'#fe680a'} stroke={'white'} />
             <p>
               <a href={process.env.NEXT_PUBLIC_PHONE_URL_1}>
                 {process.env.NEXT_PUBLIC_PHONE_1}
