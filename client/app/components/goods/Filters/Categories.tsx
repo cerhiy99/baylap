@@ -43,13 +43,13 @@ const Categories: React.FC<CategoriesProps> = ({ listCategories }) => {
     }
   }, [])
 
-  useEffect(() => {
-    const initialSelectedCategories: Record<number, boolean> = {}
-    sortedCategories.forEach(category => {
-      initialSelectedCategories[category.id] = false
-    })
-    setSelectedCategories(initialSelectedCategories)
-  }, [sortedCategories])
+  // useEffect(() => {
+  //   const initialSelectedCategories: Record<number, boolean> = {}
+  //   sortedCategories.forEach(category => {
+  //     initialSelectedCategories[category.id] = false
+  //   })
+  //   setSelectedCategories(initialSelectedCategories)
+  // }, [sortedCategories])
 
   const handleCheckboxChange = (categoryId: number) => {
     setSelectedCategories(prevState => ({

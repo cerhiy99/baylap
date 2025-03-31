@@ -7,6 +7,7 @@ import './Orders.scss'
 import LeftSVG from '@/app/assest/Admin/Left.svg'
 import RightSVG from '@/app/assest/Admin/Right.svg'
 import SearchSVG from '@/app/assest/Admin/Search.svg'
+import Link from 'next/link'
 
 const orders = [
   {
@@ -128,8 +129,12 @@ const page = ({ params: { lang } }: { params: { lang: Locale } }) => {
                 <option value='3'>відправлено</option>
               </select>
             </div>
-            <div className='add'>
-              <button>додати замовлення</button>
+            <div className='add' style={{ position: 'relative' }}>
+              <Link
+                href={`orders/new-order`}
+                style={{ position: 'absolute', inset: 0 }}
+              ></Link>
+              Додати замовлення
             </div>
             <div className='search'>
               <input

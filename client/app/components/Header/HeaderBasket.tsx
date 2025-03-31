@@ -133,7 +133,7 @@ const HeaderBasket = ({ lang, dictionary }: Props) => {
                             fill='none'
                             xmlns='http://www.w3.org/2000/svg'
                           >
-                            <path d='M0 1H14' stroke='white' stroke-width='2' />
+                            <path d='M0 1H14' stroke='white' strokeWidth='2' />
                           </svg>
                         </div>
                         <div className='count'>{x.count}</div>
@@ -155,12 +155,12 @@ const HeaderBasket = ({ lang, dictionary }: Props) => {
                             <path
                               d='M0 7L14 7'
                               stroke='white'
-                              stroke-width='2'
+                              strokeWidth='2'
                             />
                             <path
                               d='M7 0L7 14'
                               stroke='white'
-                              stroke-width='2'
+                              strokeWidth='2'
                             />
                           </svg>
                         </div>
