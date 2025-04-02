@@ -49,7 +49,7 @@ const initialOrders = [
     coment:
       'Перезаоните для уточнения заказа Нужны цвет синий 12 номер Зеленый 15 номер Ред 10 номер Фиолетовый',
     sum: '1000',
-    status: 'В очікуванні',
+    status: 'Проверка',
     isMenedher: true,
     author: 'admin',
     comentMeneger: '100 грн.'
@@ -68,7 +68,7 @@ const initialOrders = [
     coment:
       'Перезаоните для уточнения заказа Нужны цвет синий 12 номер Зеленый 15 номер Ред 10 номер Фиолетовый',
     sum: '1000',
-    status: 'В очікуванні',
+    status: 'Все оформленные',
     isMenedher: true,
     author: 'admin',
     comentMeneger: '100 грн.'
@@ -87,7 +87,7 @@ const initialOrders = [
     coment:
       'Перезаоните для уточнения заказа Нужны цвет синий 12 номер Зеленый 15 номер Ред 10 номер Фиолетовый',
     sum: '1000',
-    status: 'В очікуванні',
+    status: 'Проверка',
     isMenedher: true,
     author: 'admin',
     comentMeneger: '100 грн.'
@@ -106,7 +106,7 @@ const initialOrders = [
     coment:
       'Перезаоните для уточнения заказа Нужны цвет синий 12 номер Зеленый 15 номер Ред 10 номер Фиолетовый',
     sum: '1000',
-    status: 'В очікуванні',
+    status: 'Все оформленные',
     isMenedher: true,
     author: 'admin',
     comentMeneger: '100 грн.'
@@ -125,7 +125,7 @@ const initialOrders = [
     coment:
       'Перезаоните для уточнения заказа Нужны цвет синий 12 номер Зеленый 15 номер Ред 10 номер Фиолетовый',
     sum: '1000',
-    status: 'В очікуванні',
+    status: 'Все оформленные',
     isMenedher: true,
     author: 'admin',
     comentMeneger: '100 грн.'
@@ -145,7 +145,7 @@ const initialOrders = [
     coment:
       'Перезателефонуйте для уточнення замовлення. Потрібні кольори: синій 12 розмір, зелений 15 розмір, червоний 10 розмір, фіолетовий',
     sum: '1000',
-    status: 'В очікуванні',
+    status: 'Все оформленные',
     isMenedher: true,
     author: 'admin',
     comentMeneger: '100 грн.'
@@ -163,7 +163,7 @@ const initialOrders = [
     department: '12',
     coment: 'Термінова доставка. Додатково упакувати.',
     sum: '2450',
-    status: 'Обробляється',
+    status: 'Завершен',
     isMenedher: false,
     author: 'manager1',
     comentMeneger: ''
@@ -181,7 +181,7 @@ const initialOrders = [
     department: '33',
     coment: 'Замовлення подарункове, додати вітальну листівку',
     sum: '1780',
-    status: 'Відправлено',
+    status: 'Оплата',
     isMenedher: true,
     author: 'admin',
     comentMeneger: 'Додано подарункову упаковку'
@@ -199,7 +199,7 @@ const initialOrders = [
     department: '',
     coment: 'Зателефонувати перед приїздом',
     sum: '3200',
-    status: 'Виконано',
+    status: 'Завершен',
     isMenedher: false,
     author: 'manager2',
     comentMeneger: 'Клієнт забрав'
@@ -217,7 +217,7 @@ const initialOrders = [
     department: '45',
     coment: 'Замовити додаткову упаковку',
     sum: '1560',
-    status: 'В очікуванні',
+    status: 'Все оформленные',
     isMenedher: true,
     author: 'admin',
     comentMeneger: 'Додаткова упаковка 50 грн.'
@@ -235,10 +235,10 @@ const initialOrders = [
     department: '22',
     coment: 'Замовлення для бізнесу, потрібен рахунок',
     sum: '5430',
-    status: 'Обробляється',
+    status: 'Завершен',
     isMenedher: true,
     author: 'manager1',
-    comentMeneger: 'Рахунок відправлено'
+    comentMeneger: 'Рахунок Оплата'
   },
   {
     id: 7,
@@ -253,7 +253,7 @@ const initialOrders = [
     department: '17',
     coment: 'Кольори: чорний, розмір M',
     sum: '890',
-    status: 'Відправлено',
+    status: 'Оплата',
     isMenedher: false,
     author: 'manager2',
     comentMeneger: ''
@@ -271,7 +271,7 @@ const initialOrders = [
     department: '',
     coment: 'Дзвонити з 14:00 до 18:00',
     sum: '2100',
-    status: 'Виконано',
+    status: 'Завершен',
     isMenedher: true,
     author: 'admin',
     comentMeneger: 'Клієнт задоволений'
@@ -289,7 +289,7 @@ const initialOrders = [
     department: '9',
     coment: 'Потрібен подарунковий сертифікат',
     sum: '1250',
-    status: 'В очікуванні',
+    status: 'Все оформленные',
     isMenedher: false,
     author: 'manager1',
     comentMeneger: ''
@@ -307,7 +307,7 @@ const initialOrders = [
     department: '5',
     coment: 'Термінова доставка, максимально швидко',
     sum: '3670',
-    status: 'Обробляється',
+    status: 'Завершен',
     isMenedher: true,
     author: 'admin',
     comentMeneger: 'Додано термінову доставку +150 грн.'
@@ -325,7 +325,7 @@ const initialOrders = [
     department: '28',
     coment: 'Кольори: бежевий, розмір S',
     sum: '1430',
-    status: 'Відправлено',
+    status: 'Оплата',
     isMenedher: false,
     author: 'manager2',
     comentMeneger: ''
@@ -343,7 +343,7 @@ const initialOrders = [
     department: '',
     coment: 'Зателефонувати за годину до приїзду',
     sum: '980',
-    status: 'Виконано',
+    status: 'Завершен',
     isMenedher: true,
     author: 'admin',
     comentMeneger: 'Клієнт забрав, все добре'
@@ -361,7 +361,7 @@ const initialOrders = [
     department: '14',
     coment: 'Потрібна додаткова інформація про товар',
     sum: '2560',
-    status: 'В очікуванні',
+    status: 'Все оформленные',
     isMenedher: false,
     author: 'manager1',
     comentMeneger: ''
@@ -379,7 +379,7 @@ const initialOrders = [
     department: '7',
     coment: 'Замовлення для офісу, потрібен звіт',
     sum: '4320',
-    status: 'Обробляється',
+    status: 'Завершен',
     isMenedher: true,
     author: 'admin',
     comentMeneger: 'Звіт буде готовий до 20.07'
@@ -397,7 +397,7 @@ const initialOrders = [
     department: '19',
     coment: 'Потрібно обміняти розмір з M на L',
     sum: '1780',
-    status: 'Відправлено',
+    status: 'Оплата',
     isMenedher: false,
     author: 'manager2',
     comentMeneger: ''
@@ -486,8 +486,13 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
     }
     if (statusFilter !== '1') {
       const statusMap: Record<string, string> = {
-        '2': 'В очікуванні',
-        '3': 'відправлено'
+        '2': 'В ожидании',
+        '3': 'Проверка',
+        '4': 'Оплата',
+        '5': 'Наложка',
+        '6': 'Завершен',
+        '7': 'Отменен',
+        '8': 'Корзина'
       }
       result = result.filter(order => order.status === statusMap[statusFilter])
     }
@@ -589,9 +594,14 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
                 value={statusFilter}
                 onChange={e => setStatusFilter(e.target.value)}
               >
-                <option value='1'>всі замолення</option>
-                <option value='2'>в очікуванні</option>
-                <option value='3'>відправлено</option>
+                <option value='1'>Все оформленные</option>
+                <option value='2'>В ожидании</option>
+                <option value='3'>Проверка</option>
+                <option value='4'>Оплата</option>
+                <option value='5'>Наложка</option>
+                <option value='6'>Завершен</option>
+                <option value='7'>Отменен</option>
+                <option value='8'>Корзина</option>
               </select>
             </div>
             <div className='add' style={{ position: 'relative' }}>
@@ -728,10 +738,31 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
         ))}
         <div className='selects-adn-input'>
           <select>
-            <option value='1'>Масові операції</option>
-            <option value='2'>Змінити статус</option>
-            <option value='3'>Видалити</option>
+            <option value='1'>Массовые операции</option>
+            <option value='2'> Удалить заказ</option>
+            <option value='3'>Установить статус заказа: Отменен</option>
+            <option value='4'>Установить статус заказа: Корзина</option>
+            <option value='5'>
+              Установить статус заказа: Оформить заказ (оформить заказ)
+            </option>
+            <option value='6'>
+              Установить статус заказа: Оформить заказ (завершено)
+            </option>
+            <option value='7'>
+              Установить статус заказа: Оформить заказ (оплата)
+            </option>
+            <option value='8'>
+              Установить статус заказа: Оформить заказ (доставка)
+            </option>
+            <option value='9'>Установить статус заказа: Выполнен</option>
+            <option value='10'>
+              Установить статус заказа: В ожидании (в ожидании)
+            </option>
+            <option value='11'>
+              Установить статус заказа: В ожидании (обработка)
+            </option>
           </select>
+
           <button
             onClick={applyBulkAction}
             disabled={selectedOrderIds.length === 0}
@@ -739,29 +770,31 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
             Застосувати
           </button>
         </div>
-        <div className='pagination'>
-          <div
-            className={`left ${currentPage === 1 ? 'disabled' : ''}`}
-            onClick={() => changePage(currentPage - 1)}
-          >
-            <LeftSVG />
-          </div>
-          {generatePageNumbers().map(pageNum => (
+        {totalPages <= 1 ? null : (
+          <div className='pagination'>
             <div
-              key={pageNum}
-              className={`number ${pageNum === currentPage ? 'select' : ''}`}
-              onClick={() => changePage(pageNum)}
+              className={`left ${currentPage === 1 ? 'disabled' : ''}`}
+              onClick={() => changePage(currentPage - 1)}
             >
-              {pageNum}
+              <LeftSVG />
             </div>
-          ))}
-          <div
-            className={`right ${currentPage === totalPages ? 'disabled' : ''}`}
-            onClick={() => changePage(currentPage + 1)}
-          >
-            <RightSVG />
+            {generatePageNumbers().map(pageNum => (
+              <div
+                key={pageNum}
+                className={`number ${pageNum === currentPage ? 'select' : ''}`}
+                onClick={() => changePage(pageNum)}
+              >
+                {pageNum}
+              </div>
+            ))}
+            <div
+              className={`right ${currentPage === totalPages ? 'disabled' : ''}`}
+              onClick={() => changePage(currentPage + 1)}
+            >
+              <RightSVG />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )
