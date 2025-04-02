@@ -3,7 +3,6 @@
   padding-bottom: 60px;
   border-top: 0;
   h2 {
-    font-family: Roboto;
     font-size: 22px;
     line-height: 25px;
     font-weight: 450;
@@ -81,7 +80,7 @@
         text-decoration: none;
         color: #000000;
         //box-sizing: border-box; // Враховує padding у ширині
-        min-width: calc(100% / 6 - 12.75px);
+        min-width: calc(100% / 5 - 12.75px);
         @media (max-width: 1600px) {
           min-width: calc(100% / 5 - 12px);
         }
@@ -125,7 +124,6 @@
             }
           }
           .name {
-            font-family: Roboto;
             font-size: 14px;
             font-weight: 500;
             line-height: 16.94px;
@@ -153,7 +151,6 @@
               flex-direction: row;
               gap: 7.5px;
               .price-no-discount {
-                font-family: Roboto;
                 font-size: 13px;
                 font-weight: 500;
                 line-height: 15.73px;
@@ -165,7 +162,7 @@
               }
               .discount {
                 background-color: #ff090b;
-                font-family: Roboto;
+
                 font-size: 9.38px;
                 font-weight: 700;
                 line-height: 14px;
@@ -181,7 +178,6 @@
               }
             }
             .price-with-discount {
-              font-family: 'PT Root UI';
               font-size: 23px;
               font-weight: 700;
               line-height: 25px;
@@ -190,7 +186,6 @@
               text-decoration-skip-ink: none;
               color: #000000;
               span {
-                font-family: 'PT Root UI';
                 font-size: 19px;
                 font-weight: 700;
               }

@@ -28,7 +28,6 @@
         gap: 5px;
         align-items: center;
         span {
-          font-family: Roboto;
           font-size: 12px;
           font-weight: 400;
           line-height: 14px;
@@ -54,7 +53,7 @@
       .write-review {
         display: flex;
         align-items: center;
-        font-family: Roboto;
+
         font-size: 12px;
         font-weight: 400;
         line-height: 14px;
@@ -86,7 +85,6 @@
       }
     }
     .art {
-      font-family: Roboto;
       font-size: 13px;
       font-weight: 400;
       line-height: 14px;
@@ -108,7 +106,7 @@
       gap: 10px;
       .title {
         display: flex;
-        font-family: Roboto;
+
         font-size: 16px;
         font-weight: 500;
         line-height: 16px;
@@ -124,7 +122,6 @@
         border-bottom: 1px dashed #ccc; // Створення пунктирної лінії
       }
       .info {
-        font-family: Roboto;
         font-size: 16px;
         font-weight: 400;
         line-height: 16px;
@@ -134,7 +131,6 @@
         color: #00579f;
         text-wrap: nowrap;
         a {
-          font-family: Roboto;
           font-size: 16px;
           font-weight: 400;
           line-height: 16px;
@@ -163,7 +159,7 @@
         border: 1px solid #6d6d6d;
         border-radius: 20px;
         color: #6d6d6d;
-        font-family: Roboto;
+
         display: flex;
         align-items: center;
         justify-content: center;
@@ -212,7 +208,6 @@
         gap: 5px;
         align-items: center;
         .price-no-discount {
-          font-family: Roboto;
           font-size: 15px;
           font-weight: 500;
           line-height: 15.73px;
@@ -226,7 +221,6 @@
           flex-direction: row;
           gap: 2px;
           span {
-            font-family: 'PT Root UI';
             font-size: 13px;
             line-height: 13px;
             display: flex;
@@ -237,7 +231,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          font-family: Roboto;
+
           font-size: 13px;
           font-weight: 700;
           line-height: 11px;
@@ -251,7 +245,6 @@
         }
       }
       .price-with-discount {
-        font-family: 'PT Root UI';
         align-items: flex-end;
         font-size: 33px;
         font-weight: 700;
@@ -263,7 +256,6 @@
         white-space: nowrap;
         text-wrap: nowrap;
         span {
-          font-family: 'PT Root UI';
           font-size: 22.5px;
           font-weight: 700;
         }
@@ -280,7 +272,6 @@
         gap: 10px;
         background-color: #fe680a;
         border-radius: 30px;
-        font-family: Roboto;
         font-size: 16px;
         font-weight: 700;
         line-height: 20px;
@@ -303,7 +294,6 @@
         background-color: #ffffff;
         border: 2px solid #43b02a;
         border-radius: 30px;
-        font-family: Roboto;
         font-size: 16px;
         font-weight: 700;
         line-height: 40px;
@@ -320,7 +310,8 @@
     }
     .like {
       cursor: pointer;
-      &:hover {
+      &:hover,
+      &.isLike {
         svg {
           fill: red;
           g {
@@ -341,7 +332,6 @@
     padding-top: 20px;
     padding-bottom: 20px;
     h4 {
-      font-family: Roboto;
       font-size: 14.5px;
       font-weight: 700;
       line-height: 16px;
@@ -381,7 +371,6 @@
           margin-left: 15px;
           padding-left: 7.5px; // Відступ тексту від крапки
           text-indent: -7.5px; // Зміщуємо крапку до початку
-          font-family: Roboto;
           font-size: 14px;
           font-weight: 500;
           line-height: 24px;
@@ -393,7 +382,6 @@
       }
     }
     .info {
-      font-family: Roboto;
       font-size: 14px;
       font-weight: 500;
       line-height: 24px;
@@ -413,7 +401,7 @@
     border-radius: 15px;
     h4 {
       margin: 0;
-      font-family: Roboto;
+
       font-size: 14.5px;
       font-weight: 700;
       line-height: 24px;
@@ -423,7 +411,6 @@
       color: #000000;
     }
     .info {
-      font-family: Roboto;
       font-size: 14.5px;
       font-weight: 400;
       line-height: 24px;

@@ -135,7 +135,9 @@
       }
       .like-container {
         cursor: pointer;
-        &:hover {
+
+        &:hover,
+        &.isLike {
           svg {
             fill: red;
             g {

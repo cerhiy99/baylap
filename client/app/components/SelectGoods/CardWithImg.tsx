@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { RefObject, useEffect, useState } from 'react'
 import './CardWithImg.scss'
 import ImgContainer from './ImgContainer'
 import SelectGoodsTextContainer from './SelectGoodsTextContainer'
@@ -21,7 +21,15 @@ const CardWithImg = ({
   const setVolume = (value: number) => {
     setSelectVolume(value)
   }
-  useEffect(() => {}, [selectVolume])
+  const [activeSection, setActiveSection] = useState<
+    | 'about'
+    | 'description'
+    | 'characteristics'
+    | 'reviews'
+    | 'video'
+    | 'similar'
+  >('about')
+
   return (
     <>
       <div className='card-with-img-container'>
@@ -29,6 +37,8 @@ const CardWithImg = ({
           selectVolume={selectVolume}
           selectGoods={selectGoods}
           dictionary={dictionary}
+          onChanegeSection={setActiveSection}
+          sectionName={activeSection}
         />
         <div className='img-and-text-containers'>
           <div className='card-with-img-main'>
@@ -60,6 +70,7 @@ const CardWithImg = ({
         selectVolume={selectVolume}
         selectGoods={selectGoods}
         dictionary={dictionary.aboutProduct}
+        sectionName={activeSection}
       />
     </>
   )

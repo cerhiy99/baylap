@@ -1,6 +1,5 @@
 .about-goods {
   h2 {
-    font-family: Roboto;
     font-size: 22px;
     line-height: 25px;
     font-weight: 450;
@@ -30,7 +29,7 @@
       align-items: center;
       border: 0.75px solid #e0e1e2;
       border-radius: 15px;
-      font-family: Roboto;
+
       //border: 2px solid #e0e1e2;
       //border-left-width: 0;
 
@@ -39,7 +38,6 @@
       }
       .name {
         padding: 20px;
-        font-family: Roboto;
       }
       .additional-container {
         display: flex;
@@ -57,7 +55,7 @@
             flex-direction: row;
             gap: 5px;
             align-items: center;
-            font-family: Roboto;
+
             font-size: 12px;
             font-weight: 400;
             line-height: 14px;
@@ -68,7 +66,6 @@
             color: #00579f;
             cursor: pointer;
             p {
-              font-family: Roboto;
               font-size: 14px;
               line-height: 18px;
               color: #333333;
@@ -87,7 +84,7 @@
           .write-review {
             display: flex;
             align-items: center;
-            font-family: Roboto;
+
             font-size: 12px;
             font-weight: 400;
             line-height: 14px;
@@ -104,7 +101,6 @@
           }
         }
         .art {
-          font-family: Roboto;
           font-size: 13px;
           font-weight: 400;
           line-height: 14px;
@@ -134,7 +130,7 @@
             .price-no-discount {
               display: flex;
               align-items: center;
-              font-family: Roboto;
+
               font-size: 12.25px;
               font-weight: 500;
               line-height: 18px;
@@ -148,7 +144,7 @@
               background-color: #ff090b;
               border-radius: 12px;
               padding: 1px 4px;
-              font-family: Roboto;
+
               font-size: 11px;
               font-weight: 700;
               line-height: 14px;
@@ -159,7 +155,6 @@
             }
           }
           .price-with-discount {
-            font-family: 'PT Root UI';
             font-size: 23px;
             font-weight: 700;
             line-height: 25px;
@@ -168,7 +163,6 @@
             text-decoration-skip-ink: none;
             color: #000000;
             span {
-              font-family: 'PT Root UI';
               font-size: 19px;
               font-weight: 700;
             }
@@ -176,7 +170,8 @@
         }
         .like {
           cursor: pointer;
-          &:hover {
+          &:hover,
+          &.isLike {
             svg {
               fill: red;
               g {
@@ -198,7 +193,6 @@
       .description {
         padding: 20px;
         .description-text32 {
-          font-family: Roboto;
           font-size: 14px;
           font-weight: 400;
           line-height: 21px;
@@ -220,7 +214,7 @@
           border: 0.75px solid #e5e5e5;
           border-radius: 8px;
           background-color: #ffffff;
-          font-family: Roboto;
+
           font-size: 13.23px;
           font-weight: 300;
           line-height: 18px;
@@ -271,7 +265,6 @@
             align-items: center;
             justify-content: space-between;
             p {
-              font-family: Roboto;
               font-size: 12.25px;
               font-weight: 300;
               line-height: 20px;
@@ -281,7 +274,6 @@
               color: #000000;
             }
             span {
-              font-family: Roboto;
               font-size: 12.91px;
               font-weight: 500;
               line-height: 20px;
@@ -307,7 +299,7 @@
             border: 1px solid #e5e5e5;
             border-radius: 8px;
             background-color: #ffffff;
-            font-family: Roboto;
+
             font-size: 13.23px;
             font-weight: 300;
             line-height: 18px;
@@ -358,7 +350,7 @@
             display: flex;
             align-items: flex-end;
             margin: 0;
-            font-family: Roboto;
+
             font-size: 17.66px;
             font-weight: 700;
             line-height: 24px;
@@ -377,7 +369,7 @@
             background-color: #000000;
             border: none;
             border-radius: 50px;
-            font-family: Roboto;
+
             font-size: 13.02px;
             font-weight: 500;
             line-height: 18px;
@@ -400,7 +392,7 @@
             gap: 5px;
             margin: 0;
             margin-bottom: 5px;
-            font-family: Roboto;
+
             font-size: 14.5px;
             font-weight: 700;
             line-height: 31.25px;
@@ -409,7 +401,6 @@
             text-decoration-skip-ink: none;
             color: #000000;
             span {
-              font-family: Roboto;
               font-size: 16px;
               font-weight: 700;
               line-height: 31.25px;
@@ -452,7 +443,7 @@
               gap: 5px;
               p {
                 margin: 0;
-                font-family: Roboto;
+
                 font-size: 29.22px;
                 font-weight: 700;
                 line-height: 30px;
@@ -462,7 +453,6 @@
                 color: #000000;
               }
               span {
-                font-family: Roboto;
                 font-size: 13.13px;
                 font-weight: 400;
                 line-height: 14px;
@@ -493,7 +483,7 @@
               p {
                 margin: 0;
                 width: 39px;
-                font-family: Roboto;
+
                 font-size: 12.8px;
                 font-weight: 400;
                 line-height: 18px;
@@ -538,7 +528,7 @@
               cursor: pointer;
               p {
                 margin: 0;
-                font-family: Roboto;
+
                 font-size: 16px;
                 font-weight: 700;
                 line-height: 12px;
@@ -559,7 +549,7 @@
               outline: none;
               height: 43px;
               background-color: #ffffff;
-              font-family: Roboto;
+
               font-size: 12.91px;
               font-weight: 400;
               line-height: 18px;
@@ -577,7 +567,7 @@
               position: relative;
               option {
                 background-color: #ffffff;
-                font-family: Roboto;
+
                 font-size: 12.91px;
                 font-weight: 400;
                 line-height: 18px;
@@ -595,6 +585,8 @@
           }
         }
         .button-all-reviews {
+          font-family: inherit;
+          width: 100%;
           margin-top: 30px;
           margin-bottom: 10px;
           border: 1px solid #e5e5e5;

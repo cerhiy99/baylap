@@ -6,6 +6,13 @@ import LikeSVG from '../../assest/Goods/LikeBig.svg'
 import BasketBig from '../../assest/Goods/BasketBig.svg'
 import MyRating from './MyRating'
 import ReviewsSVG from '../../assest/Goods/Revies.svg'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/app/store'
+import {
+  addToBasket,
+  addToLike,
+  removeFromLike
+} from '@/app/store/reducers/cartReducer'
 
 type Props = {
   selectGoods: any
@@ -15,6 +22,66 @@ type Props = {
 
 const CardSelectGoods = ({ selectGoods, dictionary, selectVolume }: Props) => {
   const cardGoods = useRef<any>(null)
+  const [isInLike, setisInLike] = useState(false)
+  const { like } = useSelector((state: RootState) => state.BasketAndLike)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    setisInLike(like.findIndex(x => x.id == selectGoods.id) != -1)
+  }, [like])
+
+  const inLike = (e: any) => {
+    e.preventDefault()
+    if (!isInLike) {
+      dispatch(
+        addToLike({
+          id: selectGoods.id,
+          nameUA: selectGoods.name,
+          nameRU: selectGoods.name,
+          volume: {
+            id: selectGoods.listVolume[selectVolume].id,
+            img: selectGoods.listVolume[selectVolume].listImg[0],
+            price: selectGoods.listVolume[selectVolume].price,
+            volume: selectGoods.listVolume[selectVolume].volume,
+            discount: selectGoods.listVolume[selectVolume].discount,
+            priceWithDiscount:
+              selectGoods.listVolume[selectVolume].priceWithDiscount
+          }
+        })
+      )
+    } else {
+      dispatch(removeFromLike(selectGoods.id))
+    }
+  }
+  const [isInBasket, setIsInBasket] = useState(false) //тимчасово
+  const { basket } = useSelector((state: RootState) => state.BasketAndLike)
+
+  useEffect(() => {
+    setIsInBasket(basket.findIndex(x => x.id == selectGoods.id) != -1)
+  }, [basket])
+
+  const inBasket = (e: any) => {
+    e.preventDefault()
+    if (!isInBasket) {
+      dispatch(
+        addToBasket({
+          id: selectGoods.id,
+          nameUA: selectGoods.name,
+          nameRU: selectGoods.name,
+          volume: {
+            id: selectGoods.listVolume[selectVolume].id,
+            img: selectGoods.listVolume[selectVolume].listImg[0],
+            price: selectGoods.listVolume[selectVolume].price,
+            volume: selectGoods.listVolume[selectVolume].volume,
+            discount: selectGoods.listVolume[selectVolume].discount,
+            priceWithDiscount:
+              selectGoods.listVolume[selectVolume].priceWithDiscount
+          },
+          count: 1
+        })
+      )
+    }
+  }
+
   const [topFatherElem, setTopFatherElem] = useState(0)
 
   useEffect(() => {
@@ -112,12 +179,12 @@ const CardSelectGoods = ({ selectGoods, dictionary, selectVolume }: Props) => {
         </div>
         <div className='button-buy'>
           <InBasket id={selectGoods.id}>
-            <button>
+            <button onClick={inBasket}>
               <BasketBig /> {dictionary.buy}
             </button>
           </InBasket>
         </div>
-        <div className='like'>
+        <div className={`like ${isInLike ? 'isLike' : ''}`} onClick={inLike}>
           <LikeSVG />
         </div>
       </div>

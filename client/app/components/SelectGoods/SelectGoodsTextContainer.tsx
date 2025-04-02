@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './SelectGoodsTextContainer.scss'
 import ReviewsSVG from '../../assest/Goods/Revies.svg'
 import BasketSVG from '../../assest/Goods/BasketBig.svg'
@@ -10,6 +10,13 @@ import MyRating from './MyRating'
 import { Locale } from '@/i18n.config'
 import Link from 'next/link'
 import AvailabilityTrue from '../../assest/Goods/AvailubutlyTrue.svg'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/app/store'
+import {
+  addToBasket,
+  addToLike,
+  removeFromLike
+} from '@/app/store/reducers/cartReducer'
 
 type Props = {
   selectGoods: any
@@ -27,8 +34,66 @@ const SelectGoodsTextContainer = ({
   lang
 }: Props) => {
   const [selectVolumeIdx, setSelectVolumeIdx] = useState(0)
-
   const [clickedVolumeIdx, setClickedVolumeIdx] = useState(0)
+  const [isInLike, setisInLike] = useState(false)
+  const { like } = useSelector((state: RootState) => state.BasketAndLike)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    setisInLike(like.findIndex(x => x.id == selectGoods.id) != -1)
+  }, [like])
+
+  const inLike = (e: any) => {
+    e.preventDefault()
+    if (!isInLike) {
+      dispatch(
+        addToLike({
+          id: selectGoods.id,
+          nameUA: selectGoods.name,
+          nameRU: selectGoods.name,
+          volume: {
+            id: selectGoods.listVolume[selectVolume].id,
+            img: selectGoods.listVolume[selectVolume].listImg[0],
+            price: selectGoods.listVolume[selectVolume].price,
+            volume: selectGoods.listVolume[selectVolume].volume,
+            discount: selectGoods.listVolume[selectVolume].discount,
+            priceWithDiscount:
+              selectGoods.listVolume[selectVolume].priceWithDiscount
+          }
+        })
+      )
+    } else {
+      dispatch(removeFromLike(selectGoods.id))
+    }
+  }
+  const [isInBasket, setIsInBasket] = useState(false) //тимчасово
+  const { basket } = useSelector((state: RootState) => state.BasketAndLike)
+
+  useEffect(() => {
+    setIsInBasket(basket.findIndex(x => x.id == selectGoods.id) != -1)
+  }, [basket])
+
+  const inBasket = (e: any) => {
+    e.preventDefault()
+    if (!isInBasket) {
+      dispatch(
+        addToBasket({
+          id: selectGoods.id,
+          nameUA: selectGoods.name,
+          nameRU: selectGoods.name,
+          volume: {
+            id: selectGoods.listVolume[selectVolume].id,
+            img: selectGoods.listVolume[selectVolume].listImg[0],
+            price: selectGoods.listVolume[selectVolume].price,
+            volume: selectGoods.listVolume[selectVolume].volume,
+            discount: selectGoods.listVolume[selectVolume].discount,
+            priceWithDiscount:
+              selectGoods.listVolume[selectVolume].priceWithDiscount
+          },
+          count: 1
+        })
+      )
+    }
+  }
 
   const clickToVolume = (idx: number) => {
     setSelectVolumeIdx(idx)
@@ -129,14 +194,14 @@ const SelectGoodsTextContainer = ({
           </div>
         </div>
         <div className='button-buy'>
-          <button>
+          <button onClick={inBasket}>
             <BasketSVG /> {dictionary.buy}
           </button>
         </div>
         <div className='fast-buy'>
           <button>{dictionary.fastBuy}</button>
         </div>
-        <div className='like'>
+        <div className={`like ${isInLike ? 'isLike' : ''}`} onClick={inLike}>
           <LikeSVG />
         </div>
       </div>

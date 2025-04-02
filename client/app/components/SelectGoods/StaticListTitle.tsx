@@ -1,24 +1,52 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState
+} from 'react'
 import InBasket from './InBasket'
 import BasketSVG from '../../assest/Goods/Basket.svg'
 import LikeSVG from '../../assest/Goods/Like.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/app/store'
-import { addToLike, removeFromLike } from '@/app/store/reducers/cartReducer'
+import {
+  addToBasket,
+  addToLike,
+  removeFromLike
+} from '@/app/store/reducers/cartReducer'
 
 const heightHeader = 60 // Висота хедера
 
 const StaticListTitle = ({
   dictionary,
   selectGoods,
-  selectVolume
+  selectVolume,
+  onChanegeSection,
+  sectionName
 }: {
+  onChanegeSection: Dispatch<
+    SetStateAction<
+      | 'about'
+      | 'description'
+      | 'characteristics'
+      | 'reviews'
+      | 'video'
+      | 'similar'
+    >
+  >
   dictionary: any
   selectGoods: any
   selectVolume: number
+  sectionName:
+    | 'about'
+    | 'description'
+    | 'characteristics'
+    | 'reviews'
+    | 'video'
+    | 'similar'
 }) => {
-  const [selectTitle, setSelectTitle] = useState<number | null>(1)
   const [isSticky, setIsSticky] = useState(false)
   const listRef = useRef<HTMLDivElement>(null)
 
@@ -26,6 +54,17 @@ const StaticListTitle = ({
   const { like } = useSelector((state: RootState) => state.BasketAndLike)
   const dispatch = useDispatch()
 
+  const handleSection = (
+    sectionName:
+      | 'about'
+      | 'description'
+      | 'characteristics'
+      | 'reviews'
+      | 'video'
+      | 'similar'
+  ) => {
+    onChanegeSection(sectionName)
+  }
   useEffect(() => {
     const selectGoodsText = document.getElementById('selectGoodsText')
 
@@ -82,6 +121,35 @@ const StaticListTitle = ({
       dispatch(removeFromLike(selectGoods.id))
     }
   }
+  const [isInBasket, setIsInBasket] = useState(false) //тимчасово
+  const { basket } = useSelector((state: RootState) => state.BasketAndLike)
+
+  useEffect(() => {
+    setIsInBasket(basket.findIndex(x => x.id == selectGoods.id) != -1)
+  }, [basket])
+
+  const inBasket = (e: any) => {
+    e.preventDefault()
+    if (!isInBasket) {
+      dispatch(
+        addToBasket({
+          id: selectGoods.id,
+          nameUA: selectGoods.name,
+          nameRU: selectGoods.name,
+          volume: {
+            id: selectGoods.listVolume[selectVolume].id,
+            img: selectGoods.listVolume[selectVolume].listImg[0],
+            price: selectGoods.listVolume[selectVolume].price,
+            volume: selectGoods.listVolume[selectVolume].volume,
+            discount: selectGoods.listVolume[selectVolume].discount,
+            priceWithDiscount:
+              selectGoods.listVolume[selectVolume].priceWithDiscount
+          },
+          count: 1
+        })
+      )
+    }
+  }
 
   return (
     <div className='list-title-info-header-static'>
@@ -96,22 +164,40 @@ const StaticListTitle = ({
         className='list-title-info-header'
       >
         <ul>
-          <li className={selectTitle === 1 ? 'select' : ''}>
+          <li
+            className={sectionName === 'about' ? 'select' : ''}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
             {dictionary['list-title-info'][1]}
           </li>
-          <li className={selectTitle === 2 ? 'select' : ''}>
+          <li
+            className={sectionName === 'description' ? 'select' : ''}
+            onClick={handleSection.bind(null, 'description')}
+          >
             {dictionary['list-title-info'][2]}
           </li>
-          <li className={selectTitle === 3 ? 'select' : ''}>
+          <li
+            className={sectionName === 'characteristics' ? 'select' : ''}
+            onClick={handleSection.bind(null, 'characteristics')}
+          >
             {dictionary['list-title-info'][3]}
           </li>
-          <li className={selectTitle === 4 ? 'select' : ''}>
+          <li
+            className={sectionName === 'reviews' ? 'select' : ''}
+            onClick={handleSection.bind(null, 'reviews')}
+          >
             {dictionary['list-title-info'][4]}
           </li>
-          <li className={selectTitle === 5 ? 'select' : ''}>
+          <li
+            className={sectionName === 'video' ? 'select' : ''}
+            onClick={handleSection.bind(null, 'video')}
+          >
             {dictionary['list-title-info'][5]}
           </li>
-          <li className={selectTitle === 6 ? 'select' : ''}>
+          <li
+            className={sectionName === 'similar' ? 'select' : ''}
+            onClick={handleSection.bind(null, 'similar')}
+          >
             {dictionary['list-title-info'][6]}
           </li>
         </ul>
@@ -133,22 +219,40 @@ const StaticListTitle = ({
         className='list-title-info-header list-title-info-header-none'
       >
         <ul>
-          <li className={selectTitle === 1 ? 'select' : ''}>
+          <li
+            className={sectionName === 'about' ? 'select' : ''}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
             {dictionary['list-title-info'][1]}
           </li>
-          <li className={selectTitle === 2 ? 'select' : ''}>
+          <li
+            className={sectionName === 'description' ? 'select' : ''}
+            onClick={handleSection.bind(null, 'description')}
+          >
             {dictionary['list-title-info'][2]}
           </li>
-          <li className={selectTitle === 3 ? 'select' : ''}>
+          <li
+            className={sectionName === 'characteristics' ? 'select' : ''}
+            onClick={handleSection.bind(null, 'characteristics')}
+          >
             {dictionary['list-title-info'][3]}
           </li>
-          <li className={selectTitle === 4 ? 'select' : ''}>
+          <li
+            className={sectionName === 'reviews' ? 'select' : ''}
+            onClick={handleSection.bind(null, 'reviews')}
+          >
             {dictionary['list-title-info'][4]}
           </li>
-          <li className={selectTitle === 5 ? 'select' : ''}>
+          <li
+            className={sectionName === 'video' ? 'select' : ''}
+            onClick={handleSection.bind(null, 'video')}
+          >
             {dictionary['list-title-info'][5]}
           </li>
-          <li className={selectTitle === 6 ? 'select' : ''}>
+          <li
+            className={sectionName === 'similar' ? 'select' : ''}
+            onClick={handleSection.bind(null, 'similar')}
+          >
             {dictionary['list-title-info'][6]}
           </li>
         </ul>
@@ -174,13 +278,16 @@ const StaticListTitle = ({
           </div>
           <div className='button-container2'>
             <InBasket id={selectGoods.id}>
-              <button>
+              <button onClick={inBasket}>
                 <BasketSVG />
                 {dictionary.buy}
               </button>
             </InBasket>
           </div>
-          <div className='like-container' onClick={inLike}>
+          <div
+            className={`like-container ${isInLike ? 'isLike' : ''}`}
+            onClick={inLike}
+          >
             <LikeSVG />
           </div>
         </div>
