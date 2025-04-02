@@ -28,6 +28,7 @@
         gap: 5px;
         align-items: center;
       }
+
       .select {
       }
     }
@@ -37,9 +38,9 @@
 
       position: relative;
       height: 35px;
+
       input {
         width: 100%;
-
         margin-left: 15px;
         border-radius: 5px;
         height: 35px;
@@ -48,6 +49,7 @@
         padding-left: 10px;
         box-sizing: border-box;
       }
+
       .search-svg {
         position: absolute;
         right: 0px;
@@ -96,7 +98,7 @@
       }
       .name {
         width: 100%;
-        color: #5d8fc9;
+        color: #05172f;
         cursor: pointer;
       }
       .time {
