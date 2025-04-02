@@ -24,7 +24,6 @@
       z-index: 9;
       padding-left: 20px;
       li {
-        font-family: Roboto;
         font-size: 16px;
         font-weight: 400;
         line-height: 20.8px;
@@ -52,7 +51,6 @@
         align-items: center;
         width: 200px;
         .name {
-          font-family: Roboto;
           font-size: 12px;
           font-weight: 500;
           line-height: 15px;
@@ -76,7 +74,7 @@
           gap: 2px;
           p {
             margin: 0;
-            font-family: Roboto;
+
             font-size: 11px;
             font-weight: 400;
             line-height: 13.31px;
@@ -90,7 +88,7 @@
             flex-direction: row;
             gap: 1.5px;
             align-items: flex-end;
-            font-family: PT Root UI;
+
             font-size: 12px;
             font-weight: 700;
             line-height: 14.52px;
@@ -122,7 +120,7 @@
           border-radius: 30px;
           border: none;
           background-color: rgb(254, 104, 10);
-          font-family: Roboto;
+
           font-size: 14px;
           font-weight: 700;
           line-height: 20px;
@@ -295,109 +293,3 @@
     }
   }
 }
-
-/*
-import React from 'react'
-import './CardWithImg.scss'
-import ImgContainer from './ImgContainer'
-import SelectGoodsTextContainer from './SelectGoodsTextContainer'
-import SeeMore from './SeeMore'
-import { Locale } from '@/i18n.config'
-import AboutGoods from './AboutGoods'
-import StaticListTitle from './StaticListTitle'
-
-const CardWithImg = ({
-  dictionary,
-  selectGoods,
-  lang
-}: {
-  dictionary: any
-  selectGoods: any
-  lang: Locale
-}) => {
-  return (
-    <>
-      <div className='card-with-img-container'>
-        <StaticListTitle selectGoods={selectGoods} dictionary={dictionary} />
-        <div className='img-and-text-containers'>
-          <div className='card-with-img-main'>
-            <ImgContainer
-              name={selectGoods.name}
-              listImg={selectGoods.listImg}
-            />
-          </div>
-          <SelectGoodsTextContainer
-            dictionary={dictionary}
-            selectGoods={selectGoods}
-          />
-        </div>
-      </div>
-      <SeeMore
-        listGoods={selectGoods.listGoods}
-        lang={lang}
-        dictionary={dictionary.SeeMore}
-      />
-      <AboutGoods
-        selectGoods={selectGoods}
-        dictionary={dictionary.aboutProduct}
-      />
-    </>
-  )
-}
-
-export default CardWithImg
-
-*/
-/*
-  <div className='list-title-info-header'>
-          <ul>
-            <li className={selectTitle == 1 ? 'select' : ''}>
-              {dictionary['list-title-info'][1]}
-            </li>
-            <li className={selectTitle == 2 ? 'select' : ''}>
-              {dictionary['list-title-info'][2]}
-            </li>
-            <li className={selectTitle == 3 ? 'select' : ''}>
-              {dictionary['list-title-info'][3]}
-            </li>
-            <li className={selectTitle == 4 ? 'select' : ''}>
-              {dictionary['list-title-info'][4]}
-            </li>
-            <li className={selectTitle == 5 ? 'select' : ''}>
-              {dictionary['list-title-info'][5]}
-            </li>
-            <li className={selectTitle == 6 ? 'select' : ''}>
-              {dictionary['list-title-info'][6]}
-            </li>
-          </ul>
-          <div className='list-title-info-header-goods'>
-            <div className='info-goods'>
-              <img
-                height={'33px'}
-                width={'auto'}
-                src={process.env.NEXT_PUBLIC_SERVER + selectGoods.listImg[0]}
-              />
-              <div className='name'>{selectGoods.name}</div>
-            </div>
-            <div className='sum-container'>
-              <div className='sum'>
-                <p>{dictionary.sum}</p>
-                <span>{selectGoods.sum}₴</span>
-              </div>
-            </div>
-            <div className='button-container'>
-              <InBasket id={selectGoods.id}>
-                <button>
-                  <BasketSVG /> {dictionary.buy}
-                </button>
-              </InBasket>
-            </div>
-            <div className='like-container'>
-              <LikeSVG />
-            </div>
-            <div className='is-availability'>
-              <AvailabilityTrue /> <p>В наявності</p>
-            </div>
-          </div>
-        </div>
-        */

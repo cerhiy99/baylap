@@ -3,6 +3,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import InBasket from './InBasket'
 import BasketSVG from '../../assest/Goods/Basket.svg'
 import LikeSVG from '../../assest/Goods/Like.svg'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/app/store'
+import { addToLike, removeFromLike } from '@/app/store/reducers/cartReducer'
 
 const heightHeader = 60 // Висота хедера
 
@@ -18,6 +21,10 @@ const StaticListTitle = ({
   const [selectTitle, setSelectTitle] = useState<number | null>(1)
   const [isSticky, setIsSticky] = useState(false)
   const listRef = useRef<HTMLDivElement>(null)
+
+  const [isInLike, setisInLike] = useState(false)
+  const { like } = useSelector((state: RootState) => state.BasketAndLike)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const selectGoodsText = document.getElementById('selectGoodsText')
@@ -47,6 +54,34 @@ const StaticListTitle = ({
 
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+    setisInLike(like.findIndex(x => x.id == selectGoods.id) != -1)
+  }, [like])
+
+  const inLike = (e: any) => {
+    e.preventDefault()
+    if (!isInLike) {
+      dispatch(
+        addToLike({
+          id: selectGoods.id,
+          nameUA: selectGoods.name,
+          nameRU: selectGoods.name,
+          volume: {
+            id: selectGoods.listVolume[selectVolume].id,
+            img: selectGoods.listVolume[selectVolume].listImg[0],
+            price: selectGoods.listVolume[selectVolume].price,
+            volume: selectGoods.listVolume[selectVolume].volume,
+            discount: selectGoods.listVolume[selectVolume].discount,
+            priceWithDiscount:
+              selectGoods.listVolume[selectVolume].priceWithDiscount
+          }
+        })
+      )
+    } else {
+      dispatch(removeFromLike(selectGoods.id))
+    }
+  }
 
   return (
     <div className='list-title-info-header-static'>
@@ -145,7 +180,7 @@ const StaticListTitle = ({
               </button>
             </InBasket>
           </div>
-          <div className='like-container'>
+          <div className='like-container' onClick={inLike}>
             <LikeSVG />
           </div>
         </div>
