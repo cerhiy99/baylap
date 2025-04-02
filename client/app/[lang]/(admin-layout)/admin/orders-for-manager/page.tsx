@@ -716,7 +716,9 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
               </div>
             </div>
             <div className='status'>{order.status}</div>
-            <div className='coment-meneger'>{order.comentMeneger}</div>
+            <textarea className='coment-meneger'>
+              {order.comentMeneger}
+            </textarea>
             <div className='coment-meneger'>{order.comentMeneger}</div>
             <div className='coment-meneger'>{order.comentMeneger}</div>
             <div className='coment-meneger'>Редагувати</div>
