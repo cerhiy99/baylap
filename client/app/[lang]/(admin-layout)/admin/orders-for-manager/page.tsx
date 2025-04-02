@@ -649,8 +649,10 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
             {sortConfig?.key === 'status' &&
               (sortConfig.direction === 'ascending' ? '↑' : '↓')}
           </div>
-          <div className='meneger'>Менеджер</div>
-          <div className='coment-meneger'>Коментар менеджера</div>
+          <div className='coment-meneger'>Коментар Менеджера</div>
+          <div className='coment-meneger'>Бонус менеджера</div>
+          <div className='coment-meneger'>Загалом Зароблено</div>
+          <div className='coment-meneger'>Дії</div>
         </div>
         {getCurrentPageOrders().map((order, index) => (
           <div
@@ -714,16 +716,10 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
               </div>
             </div>
             <div className='status'>{order.status}</div>
-            <div className='meneger'>
-              <input
-                type='checkbox'
-                checked={order.isMenedher}
-                onChange={() => {
-                  // Логика для изменения статуса менеджера
-                }}
-              />
-            </div>
             <div className='coment-meneger'>{order.comentMeneger}</div>
+            <div className='coment-meneger'>{order.comentMeneger}</div>
+            <div className='coment-meneger'>{order.comentMeneger}</div>
+            <div className='coment-meneger'>Редагувати</div>
           </div>
         ))}
         <div className='selects-adn-input'>
