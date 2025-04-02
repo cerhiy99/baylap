@@ -1,96 +1,113 @@
-import Link from 'next/link'
-import styles from './Pagination.module.scss'
-import RightSVG from '../../assest/Pagination.svg'
-import LeftSVG from '../../assest/Left.svg'
+import { useState, useEffect } from 'react'
+import Left from '@/app/assest/Admin/Left.svg'
+import Right from '@/app/assest/Admin/Right.svg'
+import './Pagination.scss'
 
 interface PaginationProps {
-  currentPage: number
-  totalPages: number
-  url: string
-  showPages?: number
-  queryParams: any
+  totalItems: number
+  itemsPerPage: number
+  currentPage?: number
+  onPageChange?: (page: number) => void
 }
 
-const Pagination: React.FC<PaginationProps> = ({
-  currentPage,
-  totalPages,
-  url,
-  showPages = 2,
-  queryParams
-}) => {
-  const adjacentPages = Math.min(showPages, totalPages)
-  const startPage = Math.max(1, currentPage - Math.floor(adjacentPages / 2))
-  const endPage = Math.min(totalPages, startPage + adjacentPages)
+const Pagination = ({
+  totalItems,
+  itemsPerPage,
+  currentPage: externalCurrentPage,
+  onPageChange
+}: PaginationProps) => {
+  const totalPages = Math.ceil(totalItems / itemsPerPage)
+  const [internalCurrentPage, setInternalCurrentPage] = useState(1)
 
-  const pages = Array.from(
-    { length: endPage - startPage + 1 },
-    (_, index) => startPage + index
-  )
+  // Use either controlled or uncontrolled state for current page
+  const currentPage =
+    externalCurrentPage !== undefined
+      ? externalCurrentPage
+      : internalCurrentPage
 
-  // Створюємо рядок з параметрами запиту
-  const queryParamsString = new URLSearchParams(queryParams).toString()
+  // Reset to page 1 if totalItems or itemsPerPage changes
+  useEffect(() => {
+    if (!externalCurrentPage) {
+      setInternalCurrentPage(1)
+    }
+  }, [totalItems, itemsPerPage, externalCurrentPage])
 
-  // Генеруємо посилання з параметрами запиту
-  const generateLink = (page: number) =>
-    `${url}${page}${queryParamsString ? `?${queryParamsString}` : ''}`
+  const handlePageClick = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      if (onPageChange) {
+        // Controlled component - parent handles page state
+        onPageChange(page)
+      } else {
+        // Uncontrolled component - handle state internally
+        setInternalCurrentPage(page)
+      }
+    }
+  }
+
+  const renderPageNumbers = () => {
+    if (totalPages <= 1) {
+      return [1]
+    }
+
+    if (totalPages <= 5) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1)
+    }
+
+    if (currentPage <= 3) {
+      return [1, 2, 3, 4, 5, '...', totalPages]
+    }
+
+    if (currentPage >= totalPages - 2) {
+      return [
+        1,
+        '...',
+        totalPages - 4,
+        totalPages - 3,
+        totalPages - 2,
+        totalPages - 1,
+        totalPages
+      ]
+    }
+
+    return [
+      1,
+      '...',
+      currentPage - 1,
+      currentPage,
+      currentPage + 1,
+      '...',
+      totalPages
+    ]
+  }
+
+  // Don't render pagination if there's only one page
+  if (totalPages <= 1) {
+    return null
+  }
 
   return (
-    <div className={styles.pagination}>
-      {/* Посилання на попередню сторінку */}
-      <Link
-        href={generateLink(currentPage - 1 == 0 ? 1 : currentPage - 1)}
-        passHref
+    <div className='pagination'>
+      <div
+        className={`left ${currentPage === 1 ? 'disabled' : ''}`}
+        onClick={() => handlePageClick(currentPage - 1)}
       >
-        <div className={styles.paginationItem}>
-          <LeftSVG />
+        <Left />
+      </div>
+      {renderPageNumbers().map((page, index) => (
+        <div
+          key={index}
+          className={`number ${page === currentPage ? 'select' : ''} ${typeof page !== 'number' ? 'ellipsis' : ''}`}
+          onClick={() => typeof page === 'number' && handlePageClick(page)}
+        >
+          {page}
         </div>
-      </Link>
-
-      {/* Виведення сторінок перед поточною */}
-      {startPage > 1 && (
-        <>
-          <Link href={generateLink(1)} passHref>
-            <div className={styles.paginationItem}>1</div>
-          </Link>
-          {startPage > 2 && <div className={styles.paginationItem}>...</div>}
-        </>
-      )}
-
-      {/* Вивід поточних сторінок */}
-      {pages.map(pageNumber => (
-        <Link key={pageNumber} href={generateLink(pageNumber)} passHref>
-          <div
-            className={`${styles.paginationItem} ${
-              pageNumber === currentPage ? styles.active : ''
-            }`}
-          >
-            {pageNumber}
-          </div>
-        </Link>
       ))}
-
-      {/* Виведення сторінок після поточної */}
-      {endPage < totalPages && (
-        <>
-          {endPage < totalPages - 1 && (
-            <div className={styles.paginationItem}>...</div>
-          )}
-          <Link href={generateLink(totalPages)} passHref>
-            <div className={styles.paginationItem}>{totalPages}</div>
-          </Link>
-        </>
-      )}
-
-      <Link
-        href={generateLink(
-          currentPage + 1 > totalPages ? currentPage : currentPage + 1
-        )}
-        passHref
+      <div
+        className={`right ${currentPage === totalPages ? 'disabled' : ''}`}
+        onClick={() => handlePageClick(currentPage + 1)}
       >
-        <div className={styles.paginationItem}>
-          <RightSVG />
-        </div>
-      </Link>
+        <Right />
+      </div>
     </div>
   )
 }

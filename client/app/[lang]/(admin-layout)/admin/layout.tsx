@@ -47,7 +47,7 @@ export default function RootLayout({
                 <Link href={`/${lang}/admin/orders`}>Замовлення</Link>
               </>
             )}
-            <Link href={`/${lang}/admin/orders-for-meneger`}>
+            <Link href={`/${lang}/admin/orders-for-manager`}>
               Замовлення для менеджера
             </Link>
             {isRole === 'admin' && (

@@ -141,6 +141,141 @@ const orders = [
     month: 1030,
     year: 45,
     allTime: 575
+  },
+  {
+    id: 16,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 22,
+    week: 3993,
+    month: 2939,
+    year: 12,
+    allTime: 1122
+  },
+  {
+    id: 17,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 2,
+    week: 1388,
+    month: 321,
+    year: 293,
+    allTime: 839
+  },
+  {
+    id: 18,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 39,
+    week: 12,
+    month: 11,
+    year: 292,
+    allTime: 1221
+  },
+  {
+    id: 19,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 992,
+    week: 218,
+    month: 345,
+    year: 2562,
+    allTime: 3453
+  },
+  {
+    id: 20,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 32,
+    week: 657,
+    month: 1023,
+    year: 84,
+    allTime: 345
+  },
+  {
+    id: 21,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 345,
+    week: 5,
+    month: 1700,
+    year: 1067,
+    allTime: 34
+  },
+  {
+    id: 22,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 38,
+    week: 1939,
+    month: 399,
+    year: 301,
+    allTime: 23
+  },
+  {
+    id: 23,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 333,
+    week: 23,
+    month: 1123,
+    year: 45,
+    allTime: 1234
+  },
+  {
+    id: 24,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 932,
+    week: 34,
+    month: 432,
+    year: 34,
+    allTime: 35
+  },
+  {
+    id: 25,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 930,
+    week: 24,
+    month: 345,
+    year: 1056,
+    allTime: 30
+  },
+  {
+    id: 26,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 1200,
+    week: 1054,
+    month: 23,
+    year: 94,
+    allTime: 239
+  },
+  {
+    id: 27,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 1030,
+    week: 1200,
+    month: 1040,
+    year: 334,
+    allTime: 66
+  },
+  {
+    id: 28,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 234,
+    week: 1020,
+    month: 56,
+    year: 7,
+    allTime: 1200
+  },
+  {
+    id: 29,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 948,
+    week: 775,
+    month: 3,
+    year: 34,
+    allTime: 7
+  },
+  {
+    id: 30,
+    name: 'Шампунь жіночий DALAS Aloe vera з гіалуроновою кислотою та натуральним алое 1000 г',
+    today: 585,
+    week: 43,
+    month: 1030,
+    year: 45,
+    allTime: 575
   }
 ]
 
@@ -167,56 +302,6 @@ const page = ({ params: { lang } }: { params: { lang: Locale } }) => {
             </div>
           </div>
         </div>
-        {/* <div className='list-reviews'>
-          <div className='review review-header'>
-            <div className='name'>Назва</div>
-            <div className='time today'>
-              Cьогодні <UppSVG />
-            </div>
-            <div className='time week'>
-              Тиждень <UppSVG />
-            </div>
-            <div className='time mouth'>
-              Місяць <UppSVG />
-            </div>
-            <div className='time year'>
-              Рік <UppSVG />
-            </div>
-            <div className='time all-time'>
-              Весь період <UppSVG />
-            </div>
-          </div>
-          {orders.map((x, index) => (
-            <div
-              className='review'
-              style={{
-                backgroundColor: index % 2 == 0 ? '#2695691A' : '#A5A1A100'
-              }}
-              key={x.id}
-            >
-              <div className='name'>{x.productName}</div>
-              <div className='time today'>{x.showToday}</div>
-              <div className='time week'>{x.showForWeek}</div>
-              <div className='time mouth'>{x.showForMouth}</div>
-              <div className='time year'>{x.showForYear}</div>
-              <div className='time all-time'>{x.showForAllTime}</div>
-            </div>
-          ))}
-          <div className='pagination'>
-            <div className='left'>
-              <LeftSVG />
-            </div>
-            <div className='number select'>1</div>
-            <div className='number'>2</div>
-            <div className='number'>3</div>
-            <div className='number'>4</div>
-            <div className='number'>5</div>
-            <div className='number'>6</div>
-            <div className='right'>
-              <RightSVG />
-            </div>
-          </div>
-        </div> */}
         <SortableTable goodsList={orders} />
       </div>
     </>

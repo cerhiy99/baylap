@@ -9,48 +9,49 @@ import Pagination from '@/app/components/utils/Pagination'
 const PRODUCTS_PER_PAGE = 15
 
 // Define proper types for our data
-interface Product {
-  id: string | number
+interface User {
+  id: number
   name: string
-  today: number
-  week: number
-  month: number
-  year: number
-  allTime: number
-  [key: string]: any // Allow indexing with any string
+  email: string
+  stayActive: string
+  dateRegister: string
+  countOrders: number
+  sumOrders: number
 }
 
 interface SortConfig {
-  key: keyof Product | null
+  key: keyof User | null
   direction: 'ascending' | 'descending' | null
 }
 
 // Memoized row component to prevent unnecessary re-renders
-const ProductRow = memo(
-  ({ product, index }: { product: Product; index: number }) => {
-    return (
-      <div
-        className='review'
-        style={{
-          backgroundColor: index % 2 === 0 ? '#2695691A' : '#A5A1A100'
-        }}
-      >
-        <div className='name'>{product.name}</div>
-        <div className='time today'>{product.today}</div>
-        <div className='time week'>{product.week}</div>
-        <div className='time mouth'>{product.month}</div>
-        <div className='time year'>{product.year}</div>
-        <div className='time all-time'>{product.allTime}</div>
-      </div>
-    )
-  }
-)
+const UserRow = memo(({ user, index }: { user: User; index: number }) => {
+  return (
+    <div
+      className='review'
+      style={{
+        backgroundColor: index % 2 == 0 ? '#2695691A' : '#A5A1A100'
+      }}
+    >
+      <div className='tema'>{user.name}</div>
+      <div className='date'>{user.email}</div>
+      <div className='operations'>{user.stayActive}</div>
+      <div className='date-register'>{user.dateRegister}</div>
+      <div className='count-orders'>{user.countOrders}</div>
+      <div className='operations'>{user.sumOrders} грн.</div>
+    </div>
+  )
+})
 
 // Add display name for better debugging
-ProductRow.displayName = 'ProductRow'
+UserRow.displayName = 'UserRow'
 
-export default function SortableTable({ goodsList }: { goodsList: Product[] }) {
-  const [products, setProducts] = useState<Product[]>(goodsList || [])
+export default function UserSortableTable({
+  usersList
+}: {
+  usersList: User[]
+}) {
+  const [products, setProducts] = useState<User[]>(usersList || [])
   const [sortConfig, setSortConfig] = useState<SortConfig>({
     key: null,
     direction: null
@@ -89,7 +90,7 @@ export default function SortableTable({ goodsList }: { goodsList: Product[] }) {
   )
 
   // Memoize request sort handler to avoid recreation on every render
-  const requestSort = useCallback((key: keyof Product) => {
+  const requestSort = useCallback((key: keyof User) => {
     setSortConfig(prevConfig => {
       let direction: 'ascending' | 'descending' | null = 'ascending'
 
@@ -115,7 +116,7 @@ export default function SortableTable({ goodsList }: { goodsList: Product[] }) {
 
   // Memoize getSortDirection to avoid recreation on every render
   const getSortDirection = useCallback(
-    (key: keyof Product) => {
+    (key: keyof User) => {
       return sortConfig.key === key ? sortConfig.direction : null
     },
     [sortConfig.key, sortConfig.direction]
@@ -123,7 +124,7 @@ export default function SortableTable({ goodsList }: { goodsList: Product[] }) {
 
   // Memoize renderSortArrow to avoid recreation on every render
   const renderSortArrow = useCallback(
-    (key: keyof Product) => {
+    (key: keyof User) => {
       const direction = getSortDirection(key)
       if (!direction) return <UppSVG className='sort-icon' />
       return (
@@ -137,66 +138,77 @@ export default function SortableTable({ goodsList }: { goodsList: Product[] }) {
 
   // Update products state when goodsList prop changes
   useEffect(() => {
-    setProducts(goodsList || [])
+    setProducts(usersList || [])
     setCurrentPage(1) // Reset to first page when data changes
-  }, [goodsList])
+  }, [usersList])
 
   return (
     <div className='list-reviews'>
       <div className='review review-header'>
-        <div className='name'>Назва</div>
         <div
-          className={`time today ${
-            getSortDirection('today')
-              ? `sorted-${getSortDirection('today')}`
+          className={`tema ${
+            getSortDirection('name') ? `sorted-${getSortDirection('name')}` : ''
+          }`}
+          onClick={() => requestSort('name')}
+        >
+          Імя {renderSortArrow('name')}
+        </div>
+        <div
+          className={`date ${
+            getSortDirection('email')
+              ? `sorted-${getSortDirection('email')}`
               : ''
           }`}
-          onClick={() => requestSort('today')}
+          onClick={() => requestSort('email')}
         >
-          Cьогодні {renderSortArrow('today')}
+          E-mail {renderSortArrow('email')}
         </div>
         <div
-          className={`time week ${
-            getSortDirection('week') ? `sorted-${getSortDirection('week')}` : ''
-          }`}
-          onClick={() => requestSort('week')}
-        >
-          Тиждень {renderSortArrow('week')}
-        </div>
-        <div
-          className={`time mouth ${
-            getSortDirection('month')
-              ? `sorted-${getSortDirection('month')}`
+          className={`up operations ${
+            getSortDirection('stayActive')
+              ? `sorted-${getSortDirection('stayActive')}`
               : ''
           }`}
-          onClick={() => requestSort('month')}
+          onClick={() => requestSort('stayActive')}
         >
-          Місяць {renderSortArrow('month')}
+          Остання активність {renderSortArrow('stayActive')}
         </div>
         <div
-          className={`time year ${
-            getSortDirection('year') ? `sorted-${getSortDirection('year')}` : ''
-          }`}
-          onClick={() => requestSort('year')}
-        >
-          Рік {renderSortArrow('year')}
-        </div>
-        <div
-          className={`time all-time ${
-            getSortDirection('allTime')
-              ? `sorted-${getSortDirection('allTime')}`
+          className={`up date-register ${
+            getSortDirection('dateRegister')
+              ? `sorted-${getSortDirection('dateRegister')}`
               : ''
           }`}
-          onClick={() => requestSort('allTime')}
+          onClick={() => requestSort('dateRegister')}
         >
-          Весь період {renderSortArrow('allTime')}
+          Дата реєстрації {renderSortArrow('dateRegister')}
+        </div>
+        <div
+          className={`up count-orders ${
+            getSortDirection('countOrders')
+              ? `sorted-${getSortDirection('countOrders')}`
+              : ''
+          }`}
+          onClick={() => requestSort('countOrders')}
+        >
+          К-ть замовленнь {renderSortArrow('countOrders')}
+        </div>
+        <div
+          className={`up operations ${
+            getSortDirection('sumOrders')
+              ? `sorted-${getSortDirection('sumOrders')}`
+              : ''
+          }`}
+          onClick={() => requestSort('sumOrders')}
+        >
+          Сума витрат {renderSortArrow('sumOrders')}
         </div>
       </div>
       {paginatedData.length === 0 ? (
         <div className='review emptyMessage'>No data available</div>
       ) : (
-        paginatedData.map((product, index) => (
-          <ProductRow key={product.id} product={product} index={index} />
+        paginatedData.map((user, index) => (
+          <UserRow key={user.id} user={user} index={index} />
         ))
       )}
       <Pagination
