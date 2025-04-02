@@ -78,8 +78,8 @@
       .time {
         display: flex;
         align-items: center;
-        flex-direction: row;
         gap: 5px;
+        white-space: nowrap;
         cursor: pointer;
       }
     }
@@ -97,7 +97,7 @@
         overflow: hidden;
       }
       .name {
-        width: 100%;
+        width: 70%;
         color: #05172f;
         cursor: pointer;
       }
