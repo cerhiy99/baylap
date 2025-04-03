@@ -6,6 +6,7 @@ import AdminHeader from '@/app/components/Admin/AdminHeader/AdminHeader'
 import SearchSVG from '@/app/assest/Admin/Search.svg'
 import { Locale } from '@/i18n.config'
 import Pagination from '@/app/components/utils/Pagination'
+import Link from 'next/link'
 
 // Demo review data
 const initialReviews = [
@@ -193,9 +194,13 @@ const ReviewRow = memo(
           checked={isSelected}
           onChange={() => onSelect(review.id)}
         />
-        <div className='tema'>{review.text}</div>
+        <div className='tema'>
+          <Link href={`/ru/select-goods/1`}>{review.text}</Link>
+        </div>
         <div className='author'>{review.author}</div>
-        <div className='published'>{review.published}</div>
+        <div className='published'>
+          <Link href={`/ru/select-goods/1`}>{review.published}</Link>
+        </div>
         <div className='date'>{review.date}</div>
         <div className='operations'>Редагувати</div>
       </div>
@@ -474,7 +479,7 @@ const ReviewsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
             </select>
             <button
               onClick={handleApplyBulkAction}
-              disabled={bulkAction === '0' || selectedReviews.length === 0}
+              disabled={bulkAction === '0' || selectedReviews.length == 0}
             >
               Застосувати
             </button>

@@ -137,8 +137,10 @@
         outline: none;
       }
       button {
-        background-color: #2695694d;
-
+        &:disabled {
+          background-color: #2695694d;
+        }
+        background-color: #269569;
         font-size: 12px;
         font-weight: 400;
         line-height: 20.8px;
