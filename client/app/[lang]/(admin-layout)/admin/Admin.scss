@@ -117,6 +117,14 @@
       gap: 5px;
       align-items: center;
     }
+    select {
+      border-radius: 5px;
+      outline: none;
+      // background-color: transparent;
+      // color: white;
+      border: 2px solid #ffffff;
+      padding: 2px;
+    }
     .select {
     }
   }
@@ -145,5 +153,28 @@
       background-color: #269569;
       border-radius: 0 5px 5px 0;
     }
+  }
+}
+
+.pagination {
+  margin-top: 30px;
+  padding-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  div {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #269569;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .select {
+    background-color: #269569;
+    color: #ffffff;
   }
 }
