@@ -28,6 +28,18 @@
         gap: 5px;
         align-items: center;
       }
+      input[type='date'] {
+        border-radius: 5px;
+        outline: none;
+        // background-color: transparent;
+        // color: white;
+        border: 2px solid #ffffff;
+        padding: 2px;
+      }
+      input[type='date']::-webkit-calendar-picker-indicator {
+        color: #c4c4c4; /* Колір тексту всередині календаря (де це можливо) */
+        border-radius: 4px; /* Радіус для закруглення */
+      }
 
       .select {
       }
@@ -130,6 +142,7 @@
       flex-direction: row;
       justify-content: space-between;
       width: 225px;
+
       select {
         background-color: #269569;
         border-radius: 7px;
