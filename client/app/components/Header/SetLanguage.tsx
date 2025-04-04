@@ -9,7 +9,6 @@ type Props = {
 
 const SetLanguage = ({ lang }: Props) => {
   const select: React.CSSProperties = {
-    fontFamily: 'Roboto',
     fontSize: '12px',
     fontWeight: 650,
     lineHeight: '12px',
@@ -21,7 +20,6 @@ const SetLanguage = ({ lang }: Props) => {
     height: '25px'
   }
   const noSelect: React.CSSProperties = {
-    fontFamily: 'Roboto',
     fontSize: '12px',
     fontWeight: 400,
     lineHeight: '12px',

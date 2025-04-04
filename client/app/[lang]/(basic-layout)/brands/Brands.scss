@@ -1,21 +1,23 @@
 @import '@/app/[lang]/(basic-layout)/App.scss';
 
-.list-brends-container {
+.list-brands-container {
   @include responsive-width;
   margin-bottom: 50px;
   @media (max-width: 768px) {
     margin-bottom: 30px;
   }
+  .list-brands-title {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
   h1 {
     font-size: 28px;
     font-weight: 400;
     line-height: 28px;
-    text-align: left;
-
     font-size: 28px;
     font-weight: 400;
     line-height: 33.4px;
-    text-align: left;
+    text-align: center;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: #1e1e1e;
@@ -26,20 +28,19 @@
       line-height: 23.86px;
     }
   }
-  .list-letter-Brend-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .list-letter-Brand-container {
+    max-width: 1100px;
+    margin: 0 auto;
     margin-bottom: 20px;
   }
-  .list-letter-Brend {
+  .list-letter-Brand {
     border-radius: 15px;
     padding: 20px;
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 15px;
+    gap: 13px;
     flex-wrap: wrap;
     margin: 20px 0;
     max-width: 1100px;
@@ -67,12 +68,12 @@
     }
   }
 
-  .list-brends {
+  .list-brands {
     display: flex;
     flex-direction: column;
     border-radius: 15px;
     padding: 20px;
-    .brends-and-title-letter {
+    .brands-and-title-letter {
       display: flex;
       flex-direction: row;
       width: 100%;
@@ -94,7 +95,7 @@
         height: 100%; /* Розтягується на всю висоту двох рядків */
         margin: 0;
       }
-      .brends {
+      .brands {
         display: grid;
         grid-template-columns: repeat(
           7,
@@ -107,14 +108,14 @@
         margin: 0; /* Відсутність зовнішніх відступів */
       }
 
-      .brend {
+      .brand {
         text-align: left; /* Вирівнювання тексту по лівому краю */
         white-space: nowrap; /* Запобігання переносу тексту */
       }
 
       /* Адаптивність */
       @media (max-width: 1700px) {
-        .brends {
+        .brands {
           grid-template-columns: repeat(
             6,
             1fr
@@ -123,7 +124,7 @@
       }
 
       @media (max-width: 1500px) {
-        .brends {
+        .brands {
           grid-template-columns: repeat(
             5,
             1fr
@@ -132,7 +133,7 @@
       }
 
       @media (max-width: 1300px) {
-        .brends {
+        .brands {
           grid-template-columns: repeat(
             4,
             1fr
@@ -141,7 +142,7 @@
       }
 
       @media (max-width: 768px) {
-        .brends {
+        .brands {
           grid-template-columns: repeat(
             3,
             1fr

@@ -3,7 +3,6 @@
 .brend-letter-container {
   @include responsive-width;
   h1 {
-    font-family: Roboto;
     font-size: 30px;
     font-weight: 500;
     line-height: 36.63px;
@@ -23,7 +22,6 @@
     background-color: #ffffff;
     border-radius: 15px;
     p {
-      font-family: Roboto;
       font-size: 18px;
       font-weight: 700;
       line-height: 20.7px;
@@ -53,6 +51,7 @@
     .brend {
       text-align: left; /* Вирівнювання тексту по лівому краю */
       white-space: nowrap; /* Запобігання переносу тексту */
+      color: #333;
     }
 
     /* Адаптивність */
