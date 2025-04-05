@@ -93,7 +93,7 @@ const AddTitleCategory = () => {
             >
               {categories.map(category => (
                 <MenuItem key={category.id} value={category.id}>
-                  {category.nameua}
+                  {category.nameuk}
                 </MenuItem>
               ))}
             </Select>
