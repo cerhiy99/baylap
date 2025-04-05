@@ -4,6 +4,7 @@
   height: 100%;
   top: 0;
   left: 0;
+  background: #1e1e1e9c;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
@@ -99,6 +100,18 @@
     color: #1e1e1e;
     cursor: pointer;
     text-align: center;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    height: 41px;
+    border-radius: 3px;
+
+    box-sizing: border-box;
+    background: white;
+    // border: 1px solid #3960ff;
+    border: 1px solid #1e1e1e;
+    // color: #3960ff;
+    color: #1e1e1e;
   }
   .logInWhichUser {
     font-family: Onest;

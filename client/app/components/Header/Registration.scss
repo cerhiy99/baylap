@@ -42,7 +42,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  background-color: #00000099;
+  background: #1e1e1e9c;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,8 +123,10 @@
 
       input {
         flex: 1;
+        padding-left: 45px;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
+        width: 100%;
       }
 
       .country-select {

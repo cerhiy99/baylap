@@ -13,6 +13,8 @@
 
     &:hover {
       background-color: #ffffff15;
+
+      // color: #fe680a;
     }
     .title {
       width: 48px;
@@ -56,16 +58,18 @@
     left: calc(50% - 16px);
     transform: translateX(-50%);
     padding: 8px 11px; /* Внутрішні відступи */
-    gap: 7.5px;
+
     .dropdownBtn {
       &:hover {
         text-decoration: underline;
+        color: #fe680a;
       }
     }
+
     div {
       margin: 0;
-      padding: 0;
-      font-family: Roboto;
+      padding: 10px;
+
       font-size: 14px;
       font-weight: 400;
       line-height: 16.94px;

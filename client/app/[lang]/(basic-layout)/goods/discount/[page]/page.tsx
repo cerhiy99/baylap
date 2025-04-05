@@ -4,7 +4,7 @@ import './Discount.scss'
 import ListGoods from '@/app/components/goods/ListGoods'
 import { getDictionary } from '@/lib/dictionary'
 import BreadCrumbs from '@/app/components/utils/BreadCrumbs'
-import Pagination from '@/app/components/utils/Pagination'
+import PaginationMain from '@/app/components/paginationMain/paginationMain'
 
 const page = async ({ params }: { params: { page: Locale; lang: Locale } }) => {
   const { miniGoods } = await getDictionary(params.lang)
@@ -25,7 +25,7 @@ const page = async ({ params }: { params: { page: Locale; lang: Locale } }) => {
         </div>
       </div>
       <div className='discount-pagination'>
-        <Pagination
+        <PaginationMain
           totalPages={8}
           url={`/${params.lang}/goods/discount/`}
           showPages={3}

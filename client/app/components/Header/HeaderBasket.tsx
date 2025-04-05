@@ -90,7 +90,11 @@ const HeaderBasket = ({ lang, dictionary }: Props) => {
       <div className='title-container'>
         <div className={`title ${isOpen ? 'open' : ''}`}>
           <BasketSVG />
-          {count > 0 && <div className='count'>{count}</div>}
+          {count > 0 && (
+            <div className='count'>
+              <span>{count}</span>
+            </div>
+          )}
         </div>
         <p>Корзина</p>
       </div>
@@ -104,94 +108,106 @@ const HeaderBasket = ({ lang, dictionary }: Props) => {
           <div className='basket-list'>
             <p>Корзина</p>
             {basket.map(x => (
-              <Link key={x.id} href={`/${lang}/select-goods/${x.id}`}>
-                <div className='basket-goods'>
-                  <div className='basket-goods-img'>
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_SERVER}${x.volume.img}`}
-                      width={82}
-                      height={82}
-                      alt={x.nameUA}
-                    />
-                  </div>
-                  <div className='basket-goods-text'>
-                    <h3>{x.nameUA}</h3>
-                    <div className='add-or-minus-or-basket'>
-                      <div className='add-or-minus'>
-                        <div
-                          className='arrow minus'
-                          onClick={e => {
-                            e.stopPropagation()
-                            e.preventDefault()
-                            if (x.count > 1) minus(x.id)
-                          }}
-                        >
-                          <svg
-                            width='14'
-                            height='2'
-                            viewBox='0 0 14 2'
-                            fill='none'
-                            xmlns='http://www.w3.org/2000/svg'
+              <div key={x.id} className='itemWrapper'>
+                <Link href={`/${lang}/select-goods/${x.id}`}>
+                  <div className='basket-goods'>
+                    <div className='basket-goods-img'>
+                      {/* <Image
+                        src={`${process.env.NEXT_PUBLIC_SERVER}${x.volume.img}`}
+                        width={82}
+                        height={82}
+                        alt={x.nameUA}
+                      /> */}
+                      <Image
+                        src={`/images/adminProduct.jpg`}
+                        width={82}
+                        height={82}
+                        alt={x.nameUA}
+                      />
+                    </div>
+                    <div className='basket-goods-text'>
+                      <h3>{x.nameUA}</h3>
+                      <div className='add-or-minus-or-basket'>
+                        <div className='add-or-minus'>
+                          <div
+                            className='arrow minus'
+                            onClick={e => {
+                              e.stopPropagation()
+                              e.preventDefault()
+                              if (x.count > 1) minus(x.id)
+                            }}
                           >
-                            <path d='M0 1H14' stroke='white' strokeWidth='2' />
-                          </svg>
+                            <svg
+                              width='14'
+                              height='2'
+                              viewBox='0 0 14 2'
+                              fill='none'
+                              xmlns='http://www.w3.org/2000/svg'
+                            >
+                              <path
+                                d='M0 1H14'
+                                stroke='white'
+                                strokeWidth='2'
+                              />
+                            </svg>
+                          </div>
+                          <div className='count'>{x.count}</div>
+                          <div
+                            className='arrow plus'
+                            onClick={e => {
+                              e.stopPropagation()
+                              e.preventDefault()
+                              plus(x.id)
+                            }}
+                          >
+                            <svg
+                              width='14'
+                              height='14'
+                              viewBox='0 0 14 14'
+                              fill='none'
+                              xmlns='http://www.w3.org/2000/svg'
+                            >
+                              <path
+                                d='M0 7L14 7'
+                                stroke='white'
+                                strokeWidth='2'
+                              />
+                              <path
+                                d='M7 0L7 14'
+                                stroke='white'
+                                strokeWidth='2'
+                              />
+                            </svg>
+                          </div>
                         </div>
-                        <div className='count'>{x.count}</div>
                         <div
-                          className='arrow plus'
                           onClick={e => {
-                            e.stopPropagation()
                             e.preventDefault()
-                            plus(x.id)
+                            e.stopPropagation()
+                            delWithBasket(x.id)
                           }}
+                          className='del'
                         >
-                          <svg
-                            width='14'
-                            height='14'
-                            viewBox='0 0 14 14'
-                            fill='none'
-                            xmlns='http://www.w3.org/2000/svg'
-                          >
-                            <path
-                              d='M0 7L14 7'
-                              stroke='white'
-                              strokeWidth='2'
-                            />
-                            <path
-                              d='M7 0L7 14'
-                              stroke='white'
-                              strokeWidth='2'
-                            />
-                          </svg>
+                          <DelSVG />
                         </div>
                       </div>
-                      <div
-                        onClick={e => {
-                          e.preventDefault()
-                          e.stopPropagation()
-                          delWithBasket(x.id)
-                        }}
-                        className='del'
-                      >
-                        <DelSVG />
+                      <div className='price-count-volume'>
+                        <div className='volume-and-count'>
+                          <div className='count'>{x.volume.volume}</div>
+                        </div>
+                        <div className='price-container'>
+                          <div className='price-no-discount'>
+                            {x.volume.price} ₴
+                          </div>
+                          <div className='price-with-discount'>
+                            {x.volume.priceWithDiscount} ₴
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className='price-count-volume'>
-                      <div className='volume-and-count'>
-                        <div className='count'>{x.volume.volume}</div>
-                      </div>
-                      <div className='price-container'>
-                        <div className='price-no-discount'>
-                          {x.volume.price} ₴
-                        </div>
-                        <div className='price-with-discount'>
-                          {x.volume.priceWithDiscount} ₴
-                        </div>
-                      </div>
-                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             ))}
           </div>
         )}

@@ -4,6 +4,8 @@ import type React from 'react'
 import CloseSVG from '../../assest/Goods/Close.svg'
 import { useState } from 'react'
 import './Registration.scss'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 interface RegistrationModalProps {
   onClose: () => void
@@ -21,6 +23,9 @@ export default function RegistrationModal({ onClose }: RegistrationModalProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
+  }
+  const handleChangeNumber = (value: string) => {
+    setFormData(prev => ({ ...prev, phone: value }))
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -73,18 +78,27 @@ export default function RegistrationModal({ onClose }: RegistrationModalProps) {
               Номер телефону <span className='required'>*</span>
             </label>
             <div className='phone-input-container'>
-              <input
+              <PhoneInput
+                country={'ua'}
+                placeholder=''
+                value={formData.phone}
+                onChange={handleChangeNumber}
+                inputProps={{
+                  type: 'tel',
+
+                  required: true,
+                  pattern:
+                    '^\\+380 \\(\\d{2}\\\\) \\d{3} \\d{2} \\d{2}$|^(?!\\+380).{7,20}$'
+                }}
+              />
+              {/* <input
                 type='tel'
                 name='phone'
                 placeholder='+380(_)_-__-__'
                 value={formData.phone}
                 onChange={handleChange}
                 required
-              />
-              <div className='country-select'>
-                <div className='selected-country'></div>
-                <span className='dropdown-arrow'>▼</span>
-              </div>
+              /> */}
             </div>
           </div>
 

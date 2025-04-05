@@ -7,6 +7,7 @@ import { Rating } from '@mui/material'
 import Link from 'next/link'
 import { Locale } from '@/i18n.config'
 import InBasket from './InBasket'
+import Image from 'next/image'
 
 type Props = {
   goods: {
@@ -75,6 +76,7 @@ const MiniGoods = ({ goods, dictionary, lang }: Props) => {
               goods.listVolume[selectVolumeIdx].img
             }
           />
+          {/* <Image src={`/images/adminProduct.jpg`} width={82} height={82} /> */}
         </div>
         <h3>{goods.name}</h3>
         <div className='rating-and-reviews'>

@@ -21,21 +21,26 @@
 
     .count {
       position: absolute;
-      width: 12.95px;
-      height: 12.95px;
       right: 6px;
       bottom: 6px;
+      box-sizing: border-box;
+      width: 13px;
+      height: 13px;
       background-color: #fe680a;
+
       display: flex;
       justify-content: center;
       align-items: center;
-      text-align: center;
-      line-height: 0;
-      font-family: Roboto;
-      font-size: 8.01px;
+      // text-align: center;
+      font-size: 8px;
       font-weight: 600;
       color: #ffffff;
       border-radius: 100%;
+      line-height: 1;
+      span {
+        margin: 0;
+        padding: 0;
+      }
     }
   }
 
@@ -66,7 +71,7 @@
     .empty-title {
       margin: 0;
       padding: 0;
-      font-family: Roboto;
+
       font-size: 14px;
       font-weight: 600;
       line-height: 16.94px;
@@ -79,7 +84,7 @@
     span {
       display: flex;
       justify-content: center;
-      font-family: Roboto;
+
       font-size: 14px;
       font-weight: 400;
       line-height: 16.94px;
@@ -98,6 +103,7 @@
       padding-top: 0;
       scrollbar-width: thin; /* Для Firefox */
       scrollbar-color: #797f8b #f0f0f0; /* Колір смуги та фону */
+      overscroll-behavior: contain;
 
       /* Для браузерів WebKit */
       &::-webkit-scrollbar {
@@ -117,8 +123,15 @@
       &::-webkit-scrollbar-thumb:hover {
         background-color: #797f8b; /* Трохи темніший при наведенні */
       }
+      .itemWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #a3aebd63;
+        margin-bottom: 10px;
+      }
       p {
-        font-family: Roboto;
         font-size: 20px;
         font-weight: 400;
         line-height: 24.2px;
@@ -136,13 +149,17 @@
         flex-direction: row;
         align-items: center;
         gap: 10px;
+        position: relative;
+        a {
+          position: absolute;
+          inset: 0;
+        }
         .basket-goods-text {
           position: relative;
           display: flex;
           flex-direction: column;
           gap: 5px;
           h3 {
-            font-family: Roboto;
             font-size: 13px;
             font-weight: 400;
             line-height: 15.73px;
@@ -166,7 +183,6 @@
               flex-direction: column;
               gap: 2px;
               .volume {
-                font-family: Roboto;
                 font-size: 14px;
                 font-weight: 400;
                 line-height: 16.52px;
@@ -176,7 +192,6 @@
                 color: #797f8b;
               }
               .count {
-                font-family: Roboto;
                 font-size: 12px;
                 font-weight: 400;
                 line-height: 14.52px;
@@ -190,7 +205,6 @@
               display: flex;
               flex-direction: column;
               .price-no-discount {
-                font-family: Roboto;
                 font-size: 12px;
                 font-weight: 500;
                 line-height: 14.52px;
@@ -200,7 +214,6 @@
                 text-decoration-skip-ink: none;
               }
               .price-with-discount {
-                font-family: Roboto;
                 font-size: 16px;
                 font-weight: 700;
                 line-height: 19.36px;
@@ -225,7 +238,6 @@
         flex-direction: column;
         gap: 3px;
         p {
-          font-family: Inter;
           font-weight: 400;
           font-size: 13px;
           line-height: 100%;
@@ -238,7 +250,7 @@
           flex-direction: row;
           gap: 3px;
           align-items: center;
-          font-family: 'PT Root UI';
+
           font-size: 20px;
           font-weight: 700;
           line-height: 22px;
@@ -248,7 +260,6 @@
           text-decoration-skip-ink: none;
           color: #000000;
           .grn {
-            font-family: 'PT Root UI';
             font-size: 17px;
             font-weight: 700;
           }
@@ -261,7 +272,7 @@
           border-radius: 5px;
           box-sizing: border-box;
           background-color: #fe680a;
-          font-family: Inter;
+
           font-weight: 700;
           font-size: 14px;
           line-height: 20px;

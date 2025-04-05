@@ -81,9 +81,9 @@ const LogIn = ({ onRegisterModal, close }: Props) => {
             Увійти
           </button>
         </div>
-        <div className='register' onClick={onRegisterModal}>
+        <button className='register' onClick={onRegisterModal}>
           Зареєструватися
-        </div>
+        </button>
         <br />
         <div className='line' />
         <br />

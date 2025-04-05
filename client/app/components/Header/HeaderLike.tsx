@@ -65,6 +65,7 @@ const HeaderLike = ({ dictionary, lang }: Props) => {
     const currentLike = like.filter(currentItem => currentItem.id === id)
     dispatch(addToBasket({ ...currentLike[0], count: 1 }))
     dispatch(removeFromLike(id))
+    setIsOpen(false)
   }
 
   return (
@@ -77,7 +78,11 @@ const HeaderLike = ({ dictionary, lang }: Props) => {
       <div className={`title ${isOpen ? 'open' : ''}`}>
         <LikeSVG />
 
-        {count > 0 && <div className='count'>{count}</div>}
+        {count > 0 && (
+          <div className='count'>
+            <span>{count}</span>
+          </div>
+        )}
       </div>
       <div className={`dropdown ${isOpen ? 'show' : ''}`}>
         {like.length == 0 ? (
@@ -90,15 +95,22 @@ const HeaderLike = ({ dictionary, lang }: Props) => {
             <p>Обране</p>
             {like.map(x => (
               <>
-                <Link key={x.id} href={`/${lang}/select-goods/${x.id}`}>
+                <div className='itemWrapper' key={x.id}>
+                  <Link href={`/${lang}/select-goods/${x.id}`}> </Link>
                   <div className='liked-basket'>
                     <div className='basket-goods-img'>
                       <Image
-                        src={`${process.env.NEXT_PUBLIC_SERVER}${x.volume.img}`}
+                        src={`/images/adminProduct.jpg`}
                         width={82}
                         height={82}
                         alt={x.nameUA}
                       />
+                      {/* <Image
+                        src={`${process.env.NEXT_PUBLIC_SERVER}${x.volume.img}`}
+                        width={82}
+                        height={82}
+                        alt={x.nameUA}
+                      /> */}
                     </div>
                     <div className='basket-goods-text'>
                       <h3>{x.nameUA}</h3>
@@ -126,18 +138,19 @@ const HeaderLike = ({ dictionary, lang }: Props) => {
                       <DelSVG />
                     </div>
                   </div>
-                </Link>
-                <div className='button-with-price'>
-                  <div className='price'>
-                    <p>Вместе, без доставки</p>
-                    <div className='price-grn'>
-                      {price} <span className='grn'>₴</span>
+
+                  <div className='button-with-price'>
+                    <div className='price'>
+                      <p>Вместе, без доставки</p>
+                      <div className='price-grn'>
+                        {price} <span className='grn'>₴</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className='in-basket'>
-                    <button onClick={() => handlerAddToCart(x.id)}>
-                      Добавити в корзину
-                    </button>
+                    <div className='in-basket'>
+                      <button onClick={() => handlerAddToCart(x.id)}>
+                        Добавити в корзину
+                      </button>
+                    </div>
                   </div>
                 </div>
               </>

@@ -53,7 +53,6 @@
     }
   }
   h3 {
-    font-family: Roboto;
     font-size: 14px;
     font-weight: 500;
     line-height: 16.94px;
@@ -86,7 +85,6 @@
         }
       }
       span {
-        font-family: Roboto;
         font-size: 14px;
         font-weight: 400;
         line-height: 10.89px;
@@ -100,7 +98,6 @@
       }
     }
     .reviews {
-      font-family: Roboto;
       font-size: 14px;
       font-weight: 400;
       line-height: 10.89px;
@@ -116,19 +113,23 @@
   .list-volume {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    // justify-content: center;
+    flex-wrap: wrap;
     gap: 5px;
     margin-top: 10px;
     .volume {
-      font-family: Roboto;
-      font-size: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 20px;
+      font-size: 12px;
       font-weight: 500;
-      line-height: 9.68px;
-      text-align: center;
+      // text-align: center;
       text-underline-position: from-font;
       text-decoration-skip-ink: none;
       color: #6d6d6d;
-      border: 0.73px solid #6d6d6d;
+      border: 1px solid #6d6d6d;
       padding: 3px;
       border-radius: 10.92px;
       cursor: pointer;
@@ -157,7 +158,6 @@
         gap: 5px;
         align-items: center;
         .price {
-          font-family: Roboto;
           font-size: 13px;
           font-weight: 500;
           line-height: 15.73px;
@@ -168,7 +168,6 @@
           color: #a3aebd;
         }
         .discount {
-          font-family: Roboto;
           font-size: 12px;
           font-weight: 700;
           line-height: 13px;
@@ -182,7 +181,6 @@
         }
       }
       .price-with-discount {
-        font-family: 'PT Root UI';
         font-size: 23px;
         font-weight: 700;
         line-height: 25px;
@@ -191,7 +189,6 @@
         text-decoration-skip-ink: none;
         color: #000000;
         span {
-          font-family: 'PT Root UI';
           font-size: 19px;
           font-weight: 700;
         }

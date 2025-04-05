@@ -1,6 +1,6 @@
 .header-basket-container {
   position: relative;
-  font-family: Roboto;
+
   .title-container {
     display: flex;
     flex-direction: row;
@@ -25,20 +25,25 @@
 
       .count {
         position: absolute;
-        width: 12.95px;
-        height: 12.95px;
+        width: 13px;
+        height: 13px;
         right: 6px;
         bottom: 6px;
         background-color: #fe680a;
+
         display: flex;
         justify-content: center;
         align-items: center;
-        text-align: center;
-        line-height: 0;
-        font-family: Roboto;
-        font-size: 8.01px;
+        // text-align: center;
+        font-size: 8px;
         font-weight: 600;
         color: #ffffff;
+        border-radius: 100%;
+        line-height: 1;
+        span {
+          margin: 0;
+          padding: 0;
+        }
         border-radius: 100%;
       }
     }
@@ -81,7 +86,7 @@
     p {
       margin: 0;
       padding: 0;
-      font-family: Roboto;
+
       font-size: 14px;
       font-weight: 600;
       line-height: 16.94px;
@@ -94,7 +99,7 @@
     span {
       display: flex;
       justify-content: center;
-      font-family: Roboto;
+
       font-size: 14px;
       font-weight: 400;
       line-height: 16.94px;
@@ -115,6 +120,7 @@
       scrollbar-width: thin; /* Для Firefox */
       scrollbar-color: #797f8b #f0f0f0; /* Колір смуги та фону */
       gap: 10px;
+      overscroll-behavior: contain;
 
       /* Для браузерів WebKit */
       &::-webkit-scrollbar {
@@ -134,8 +140,12 @@
       &::-webkit-scrollbar-thumb:hover {
         background-color: #797f8b; /* Трохи темніший при наведенні */
       }
+      .itemWrapper {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #a3aebd63;
+        margin-bottom: 10px;
+      }
       p {
-        font-family: Roboto;
         font-size: 20px;
         font-weight: 400;
         line-height: 24.2px;
@@ -196,7 +206,6 @@
             }
           }
           h3 {
-            font-family: Roboto;
             font-size: 13px;
             font-weight: 400;
             line-height: 15.73px;
@@ -220,7 +229,6 @@
               flex-direction: column;
               gap: 2px;
               .volume {
-                font-family: Roboto;
                 font-size: 14px;
                 font-weight: 400;
                 line-height: 16.52px;
@@ -230,7 +238,6 @@
                 color: #000000;
               }
               .count {
-                font-family: Roboto;
                 font-size: 12px;
                 font-weight: 400;
                 line-height: 14.52px;
@@ -244,7 +251,6 @@
               display: flex;
               flex-direction: column;
               .price-no-discount {
-                font-family: Roboto;
                 font-size: 12px;
                 font-weight: 500;
                 line-height: 14.52px;
@@ -254,7 +260,6 @@
                 text-decoration-skip-ink: none;
               }
               .price-with-discount {
-                font-family: Roboto;
                 font-size: 16px;
                 font-weight: 700;
                 line-height: 19.36px;
@@ -287,7 +292,6 @@
           color: #000000;
         }
         p {
-          font-family: 'PT Root Ui';
           margin-bottom: 0;
           font-weight: 700;
           font-size: 20px;
@@ -301,7 +305,7 @@
           gap: 3px;
           span {
             font-weight: 400;
-            font-family: 'PT Root Ui';
+
             display: flex;
             align-items: flex-end;
             font-size: 16px;

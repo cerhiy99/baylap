@@ -76,9 +76,9 @@
         margin-top: 5px; /* Відступ зверху у 5 пікселів */
         line-height: normal; /* Додатково можна налаштувати висоту рядка, якщо потрібно */
       }
-      // span {
-      //   margin-top: 0 !important;
-      // }
+      span {
+        margin: 0 !important;
+      }
     }
     h3 {
       font-size: 22px;

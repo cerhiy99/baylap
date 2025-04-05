@@ -59,6 +59,14 @@ const AuthHeader = ({ dictionary, lang }: Props) => {
   const closeRegister = () => {
     setIsRegisterOpen(false)
   }
+  useEffect(() => {
+    if (logIsOpen || isRegisterOpen) {
+      document.body.style.overflow = 'hidden'
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [logIsOpen, isRegisterOpen])
 
   return (
     <>
@@ -68,13 +76,13 @@ const AuthHeader = ({ dictionary, lang }: Props) => {
         className='auth-header-container'
         ref={dropdownRef}
       >
-        <div className='title-container'>
+        <div className='title-container' onClick={() => setLogIsOpen(true)}>
           <div className={`title ${isOpen ? 'open' : ''}`}>
             <AuthSVG />
           </div>
           <p>{dictionary.logIn}</p>
         </div>
-        <div className={`dropdown ${isOpen ? 'show' : ''}`}>
+        {/* <div className={`dropdown ${isOpen ? 'show' : ''}`}>
           <div
             className='log-in dropdownBtn'
             onClick={() => setLogIsOpen(true)}
@@ -87,7 +95,7 @@ const AuthHeader = ({ dictionary, lang }: Props) => {
           >
             {dictionary.register}
           </div>
-        </div>
+        </div> */}
       </div>
       {logIsOpen && <LogIn onRegisterModal={handleLogin} close={closeLogIn} />}
       {isRegisterOpen && <Register onClose={closeRegister} />}

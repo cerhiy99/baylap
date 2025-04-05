@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect } from 'react'
 import Left from '@/app/assest/Admin/Left.svg'
 import Right from '@/app/assest/Admin/Right.svg'
