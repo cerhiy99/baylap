@@ -103,8 +103,8 @@ const page = async ({ params: { lang } }: { params: { lang: Locale } }) => {
         lang={lang}
       />
       <div className='title'>
-        <h1>{Reviews.title}</h1>
         <ReviewsSVG />
+        <h1>{Reviews.title}</h1>
       </div>
       <div className='reviews-list-and-header'>
         <div className='reviews-header'>
