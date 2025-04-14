@@ -64,7 +64,7 @@ export default function RootLayout({
             </Link>
             <div className='right__wrapper'>
               <Link href={`/${lang}/admin/exit`}>Вихід</Link>
-              <ExitSVG />
+              <ExitSVG color='white' />
             </div>
           </div>
         </div>
