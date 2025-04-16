@@ -36,7 +36,7 @@ const SelectedProductsPage = () => {
           </div>
         ) : (
           basket.map(product => (
-            <div className='selectedProducts__item'>
+            <div className='selectedProducts__item' key={product.id}>
               <div className='item-image'>
                 <Image
                   src={`/images/adminProduct.jpg`}

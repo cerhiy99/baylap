@@ -176,7 +176,7 @@ const PagePersonal = () => {
         </div>
       </div>
       <div className='required'>
-        Поля, позначені зірочками (*), обов'язкові для заповнення. 
+        Поля, позначені зірочками (*), обов&apos;язкові для заповнення. 
       </div>
       <div className='button__container'>
         <button>Зберегти</button>

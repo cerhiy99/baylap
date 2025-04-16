@@ -65,7 +65,7 @@ const UserDashboard = ({ lang }: { lang: Locale }) => {
             Будьте <Link href={'#'}>#НАМБЕРВАН </Link>з BAYLAP У{' '}
             <Link href={'#'}>каталозі </Link>
             знайдете всі товари. А найвигідніше - у
-            <Link href={'#'}>акційних пропозиціях.</Link>
+            <Link href={'#'}> акційних пропозиціях.</Link>
           </div>
         </div>
         <div className='header--image'>
@@ -113,7 +113,9 @@ const UserDashboard = ({ lang }: { lang: Locale }) => {
           <FavoritiesSVG width={28} />
           <div className='nav__item'>
             <div className='nav__text'>
-              <Link href={'#'}>Персональна знижка</Link>
+              <Link href={`/${lang}/user-cabinet/discount`}>
+                Персональна знижка
+              </Link>
             </div>
           </div>
         </div>
@@ -121,7 +123,19 @@ const UserDashboard = ({ lang }: { lang: Locale }) => {
           <WatchedSvg width={28} />
           <div className='nav__item'>
             <div className='nav__text'>
-              <Link href={'#'}>Переглянуті товари</Link>
+              <Link
+                href='#listGoodsLeft'
+                scroll={false}
+                onClick={e => {
+                  e.preventDefault()
+                  document.getElementById('listGoodsLeft')?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                  })
+                }}
+              >
+                Переглянуті товари
+              </Link>
             </div>
           </div>
         </div>

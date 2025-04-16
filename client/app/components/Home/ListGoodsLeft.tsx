@@ -991,7 +991,7 @@ const ListGoodsLeft = ({ lang, dictionary, type }: Props) => {
   }
 
   return (
-    <div className='list-goods-left-container'>
+    <div className='list-goods-left-container' id='listGoodsLeft'>
       <div
         className={`scroll-button left ${
           currentPage > 0 ? 'arrow-active' : 'disabled'
