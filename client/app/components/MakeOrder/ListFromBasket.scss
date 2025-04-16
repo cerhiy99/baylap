@@ -1,5 +1,11 @@
 .list-from-basket-container {
   width: 30%;
+  @media (max-width: 1400px) {
+    width: 50%;
+  }
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
   .list-from-basket {
     background-color: #ffffff;
     border: 0.75px solid #fe680a;
@@ -19,6 +25,7 @@
         color: #ccc;
       }
     }
+
     .listBasket {
       display: flex;
       flex-direction: column;
@@ -64,7 +71,6 @@
             overflow: hidden;
             color: #000;
             word-break: break-all;
-            font-family: 'PT Root UI', sans-serif;
           }
           .count {
             color: #ccc;
@@ -101,7 +107,6 @@
             margin: 0;
             font-weight: 500;
             color: #000;
-            font-family: 'PT Root UI', sans-serif;
           }
         }
       }
@@ -117,7 +122,7 @@
         margin-top: 10px;
         height: 40px;
         box-sizing: border-box;
-        font-family: Roboto;
+
         font-weight: 400;
         font-size: 13.89px;
         line-height: 22.01px;

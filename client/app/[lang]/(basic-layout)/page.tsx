@@ -29,7 +29,7 @@ const page = async ({ params: { lang } }: { params: { lang: Locale } }) => {
         <h2>{home.title4}</h2>
         <ListArticle lang={lang} dictionary={miniGoods} type='reviews' />
         <h2>{home.youWatching}</h2>
-        {/* <ListGoodsLeft lang={lang} dictionary={miniGoods} type='' /> */}
+        <ListGoodsLeft lang={lang} dictionary={miniGoods} type='' />
       </div>
     </div>
   )

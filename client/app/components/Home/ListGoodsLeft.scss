@@ -1,9 +1,13 @@
+@import '@/app/[lang]/(basic-layout)/App.scss';
+
 .list-goods-left-container {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   position: relative;
-  width: 100%;
+  width: 100%; // Полная ширина
   margin-bottom: 40px;
+  // @include responsive-width;
 
   .scroll-button {
     border: none;
@@ -62,6 +66,10 @@
   .list-goods {
     display: grid;
     gap: 15px;
+    width: 100%;
+    @media (max-width: 768px) {
+      overflow-x: auto; // Добавляем горизонтальную прокрутку при необходимости
+    }
     &.limit-5 {
       grid-template-columns: repeat(5, 1fr);
     }
@@ -75,7 +83,12 @@
     }
 
     &.limit-2 {
+      width: fit-content;
       grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    &.limit-1 {
+      grid-template-columns: repeat(1, 1fr);
       gap: 10px;
     }
   }

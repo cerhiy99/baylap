@@ -1,7 +1,6 @@
 .make-order {
   color: #333333;
   h1 {
-    font-family: Roboto;
     font-size: 16px;
     font-weight: 700;
     line-height: 22.86px;
@@ -30,9 +29,19 @@
   }
   .form-with-basket {
     display: flex;
-    flex-direction: row;
+
     gap: 10px;
+
+    @media (max-width: 1024px) {
+      flex-direction: column-reverse;
+    }
     form {
+      @media (max-width: 1400px) {
+        width: 50%;
+      }
+      @media (max-width: 1024px) {
+        width: 100%;
+      }
       display: flex;
       flex-direction: column;
       width: 70%;
@@ -42,7 +51,6 @@
         width: 100%;
         height: 40px;
         border: 1px solid #339e36;
-        font-family: Roboto;
         font-size: 13.45px;
         font-weight: 400;
         line-height: 22.01px;
@@ -61,7 +69,6 @@
         .number {
           width: 24px;
           height: 24px;
-          font-family: Roboto;
           font-size: 14px;
           font-weight: 700;
           line-height: 14px;
@@ -76,7 +83,6 @@
           justify-content: center;
         }
         h2 {
-          font-family: Roboto;
           font-size: 14px;
           font-weight: 700;
           line-height: 20.01px;
@@ -151,7 +157,6 @@
         flex-direction: column;
         gap: 7.5px;
         p {
-          font-family: Roboto;
           font-size: 13.67px;
           font-weight: 400;
           line-height: 20.01px;
@@ -163,7 +168,6 @@
         }
         label {
           margin-top: 3px;
-          font-family: Roboto;
           font-size: 14px;
           font-weight: 400;
           line-height: 20.01px;
@@ -184,7 +188,6 @@
           border-radius: 8px;
           width: 100%;
           &::placeholder {
-            font-family: Roboto;
             font-size: 14px;
             font-weight: 400;
             line-height: 22.01px;
@@ -204,7 +207,6 @@
           border: 1px solid #ccc;
           border-radius: 8px;
           width: 100%;
-          font-family: Roboto;
           font-size: 14px;
           font-weight: 400;
           line-height: 22.01px;
@@ -214,7 +216,6 @@
           color: #333333;
           outline: none;
           &::placeholder {
-            font-family: Roboto;
             font-size: 13.67px;
             font-weight: 400;
             line-height: 16.02px;
@@ -251,7 +252,6 @@
             gap: 5px;
             width: 100%;
             .new-post-title {
-              font-family: Roboto;
               font-size: 13.89px;
               font-weight: 400;
               line-height: 20.01px;
@@ -264,7 +264,6 @@
               display: flex;
               flex-direction: column;
               span {
-                font-family: Roboto;
                 font-size: 14px;
                 font-weight: 400;
                 line-height: 20.01px;
@@ -294,7 +293,6 @@
           display: flex;
           flex-direction: row;
           cursor: pointer;
-          font-family: Roboto;
           font-size: 13.23px;
           font-weight: 400;
           line-height: 20.01px;

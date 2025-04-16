@@ -946,15 +946,30 @@ const ListGoodsLeft = ({ lang, dictionary, type }: Props) => {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth
-      if (width >= 1400) setLimit(5)
-      else if (width >= 1124) setLimit(4)
-      else if (width >= 800) setLimit(3)
-      else setLimit(2)
+
+      if (width >= 1400) {
+        setLimit(5)
+      } else if (width >= 1124) {
+        setLimit(4)
+      } else if (width >= 800) {
+        setLimit(3)
+      } else if (width >= 400) {
+        setLimit(2)
+      } else {
+        setLimit(1)
+      }
     }
 
+    // Виклик функції для встановлення початкового значення
     handleResize()
+
+    // Додаємо обробник події при зміні розміру вікна
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+
+    // Очищуємо обробник при відмонтовані компонента
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
   useEffect(() => {
