@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import type { Locale } from '@/i18n.config'
 import './MobileMenu.scss'
 import Logo from '@/app/assest/Logo.svg'
@@ -29,7 +29,7 @@ import TelegramSVG from '@/app/assest/Header/Telegram.svg'
 import WhatccapSVG from '@/app/assest/Header/Whatccap.svg'
 import PhoneSVG from '@/app/assest/Header/Phone.svg'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 type MobileMenuProps = {
   isOpen: boolean
@@ -39,6 +39,7 @@ type MobileMenuProps = {
 }
 
 const MobileMenu = ({ isOpen, onClose, dictionary, lang }: MobileMenuProps) => {
+  // const pathname = usePathname()
   const router = useRouter()
   const [isClosing, setIsClosing] = useState(false)
   const [shouldRender, setShouldRender] = useState(false)
@@ -48,29 +49,21 @@ const MobileMenu = ({ isOpen, onClose, dictionary, lang }: MobileMenuProps) => {
   const [countFav, setCountFav] = useState(0)
   const [isBasketOpen, setBasketOpen] = useState(false)
   const [isFavOpen, setFavOpen] = useState(false)
-
+  const [isFormClosed, setFormClosed] = useState(false)
   const dispatch = useDispatch()
   const { basket, like } = useSelector(
     (state: RootState) => state.BasketAndLike
   )
 
-  useEffect(() => {
-    let sum = 0
-    like.forEach(x => (sum += x.volume.priceWithDiscount))
-    setPrice(sum)
-  }, [like])
+  const toggleForm = useCallback(() => {
+    setFormClosed(!isFormClosed)
+  }, [isFormClosed])
+
   const handlerAddToCart = (id: number) => {
     const currentLike = like.filter(currentItem => currentItem.id === id)
     dispatch(addToBasket({ ...currentLike[0], count: 1 }))
     dispatch(removeFromLike(id))
   }
-
-  useEffect(() => {
-    setCountBasket(basket.length)
-  }, [basket])
-  useEffect(() => {
-    setCountFav(like.length)
-  }, [like])
 
   const delWithLike = (id: number) => {
     dispatch(removeFromLike(id))
@@ -87,6 +80,41 @@ const MobileMenu = ({ isOpen, onClose, dictionary, lang }: MobileMenuProps) => {
   const minus = (id: number) => {
     dispatch(decrementItemCount(id))
   }
+
+  const handleClose = useCallback(() => {
+    setIsClosing(true)
+    setBasketOpen(false)
+    setFavOpen(false)
+
+    const timer = setTimeout(() => {
+      onClose()
+    }, 300)
+
+    return () => clearTimeout(timer)
+  }, [onClose])
+
+  const toggleAccordion = (accordionType: 'favorite' | 'basket') => {
+    if (accordionType === 'basket') {
+      setBasketOpen(prev => !prev)
+      setFavOpen(false)
+    }
+    if (accordionType === 'favorite') {
+      setFavOpen(prev => !prev)
+      setBasketOpen(false)
+    }
+  }
+  useEffect(() => {
+    if (isFormClosed) {
+      handleClose()
+    }
+    return () => setFormClosed(false)
+  }, [isFormClosed, handleClose])
+
+  useEffect(() => {
+    let sum = 0
+    like.forEach(x => (sum += x.volume.priceWithDiscount))
+    setPrice(sum)
+  }, [like])
 
   useEffect(() => {
     let tempSum = 0
@@ -112,27 +140,19 @@ const MobileMenu = ({ isOpen, onClose, dictionary, lang }: MobileMenuProps) => {
     }
   }, [isOpen, shouldRender])
 
-  const handleClose = () => {
-    setIsClosing(true)
-    setBasketOpen(false)
-    setFavOpen(false)
+  useEffect(() => {
+    setCountBasket(basket.length)
+  }, [basket])
 
-    const timer = setTimeout(() => {
-      onClose()
-    }, 300) // Match this with the CSS animation duration
+  useEffect(() => {
+    setCountFav(like.length)
+  }, [like])
 
-    return () => clearTimeout(timer)
-  }
-  const toggleAccordion = (accordionType: 'favorite' | 'basket') => {
-    if (accordionType === 'basket') {
-      setBasketOpen(prev => !prev)
-      setFavOpen(false)
-    }
-    if (accordionType === 'favorite') {
-      setFavOpen(prev => !prev)
-      setBasketOpen(false)
-    }
-  }
+  // useEffect(() => {
+  //   if (isOpen && pathname !== window.location.pathname) {
+  //     handleClose()
+  //   }
+  // }, [pathname, handleClose, isOpen])
 
   if (!shouldRender) return null
 
@@ -164,6 +184,7 @@ const MobileMenu = ({ isOpen, onClose, dictionary, lang }: MobileMenuProps) => {
               dictionary={dictionary.Auth}
               lang={lang}
               iconColor='#333'
+              onFormClose={toggleForm}
             />
             <div className='line-vertically' />
             <div
@@ -469,6 +490,17 @@ const MobileMenu = ({ isOpen, onClose, dictionary, lang }: MobileMenuProps) => {
                   }}
                 >
                   Договор оферты
+                </button>
+              </li>
+              <li>
+                <button
+                  className='navigationBtn'
+                  onClick={() => {
+                    router.push(`/${lang}/reviews`)
+                    handleClose()
+                  }}
+                >
+                  Отзывы о магазине
                 </button>
               </li>
               <li>

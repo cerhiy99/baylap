@@ -6,12 +6,27 @@ import { useState } from 'react'
 import './Registration.scss'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import { Locale } from '@/i18n.config'
+export type FormRegisterProps = {
+  firstName: string
+  lastName: string
+  phone: string
+  email: string
+  password: string
+  confirmPassword: string
+}
 
 interface RegistrationModalProps {
+  lang: Locale
+  onSubmit: (e: React.FormEvent, formData: FormRegisterProps) => void
   onClose: () => void
 }
-export default function RegistrationModal({ onClose }: RegistrationModalProps) {
-  const [formData, setFormData] = useState({
+export default function RegistrationModal({
+  onClose,
+  onSubmit,
+  lang
+}: RegistrationModalProps) {
+  const [formData, setFormData] = useState<FormRegisterProps>({
     firstName: '',
     lastName: '',
     phone: '',
@@ -29,9 +44,7 @@ export default function RegistrationModal({ onClose }: RegistrationModalProps) {
   }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Form submitted:', formData)
-    // Add your registration logic here
+    onSubmit(e, formData)
   }
 
   return (

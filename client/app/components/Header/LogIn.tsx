@@ -4,14 +4,22 @@ import CloseSVG from '../../assest/Goods/Close.svg'
 import './LogIn.scss'
 import FacebookSVG from '../../assest/Header/Facebook.svg'
 import GoogleSVG from '../../assest/Header/Google.svg'
+import { Locale } from '@/i18n.config'
+
+export type FormLoginProps = {
+  email: string
+  password: string
+}
 
 type Props = {
+  lang: Locale
+  onSubmit: (formData: FormLoginProps) => void
   onRegisterModal: () => void
   close: () => void
 }
 
-const LogIn = ({ onRegisterModal, close }: Props) => {
-  const [formData, setFormData] = useState({
+const LogIn = ({ onRegisterModal, close, lang, onSubmit }: Props) => {
+  const [formData, setFormData] = useState<FormLoginProps>({
     email: '',
     password: ''
   })
@@ -22,6 +30,9 @@ const LogIn = ({ onRegisterModal, close }: Props) => {
 
   const handleSubmitLogin = () => {
     console.log(formData)
+    onSubmit(formData)
+
+    close()
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

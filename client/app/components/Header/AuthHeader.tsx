@@ -3,21 +3,29 @@ import React, { useState, useEffect, useRef } from 'react'
 import './AuthHeader.scss'
 import AuthSVG from '../../assest/Header/Auth.svg'
 import { Locale } from '@/i18n.config'
-import LogIn from './LogIn'
-import Register from './Register'
+import LogIn, { FormLoginProps } from './LogIn'
+import Register, { FormRegisterProps } from './Register'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   iconColor?: string
   dictionary: any
   lang: Locale
+  onFormClose?: () => void
 }
 
-const AuthHeader = ({ iconColor = 'white', dictionary, lang }: Props) => {
+const AuthHeader = ({
+  iconColor = 'white',
+  dictionary,
+  lang,
+  onFormClose
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [logIsOpen, setLogIsOpen] = useState(false)
   const [isRegisterOpen, setIsRegisterOpen] = useState(false)
 
+  const router = useRouter()
   const toggleDropdownOpen = () => {
     setIsOpen(true)
   }
@@ -60,6 +68,20 @@ const AuthHeader = ({ iconColor = 'white', dictionary, lang }: Props) => {
   const closeRegister = () => {
     setIsRegisterOpen(false)
   }
+
+  const submitRegister = (e: React.FormEvent, formData: FormRegisterProps) => {
+    e.preventDefault()
+    console.log('Form submitted:', formData)
+    if (onFormClose) onFormClose()
+    // Add your registration logic here
+  }
+  const submitLogin = (formData: FormLoginProps) => {
+    console.log('Form submitted:', formData)
+    if (onFormClose) onFormClose()
+    // Add your registration logic here
+    router.push(`/${lang}/user-cabinet`)
+  }
+
   useEffect(() => {
     if (logIsOpen || isRegisterOpen) {
       document.body.style.overflow = 'hidden'
@@ -98,8 +120,21 @@ const AuthHeader = ({ iconColor = 'white', dictionary, lang }: Props) => {
           </div>
         </div> */}
       </div>
-      {logIsOpen && <LogIn onRegisterModal={handleLogin} close={closeLogIn} />}
-      {isRegisterOpen && <Register onClose={closeRegister} />}
+      {logIsOpen && (
+        <LogIn
+          onSubmit={submitLogin}
+          onRegisterModal={handleLogin}
+          close={closeLogIn}
+          lang={lang}
+        />
+      )}
+      {isRegisterOpen && (
+        <Register
+          onSubmit={submitRegister}
+          onClose={closeRegister}
+          lang={lang}
+        />
+      )}
     </>
   )
 }
