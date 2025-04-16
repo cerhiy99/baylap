@@ -6,7 +6,6 @@
     font-size: 30px;
     font-weight: 500;
     line-height: 36.63px;
-    text-align: left;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: #05172f;
@@ -16,11 +15,15 @@
   }
   .brends-letter {
     display: flex;
-    flex-direction: row;
+
     width: calc(100% - 40px);
     padding: 20px;
     background-color: #ffffff;
     border-radius: 15px;
+    @media (max-width: 460px) {
+      flex-direction: column;
+      gap: 20px;
+    }
     p {
       font-size: 18px;
       font-weight: 700;
