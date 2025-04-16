@@ -61,8 +61,17 @@ export default function DiscountLevel({ currentAmount }: DiscountLevelProps) {
     <div className='discount-level'>
       {nextLevel ? (
         <p className='discount-level__subtitle'>
-          До отримання знижки {nextLevel.discount}% Вам залишилось:{' '}
-          {remainingToNextLevel.toLocaleString('en-US')} ₴
+          До отримання знижки
+          <span className='highlight'> {nextLevel.discount}%</span> Вам
+          залишилось:{' '}
+          <span className='highlight'>
+            {remainingToNextLevel.toLocaleString('uk-UA', {
+              useGrouping: false,
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            })}{' '}
+            ₴
+          </span>
           {/* {remainingToNextLevel.toLocaleString()} ₴ */}
         </p>
       ) : (
