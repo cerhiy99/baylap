@@ -3,17 +3,20 @@
 .header-container {
   display: flex;
   flex-direction: column;
-
+  // height: 60px;
   .list-url-and-logo-container {
     background-color: #f6f9fe;
     height: 60px;
     .list-url-and-logo {
       @include responsive-width;
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
       align-items: center;
       padding: 10px 0;
+      @media (max-width: 1332px) {
+      }
+      @media (max-width: 768px) {
+      }
       .list-url-and-language-and-contact {
         display: flex;
         flex-direction: row;
@@ -66,8 +69,13 @@
       justify-content: space-between;
       gap: 120px;
       align-items: center;
-      // margin-left: auto;
-      // margin-right: 41px;
+      @media (max-width: 1332px) {
+        gap: 50px;
+      }
+      @media (max-width: 1232px) {
+        margin-left: 10px;
+        gap: 25px;
+      }
     }
     @media (max-width: 1024px) {
       display: none;
@@ -75,6 +83,7 @@
   }
   .catalog-search-and-other-container-static {
     height: 60px;
+
     .catalog-search-and-other-container {
       background-color: #05172f;
       &.fixed {
@@ -85,6 +94,9 @@
         left: 0;
       }
       .catalog-search-and-other {
+        @media (max-width: 524px) {
+          height: 60px;
+        }
         @include responsive-width;
         position: relative;
         display: flex;
@@ -104,8 +116,14 @@
             display: none;
           }
           .burger {
+            border: none;
+            background: transparent;
+            // color:
             display: block;
             margin-right: 15px;
+            @media (max-width: 584px) {
+              margin-left: 10px;
+            }
           }
         }
         .list-icon-header {
@@ -113,6 +131,9 @@
           flex-direction: row;
           align-items: center;
           gap: 5px;
+          @media (max-width: 524px) {
+            display: none;
+          }
           .line-vertically {
             display: flex;
             height: 40px;
@@ -123,12 +144,12 @@
           }
 
           @media (max-width: 1024px) {
-            gap: 5px;
+            margin-right: 20px;
           }
 
-          @media (max-width: 1024px) {
-            gap: 0px;
-          }
+          // @media (max-width: 1024px) {
+          //   gap: 0px;
+          // }
         }
         .search-with-list-icon {
           display: flex;

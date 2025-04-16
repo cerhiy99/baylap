@@ -8,6 +8,7 @@ import HeaderLike from './HeaderLike'
 import HeaderBasket from './HeaderBasket'
 import Burger from './Burger/Burger'
 import { Locale } from '@/i18n.config'
+import MobileMenu from './mobile/MobileMenu'
 
 type Props = {
   dictionary: any
@@ -18,6 +19,15 @@ const heightHeader = 60
 
 const CatalogSearchAndOther = ({ dictionary, lang }: Props) => {
   const [scrolled, setScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,9 +48,9 @@ const CatalogSearchAndOther = ({ dictionary, lang }: Props) => {
           <div className='catalog'>
             <Catalog lang={lang} dictionary={dictionary.catalog} />
           </div>
-          <div className='burger'>
+          <button className='burger' onClick={toggleMobileMenu}>
             <Burger />
-          </div>
+          </button>
           <div className='search-with-list-icon'>
             <Search dictionary={dictionary.search} lang={lang} />
             <div className='list-icon-header'>
@@ -53,6 +63,12 @@ const CatalogSearchAndOther = ({ dictionary, lang }: Props) => {
           </div>
         </div>
       </div>
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        onClose={closeMobileMenu}
+        dictionary={dictionary}
+        lang={lang}
+      />
     </div>
   )
 }

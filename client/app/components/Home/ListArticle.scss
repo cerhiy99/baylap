@@ -2,6 +2,10 @@
   display: grid;
   position: relative;
   gap: 15px;
+  @media (max-width: 768px) {
+    min-width: unset;
+    max-width: 100%;
+  }
   &.limit-5 {
     grid-template-columns: repeat(5, 1fr);
   }
@@ -16,6 +20,10 @@
 
   &.limit-2 {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  &.limit-1 {
+    grid-template-columns: repeat(1, 1fr);
     gap: 10px;
   }
 

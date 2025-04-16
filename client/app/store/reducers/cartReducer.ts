@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-interface LikeItem {
+export interface LikeItem {
   id: number
   nameUA: string
   nameRU: string

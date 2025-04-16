@@ -2,23 +2,21 @@
   display: flex;
   align-items: center;
   margin-right: 30px;
-  //width: calc(23% - 50px);
-  @media (min-width: 1024px) {
-    width: 300px;
-  }
 
-  @media (min-width: 1300px) {
-    //min-width: 320px;
-    min-width: 345px;
-  }
-  @media (min-width: 768px) {
-    width: 220px;
-  }
+  // @media (min-width: 1024px) {
+  //   width: 300px;
+  // }
+
+  // @media (min-width: 1300px) {
+  //   min-width: 345px;
+  // }
+  // @media (min-width: 768px) {
+  //   width: 220px;
+  // }
   .catalog-title {
     display: flex;
     margin: 10px 0;
     padding: 8px 25px;
-
     font-size: 16px;
     font-weight: 500;
     line-height: 19.36px;
@@ -26,29 +24,22 @@
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: #ffffff;
-    flex-direction: row;
     align-items: center;
     gap: 15px;
     cursor: pointer;
-    word-wrap: nowrap;
+    text-wrap: nowrap;
     border: 2px solid #fffbfb;
     border-radius: 5px;
-    width: calc(23% - 50px);
-    @media (min-width: 1024px) {
-      max-width: 300px;
-    }
-
+    // width: calc(23% - 50px);
     @media (min-width: 1300px) {
       min-width: 320px;
     }
+    @media (min-width: 1024px) {
+      max-width: 300px;
+      margin-left: 10px;
+    }
     @media (min-width: 768px) {
       max-width: 220px;
-    }
-    @media (min-width: 1024px) {
-      width: 100%;
-      position: absolute;
-      //left: -25px;
-      left: 0;
     }
   }
   .dropdown {

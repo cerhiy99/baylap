@@ -956,8 +956,10 @@ const ListArticle = ({ type, dictionary, lang }: Props) => {
         setLimit(4)
       } else if (width >= 800) {
         setLimit(3)
-      } else {
+      } else if (width >= 400) {
         setLimit(2)
+      } else {
+        setLimit(1)
       }
     }
 

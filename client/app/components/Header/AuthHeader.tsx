@@ -7,11 +7,12 @@ import LogIn from './LogIn'
 import Register from './Register'
 
 type Props = {
+  iconColor?: string
   dictionary: any
   lang: Locale
 }
 
-const AuthHeader = ({ dictionary, lang }: Props) => {
+const AuthHeader = ({ iconColor = 'white', dictionary, lang }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [logIsOpen, setLogIsOpen] = useState(false)
@@ -78,7 +79,7 @@ const AuthHeader = ({ dictionary, lang }: Props) => {
       >
         <div className='title-container' onClick={() => setLogIsOpen(true)}>
           <div className={`title ${isOpen ? 'open' : ''}`}>
-            <AuthSVG />
+            <AuthSVG color={iconColor} />
           </div>
           <p>{dictionary.logIn}</p>
         </div>
