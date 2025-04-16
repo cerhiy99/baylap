@@ -11,6 +11,7 @@ import ReviewsSVG from '@/app/assest/Goods/Revies.svg'
 import BasketSVG from '@/public/svgs/userNavigation/Del.svg'
 import Link from 'next/link'
 import { removeFromBasket } from '@/app/store/reducers/cartReducer'
+import TabNavigation from '../components/tabNavigation'
 
 const SelectedProductsPage = ({
   params: { lang }
@@ -86,6 +87,7 @@ const SelectedProductsPage = ({
           ))
         )}
       </div>
+      <TabNavigation lang={lang} />
     </div>
   )
 }
