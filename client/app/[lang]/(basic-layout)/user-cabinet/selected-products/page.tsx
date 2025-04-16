@@ -12,8 +12,11 @@ import BasketSVG from '@/public/svgs/userNavigation/Del.svg'
 import Link from 'next/link'
 import { removeFromBasket } from '@/app/store/reducers/cartReducer'
 
-const lang = 'ru'
-const SelectedProductsPage = () => {
+const SelectedProductsPage = ({
+  params: { lang }
+}: {
+  params: { lang: Locale }
+}) => {
   const dispatch = useDispatch()
   const { basket } = useSelector((state: RootState) => state.BasketAndLike)
 
@@ -52,14 +55,13 @@ const SelectedProductsPage = () => {
                 </div>
                 <div className='itemInfo__rating'>
                   <div className='rating'>
-                    {/* <MyRating rating={4.8} /> */}
                     <Rating
                       name='half-rating-read'
                       defaultValue={4.5}
                       precision={0.1}
                       readOnly
                       sx={{
-                        fontSize: '20px', // Задання конкретного розміру
+                        fontSize: '20px',
                         color: '#D93A3F'
                       }}
                     />

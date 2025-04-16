@@ -3,8 +3,10 @@ import { useState } from 'react'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import './pagePersonal.scss'
+import { Locale } from '@/i18n.config'
+import TabNavigation from '../components/tabNavigation'
 
-const PagePersonal = () => {
+const PagePersonal = ({ params: { lang } }: { params: { lang: Locale } }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -113,7 +115,7 @@ const PagePersonal = () => {
             <input
               type='text'
               name='country'
-              placeholder='Введіть країну...'
+              placeholder='Введіть квартиру...'
               value={formData.apt}
               onChange={handleChange}
               required
@@ -181,6 +183,7 @@ const PagePersonal = () => {
       <div className='button__container'>
         <button>Зберегти</button>
       </div>
+      <TabNavigation lang={lang} />
     </div>
   )
 }

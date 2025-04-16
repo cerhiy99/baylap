@@ -122,6 +122,7 @@ export default function DiscountLevel({ currentAmount }: DiscountLevelProps) {
           ></div>
         </div>
       </div>
+
       <div className='discount-level__text'>
         Продовжуйте здійснювати покупки в нашому магазині BAYLAP, щоб
         наблизитися до більшої персональної знижки! Що більше Ви купуєте — тим

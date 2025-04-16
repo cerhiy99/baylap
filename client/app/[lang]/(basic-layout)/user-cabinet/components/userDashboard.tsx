@@ -24,24 +24,26 @@ const UserDashboard = ({ lang }: { lang: Locale }) => {
   return (
     <>
       <div className='cabinetLayout__header'>
-        <div className='header--avatar'>
-          <div className='avatarWrapper'>
-            <span>{userData.name[0].toUpperCase()}</span>
-          </div>
-          <div className='userDetails'>
-            <div>
-              <span>{userData.name}</span>
+        <div className='styled__wrapper'>
+          <div className='header--avatar'>
+            <div className='avatarWrapper'>
+              <span>{userData.name[0].toUpperCase()}</span>
             </div>
-            <div>
-              <Link href='#'>Редагувати інформацію</Link>
+            <div className='userDetails'>
+              <div>
+                <span>{userData.name}</span>
+              </div>
+              <div>
+                <Link href='#'>Редагувати інформацію</Link>
+              </div>
             </div>
           </div>
-        </div>
-        <div className='header--discount'>
-          <div className='userDiscount__title'>
-            <span>Персональна знижка</span>
+          <div className='header--discount'>
+            <div className='userDiscount__title'>
+              <span>Персональна знижка</span>
+            </div>
+            <div className='userDiscount__total'>{userData.discount}%</div>
           </div>
-          <div className='userDiscount__total'>{userData.discount}</div>
         </div>
         <div className='header--stats'>
           <div className='inline--stat'>
