@@ -192,6 +192,9 @@ const SelectGoodsTextContainer = ({
               <span>₴</span>
             </div>
           </div>
+          <div className={`like ${isInLike ? 'isLike' : ''}`} onClick={inLike}>
+            <LikeSVG />
+          </div>
         </div>
         <div className='button-buy'>
           <button onClick={inBasket}>

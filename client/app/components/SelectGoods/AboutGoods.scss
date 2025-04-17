@@ -13,8 +13,17 @@
     border-top-width: 0;
     width: 100%;
     position: relative;
+    @media (max-width: 1178px) {
+      margin-left: 0;
+      width: 100%;
+      position: static;
+    }
 
     .select-goods {
+      @media (max-width: 1178px) {
+        display: none;
+        // position: static;
+      }
       position: absolute;
       right: 0;
       top: 0;
@@ -188,6 +197,10 @@
     }
     .text {
       width: calc(100% - 507px);
+      @media (max-width: 1178px) {
+        width: 100%;
+        // position: static;
+      }
       //border: 2px solid #e0e1e2;
       border-top-width: 0;
       .description {
@@ -430,6 +443,9 @@
           flex-direction: row;
           justify-content: center;
           gap: 5%;
+          @media (max-width: 670px) {
+            justify-content: space-between;
+          }
           .average-rating {
             display: flex;
             flex-direction: column;
@@ -468,6 +484,10 @@
             flex-direction: column;
             width: 40%;
             min-width: 300px;
+            @media (max-width: 670px) {
+              min-width: unset;
+              width: fit-content;
+            }
             .count-rating {
               display: flex;
               flex-direction: row;
@@ -475,6 +495,7 @@
               width: 100%;
               align-items: center;
               gap: 10px;
+
               .my-client-rating {
                 width: 100px;
                 display: flex;
@@ -511,12 +532,21 @@
         }
         .list-star-and-star {
           display: flex;
-          flex-direction: row;
           justify-content: space-between;
+          @media (max-width: 670px) {
+            flex-direction: column;
+            gap: 10px;
+            justify-content: flex-end;
+            align-items: flex-end;
+          }
           .list-star {
             display: flex;
             flex-direction: row;
             gap: 10px;
+
+            @media (max-width: 670px) {
+              display: none;
+            }
             .sort-in-star {
               border: 2px solid #e5e5e5;
               display: flex;
@@ -543,6 +573,9 @@
             position: relative;
             display: flex;
             align-items: center;
+            @media (max-width: 670px) {
+              width: fit-content;
+            }
             select {
               width: 222px;
               border: 1px solid #e5e5e5;

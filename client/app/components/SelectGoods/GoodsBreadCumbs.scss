@@ -25,5 +25,9 @@
     flex-direction: row;
     gap: 7.5px;
     align-items: center;
+    white-space: nowrap; /* Запрещает перенос на новую строку */
+    overflow: hidden; /* Скрывает выходящий за пределы текст */
+    text-overflow: ellipsis; /* Показывает троеточие */
+    max-width: 200px; /* Максимальная ширина контейнера */
   }
 }

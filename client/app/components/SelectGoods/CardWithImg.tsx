@@ -7,6 +7,7 @@ import SeeMore from './SeeMore'
 import { Locale } from '@/i18n.config'
 import AboutGoods from './AboutGoods'
 import StaticListTitle from './StaticListTitle'
+import ListGoodsLeft from '../Home/ListGoodsLeft'
 
 const CardWithImg = ({
   dictionary,
@@ -61,11 +62,15 @@ const CardWithImg = ({
           />
         </div>
       </div>
-      <SeeMore
+      <div className='card-with-image__text_h2'>
+        <h2>Подивіться ще</h2>
+      </div>
+      <ListGoodsLeft type='' lang={lang} dictionary={dictionary.SeeMore} />
+      {/* <SeeMore
         listGoods={selectGoods.listGoods}
         lang={lang}
         dictionary={dictionary.SeeMore}
-      />
+      /> */}
       <AboutGoods
         selectVolume={selectVolume}
         selectGoods={selectGoods}

@@ -65,7 +65,7 @@
     .see-more-list-goods {
       display: flex;
       flex-direction: row;
-      gap: 15px; // Мінімальний відступ між елементами
+      // gap: 15px; // Мінімальний відступ між елементами
       overflow-x: auto; // Горизонтальна прокрутка, якщо елементів багато
       overflow-y: hidden;
       padding-right: 2px;
@@ -81,12 +81,22 @@
         color: #000000;
         //box-sizing: border-box; // Враховує padding у ширині
         min-width: calc(100% / 5 - 12.75px);
-        @media (max-width: 1600px) {
-          min-width: calc(100% / 5 - 12px);
+        margin: 8px;
+        @media (max-width: 1400px) {
+          min-width: calc(100% / 4 - 12px);
         }
-        @media (max-width: 1300px) {
-          min-width: calc(100% / 4 - 6px);
+        @media (max-width: 1124px) {
+          min-width: calc(100% / 3 - 12px);
         }
+        @media (max-width: 800px) {
+          min-width: calc(100% / 2 - 12px);
+        }
+        @media (max-width: 400px) {
+          min-width: calc(100% / 1 - 12px);
+        }
+        // @media (min-width: 400px) {
+        //   min-width: calc(100% / 1 - 6px);
+        // }
         border-radius: 15px;
         &:hover {
           max-width: 100%;
