@@ -938,6 +938,7 @@ const data = [
     ]
   }
 ]
+
 const ListGoodsLeft = ({ lang, dictionary, type }: Props) => {
   const [limit, setLimit] = useState(5)
   const [currentPage, setCurrentPage] = useState(0)
@@ -1005,6 +1006,7 @@ const ListGoodsLeft = ({ lang, dictionary, type }: Props) => {
         {listGoods.map((item: any, index) => (
           <motion.div
             key={item.id}
+            style={{ minWidth: '100%', display: 'flex' }}
             initial={{ opacity: 0, y: 20 }} // Початковий стан
             animate={{ opacity: 1, y: 0 }} // Анімація появи
             exit={{ opacity: 0, y: -20 }} // Анімація зникнення
