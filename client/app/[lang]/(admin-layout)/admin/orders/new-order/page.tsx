@@ -2,11 +2,12 @@
 
 import type React from 'react'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 import '../editOrder.scss'
-import { Locale } from '@/i18n.config'
+
+import type { Locale } from '@/i18n.config'
 import AdminHeader from '@/app/components/Admin/AdminHeader/AdminHeader'
 
 export default function CreateOrderPage({
@@ -24,6 +25,20 @@ export default function CreateOrderPage({
       quantity: number
     }>
   >([])
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkIfMobile()
+    window.addEventListener('resize', checkIfMobile)
+
+    return () => {
+      window.removeEventListener('resize', checkIfMobile)
+    }
+  }, [])
 
   const [formData, setFormData] = useState({
     phone: '',
@@ -85,72 +100,132 @@ export default function CreateOrderPage({
     return price * quantity
   }
 
+  const renderMobileProductList = () => {
+    if (products.length === 0) {
+      return (
+        <div className='mobile-empty-message'>
+          Позиції замовлення не знайдені.
+        </div>
+      )
+    }
+
+    return products.map(product => (
+      <div className='mobile-product-card' key={product.id}>
+        <div className='mobile-product-header'>
+          <Link href={'#'} className='productLink'>
+            {product.name}
+          </Link>
+          <button
+            className='removeBtn'
+            onClick={() => handleRemoveProduct(product.id)}
+          >
+            x
+          </button>
+        </div>
+        <div className='mobile-product-details'>
+          <div className='mobile-product-info'>
+            <span className='mobile-label'>Артикул:</span>
+            <span>{product.article}</span>
+          </div>
+          <div className='mobile-product-info'>
+            <span className='mobile-label'>Ціна:</span>
+            <span>{product.price} грн</span>
+          </div>
+          <div className='mobile-product-info'>
+            <span className='mobile-label'>К-сть:</span>
+            <div className='mobile-quantity-input'>
+              <input
+                type='number'
+                min='1'
+                value={product.quantity}
+                onChange={e =>
+                  handleQuantityChange(
+                    product.id,
+                    Number.parseInt(e.target.value) || 1
+                  )
+                }
+              />
+            </div>
+          </div>
+          <div className='mobile-product-info'>
+            <span className='mobile-label'>Разом:</span>
+            <span className='mobile-total'>
+              {calculateTotal(product.price, product.quantity)} грн
+            </span>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+
   return (
     <>
       <AdminHeader url='new-order' name='Додати замовлення' lang={lang} />
       <div className='container'>
         <div className='content'>
-          <table className='table'>
-            <thead>
-              <tr>
-                <th>Видалити</th>
-                <th>Назва товару</th>
-                <th>Артикул</th>
-                <th>Ціна</th>
-                <th>К-сть</th>
-                <th>Разом</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.length === 0 ? (
+          {isMobile ? (
+            <div className='mobile-products-container'>
+              {renderMobileProductList()}
+            </div>
+          ) : (
+            <table className='table'>
+              <thead>
                 <tr>
-                  <td colSpan={6} className='emptyMessage'>
-                    Позиції замовлення не знайдені.
-                  </td>
+                  <th>Видалити</th>
+                  <th>Назва товару</th>
+                  <th>Артикул</th>
+                  <th>Ціна</th>
+                  <th>К-сть</th>
+                  <th>Разом</th>
                 </tr>
-              ) : (
-                products.map(product => (
-                  <tr key={product.id}>
-                    <td className='centered'>
-                      {/* <input
-                        type='checkbox'
-                        onChange={() => handleRemoveProduct(product.id)}
-                      /> */}
-                      <button
-                        className='removeBtn'
-                        onClick={() => handleRemoveProduct(product.id)}
-                      >
-                        x
-                      </button>
-                    </td>
-                    <td>
-                      <Link href={'#'} className='productLink'>
-                        {product.name}
-                      </Link>
-                    </td>
-                    <td>{product.article}</td>
-                    <td>{product.price} грн</td>
-                    <td>
-                      <input
-                        type='number'
-                        min='1'
-                        value={product.quantity}
-                        onChange={e =>
-                          handleQuantityChange(
-                            product.id,
-                            Number.parseInt(e.target.value) || 1
-                          )
-                        }
-                      />
-                    </td>
-                    <td>
-                      {calculateTotal(product.price, product.quantity)} грн
+              </thead>
+              <tbody>
+                {products.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className='emptyMessage'>
+                      Позиції замовлення не знайдені.
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                ) : (
+                  products.map(product => (
+                    <tr key={product.id}>
+                      <td className='centered'>
+                        <button
+                          className='removeBtn'
+                          onClick={() => handleRemoveProduct(product.id)}
+                        >
+                          x
+                        </button>
+                      </td>
+                      <td>
+                        <Link href={'#'} className='productLink'>
+                          {product.name}
+                        </Link>
+                      </td>
+                      <td>{product.article}</td>
+                      <td>{product.price} грн</td>
+                      <td>
+                        <input
+                          type='number'
+                          min='1'
+                          value={product.quantity}
+                          onChange={e =>
+                            handleQuantityChange(
+                              product.id,
+                              Number.parseInt(e.target.value) || 1
+                            )
+                          }
+                        />
+                      </td>
+                      <td>
+                        {calculateTotal(product.price, product.quantity)} грн
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          )}
 
           <div className='articleInput'>
             <label className='label'>Артикул товару</label>

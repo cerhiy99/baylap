@@ -287,7 +287,7 @@ const page = ({ params: { lang } }: { params: { lang: Locale } }) => {
         <div className='filter-container'>
           <div className='filters'>
             <div className='select filter'>
-              <p>Дата початку: </p>
+              Дата початку:
               <input type='date' />
             </div>
             <div className='filter'>

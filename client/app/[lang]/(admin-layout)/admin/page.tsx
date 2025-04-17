@@ -108,7 +108,7 @@ const ProductsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
         <div className='filter-container'>
           <div className='filters'>
             <div className='select filter'>
-              <p>Категорії: </p>
+              Категорії:
               <select value={categoryFilter} onChange={handleCategoryChange}>
                 <option value=''>Усі категорії</option>
                 {categories.map((category, index) => (

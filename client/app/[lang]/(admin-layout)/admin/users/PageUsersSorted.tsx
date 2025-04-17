@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useState, useMemo, useCallback, memo } from 'react'
-import './Goods.scss'
+import './User.scss'
+// import { ChevronRight } from 'lucide-react'
 
 import UppSVG from '@/app/assest/Admin/Up.svg'
 import Pagination from '@/app/components/utils/Pagination'
@@ -33,12 +34,30 @@ const UserRow = memo(({ user, index }: { user: User; index: number }) => {
         backgroundColor: index % 2 == 0 ? '#2695691A' : '#A5A1A100'
       }}
     >
-      <div className='tema'>{user.name}</div>
-      <div className='date'>{user.email}</div>
-      <div className='operations'>{user.stayActive}</div>
-      <div className='date-register'>{user.dateRegister}</div>
-      <div className='count-orders'>{user.countOrders}</div>
-      <div className='operations'>{user.sumOrders} грн.</div>
+      <div className='tema'>
+        <span className='mobile-label'>Імя:</span>
+        {user.name}
+      </div>
+      <div className='date'>
+        <span className='mobile-label'>E-mail:</span>
+        {user.email}
+      </div>
+      <div className='operations'>
+        <span className='mobile-label'>Остання активність:</span>
+        {user.stayActive}
+      </div>
+      <div className='date-register'>
+        <span className='mobile-label'>Дата реєстрації:</span>
+        {user.dateRegister}
+      </div>
+      <div className='count-orders'>
+        <span className='mobile-label'>К-ть замовленнь:</span>
+        {user.countOrders}
+      </div>
+      <div className='operations'>
+        <span className='mobile-label'>Сума витрат:</span>
+        {user.sumOrders} грн.
+      </div>
     </div>
   )
 })
@@ -57,6 +76,23 @@ export default function UserSortableTable({
     direction: null
   })
   const [currentPage, setCurrentPage] = useState(1)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Check if we're on a mobile device
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 992)
+    }
+
+    // Initial check
+    checkIfMobile()
+
+    // Add event listener for window resize
+    window.addEventListener('resize', checkIfMobile)
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkIfMobile)
+  }, [])
 
   // Memoize sorted products to avoid recomputing on every render
   const sortedProducts = useMemo(() => {
@@ -144,73 +180,98 @@ export default function UserSortableTable({
 
   return (
     <div className='list-reviews'>
-      <div className='review review-header'>
-        <div
-          className={`tema ${
-            getSortDirection('name') ? `sorted-${getSortDirection('name')}` : ''
-          }`}
-          onClick={() => requestSort('name')}
+      <div className='mobile-sort-controls'>
+        <div className='mobile-sort-label'>Сортувати за:</div>
+        <select
+          onChange={e => requestSort(e.target.value as keyof User)}
+          value={(sortConfig.key as string) || ''}
         >
-          Імя {renderSortArrow('name')}
-        </div>
-        <div
-          className={`date ${
-            getSortDirection('email')
-              ? `sorted-${getSortDirection('email')}`
-              : ''
-          }`}
-          onClick={() => requestSort('email')}
-        >
-          E-mail {renderSortArrow('email')}
-        </div>
-        <div
-          className={`up operations ${
-            getSortDirection('stayActive')
-              ? `sorted-${getSortDirection('stayActive')}`
-              : ''
-          }`}
-          onClick={() => requestSort('stayActive')}
-        >
-          Остання активність {renderSortArrow('stayActive')}
-        </div>
-        <div
-          className={`up date-register ${
-            getSortDirection('dateRegister')
-              ? `sorted-${getSortDirection('dateRegister')}`
-              : ''
-          }`}
-          onClick={() => requestSort('dateRegister')}
-        >
-          Дата реєстрації {renderSortArrow('dateRegister')}
-        </div>
-        <div
-          className={`up count-orders ${
-            getSortDirection('countOrders')
-              ? `sorted-${getSortDirection('countOrders')}`
-              : ''
-          }`}
-          onClick={() => requestSort('countOrders')}
-        >
-          К-ть замовленнь {renderSortArrow('countOrders')}
-        </div>
-        <div
-          className={`up operations ${
-            getSortDirection('sumOrders')
-              ? `sorted-${getSortDirection('sumOrders')}`
-              : ''
-          }`}
-          onClick={() => requestSort('sumOrders')}
-        >
-          Сума витрат {renderSortArrow('sumOrders')}
-        </div>
+          <option value=''>Виберіть поле</option>
+          <option value='name'>Імя</option>
+          <option value='email'>E-mail</option>
+          <option value='stayActive'>Остання активність</option>
+          <option value='dateRegister'>Дата реєстрації</option>
+          <option value='countOrders'>К-ть замовленнь</option>
+          <option value='sumOrders'>Сума витрат</option>
+        </select>
+
+        {sortConfig.key && (
+          <select
+            onChange={e =>
+              setSortConfig({
+                key: sortConfig.key,
+                direction: e.target.value as 'ascending' | 'descending' | null
+              })
+            }
+            value={sortConfig.direction || ''}
+          >
+            <option value='ascending'>За зростанням</option>
+            <option value='descending'>За спаданням</option>
+          </select>
+        )}
       </div>
-      {paginatedData.length === 0 ? (
-        <div className='review emptyMessage'>No data available</div>
-      ) : (
-        paginatedData.map((user, index) => (
-          <UserRow key={user.id} user={user} index={index} />
-        ))
-      )}
+
+      <div className='table-container'>
+        <div className='review-header'>
+          <div
+            className={`tema ${getSortDirection('name') ? `sorted-${getSortDirection('name')}` : ''}`}
+            onClick={() => requestSort('name')}
+          >
+            Імя {renderSortArrow('name')}
+          </div>
+          <div
+            className={`date ${getSortDirection('email') ? `sorted-${getSortDirection('email')}` : ''}`}
+            onClick={() => requestSort('email')}
+          >
+            E-mail {renderSortArrow('email')}
+          </div>
+          <div
+            className={`up operations ${
+              getSortDirection('stayActive')
+                ? `sorted-${getSortDirection('stayActive')}`
+                : ''
+            }`}
+            onClick={() => requestSort('stayActive')}
+          >
+            Остання активність {renderSortArrow('stayActive')}
+          </div>
+          <div
+            className={`up date-register ${
+              getSortDirection('dateRegister')
+                ? `sorted-${getSortDirection('dateRegister')}`
+                : ''
+            }`}
+            onClick={() => requestSort('dateRegister')}
+          >
+            Дата реєстрації {renderSortArrow('dateRegister')}
+          </div>
+          <div
+            className={`up count-orders ${
+              getSortDirection('countOrders')
+                ? `sorted-${getSortDirection('countOrders')}`
+                : ''
+            }`}
+            onClick={() => requestSort('countOrders')}
+          >
+            К-ть замовленнь {renderSortArrow('countOrders')}
+          </div>
+          <div
+            className={`up operations ${getSortDirection('sumOrders') ? `sorted-${getSortDirection('sumOrders')}` : ''}`}
+            onClick={() => requestSort('sumOrders')}
+          >
+            Сума витрат {renderSortArrow('sumOrders')}
+          </div>
+        </div>
+        {paginatedData.length === 0 ? (
+          <div className='review emptyMessage'>No data available</div>
+        ) : (
+          <div className='reviews-list'>
+            {paginatedData.map((user, index) => (
+              <UserRow key={user.id} user={user} index={index} />
+            ))}
+          </div>
+        )}
+      </div>
       <Pagination
         totalItems={products.length}
         itemsPerPage={PRODUCTS_PER_PAGE}

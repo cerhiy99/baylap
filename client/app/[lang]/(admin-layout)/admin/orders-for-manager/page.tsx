@@ -1,39 +1,5 @@
 'use client'
 
-import AdminHeader from '@/app/components/Admin/AdminHeader/AdminHeader'
-import { Locale } from '@/i18n.config'
-import React, { useState, useEffect } from 'react'
-import './Orders.scss'
-import LeftSVG from '@/app/assest/Admin/Left.svg'
-import RightSVG from '@/app/assest/Admin/Right.svg'
-import SearchSVG from '@/app/assest/Admin/Search.svg'
-import Link from 'next/link'
-
-interface Order {
-  id: number
-  date: string
-  name: string
-  email: string
-  phone: string
-  pib: string
-  deliveryType: string
-  oblast: string
-  city: string
-  department: string
-  coment: string
-  sum: string
-  status: string
-  isMenedher: boolean
-  author: string
-  comentMeneger: string
-}
-
-interface SortConfig {
-  key: keyof Order
-  direction: 'ascending' | 'descending'
-}
-
-// Исходные данные заказов
 const initialOrders = [
   {
     id: 20,
@@ -404,9 +370,189 @@ const initialOrders = [
   }
 ]
 
-const ITEMS_PER_PAGE = 5
+import AdminHeader from '@/app/components/Admin/AdminHeader/AdminHeader'
+import type { Locale } from '@/i18n.config'
+import { useState, useEffect, useCallback, useMemo } from 'react'
+import './Orders.scss'
+import LeftSVG from '@/app/assest/Admin/Left.svg'
+import RightSVG from '@/app/assest/Admin/Right.svg'
+import SearchSVG from '@/app/assest/Admin/Search.svg'
+import Link from 'next/link'
 
-const OrdersPageManger = ({
+interface Order {
+  id: number
+  date: string
+  name: string
+  email: string
+  phone: string
+  pib: string
+  deliveryType: string
+  oblast: string
+  city: string
+  department: string
+  coment: string
+  sum: string
+  status: string
+  isMenedher: boolean
+  author: string
+  comentMeneger: string
+}
+
+interface SortConfig {
+  key: keyof Order
+  direction: 'ascending' | 'descending'
+}
+
+const ITEMS_PER_PAGE = 15
+
+// Order card component for mobile view
+const OrderCard = ({
+  order,
+  isSelected,
+  onToggleSelect,
+  expandedOrderId,
+  setExpandedOrderId,
+  handleCommentChange
+}: {
+  order: Order
+  isSelected: boolean
+  onToggleSelect: (id: number) => void
+  expandedOrderId: number | null
+  setExpandedOrderId: (id: number | null) => void
+  handleCommentChange: (id: number, comment: string) => void
+}) => {
+  const isExpanded = expandedOrderId === order.id
+
+  return (
+    <div className={`order-card ${isSelected ? 'selected' : ''}`}>
+      <div className='order-card-header'>
+        <div className='order-checkbox'>
+          <input
+            type='checkbox'
+            checked={isSelected}
+            onChange={() => onToggleSelect(order.id)}
+          />
+        </div>
+        <div className='order-id'>
+          <span className='label'>ID:</span> {order.id}
+        </div>
+        <div className='order-status'>
+          <span className='status-badge'>{order.status}</span>
+        </div>
+        <button
+          className='expand-button'
+          onClick={() => setExpandedOrderId(isExpanded ? null : order.id)}
+          aria-label={
+            isExpanded ? 'Collapse order details' : 'Expand order details'
+          }
+        >
+          {isExpanded ? 'Закрыть' : 'Открыть'}
+        </button>
+      </div>
+
+      <div className='order-card-summary'>
+        <div className='order-name'>
+          <span className='label'>Ім&apos;я:</span> {order.name}
+        </div>
+        <div className='order-date'>
+          <span className='label'>Дата:</span> {order.date}
+        </div>
+        <div className='order-sum'>
+          <span className='label'>Сума:</span> {order.sum} грн.
+        </div>
+      </div>
+
+      {isExpanded && (
+        <div className='order-card-details'>
+          <div className='details-section'>
+            <h4>Контактна інформація</h4>
+            <div className='info-row'>
+              <span className='label'>E-mail:</span> {order.email}
+            </div>
+            <div className='info-row'>
+              <span className='label'>Телефон:</span> {order.phone}
+            </div>
+            <div className='info-row'>
+              <span className='label'>П.І.Б.:</span> {order.pib}
+            </div>
+          </div>
+
+          <div className='details-section'>
+            <h4>Доставка</h4>
+            <div className='info-row'>
+              <span className='label'>Тип доставки:</span> {order.deliveryType}
+            </div>
+            <div className='info-row'>
+              <span className='label'>Область:</span> {order.oblast}
+            </div>
+            <div className='info-row'>
+              <span className='label'>Місто:</span> {order.city}
+            </div>
+            {order.department && (
+              <div className='info-row'>
+                <span className='label'>Відділення:</span> {order.department}
+              </div>
+            )}
+          </div>
+
+          <div className='details-section'>
+            <h4>Позиції замовлення</h4>
+            <div className='order-items'>
+              <div className='order-item'>
+                <div className='item-title'>
+                  Полуперманентные красители прямого действия Elgon I-Light 100
+                  ml (100 ml) (28926)
+                </div>
+                <div className='item-details'>
+                  <div className='item-price'>
+                    <span className='label'>Ціна:</span> 250 грн.
+                  </div>
+                  <div className='item-quantity'>
+                    <span className='label'>Кількість:</span> 4 шт.
+                  </div>
+                  <div className='item-total'>
+                    <span className='label'>Сума:</span> 1000 грн.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className='details-section'>
+            <h4>Коментар клієнта</h4>
+            <div className='info-row'>{order.coment}</div>
+          </div>
+
+          <div className='details-section'>
+            <h4>Інформація менеджера</h4>
+            <div className='info-row'>
+              <span className='label'>Коментар менеджера:</span>
+              <textarea
+                className='manager-comment'
+                defaultValue={order.comentMeneger}
+                onChange={e => handleCommentChange(order.id, e.target.value)}
+                placeholder='Введіть коментар'
+              ></textarea>
+            </div>
+            <div className='info-row'>
+              <span className='label'>Бонус менеджера:</span>{' '}
+              {order.comentMeneger}
+            </div>
+            <div className='info-row'>
+              <span className='label'>Загалом зароблено:</span>{' '}
+              {order.comentMeneger}
+            </div>
+            <div className='action-buttons'>
+              <button className='edit-button'>Редагувати</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+const OrdersPageManager = ({
   params: { lang }
 }: {
   params: { lang: Locale }
@@ -423,38 +569,78 @@ const OrdersPageManger = ({
   const [totalPages, setTotalPages] = useState<number>(
     Math.ceil(initialOrders.length / ITEMS_PER_PAGE)
   )
+  const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [expandedOrderId, setExpandedOrderId] = useState<number | null>(null)
+  const [expandedFilters, setExpandedFilters] = useState<boolean>(false)
+  const [expandedBulkOperations, setExpandedBulkOperations] =
+    useState<boolean>(false)
+  const [bulkAction, setBulkAction] = useState<string>('1')
+
+  // Check if we're on a mobile device
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 992)
+    }
+
+    // Initial check
+    checkIfMobile()
+
+    // Add event listener for window resize
+    window.addEventListener('resize', checkIfMobile)
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkIfMobile)
+  }, [])
+
+  // Функция для обновления комментария менеджера
+  const handleCommentChange = useCallback(
+    (orderId: number, comment: string) => {
+      setOrders(prevOrders =>
+        prevOrders.map(order =>
+          order.id === orderId ? { ...order, comentMeneger: comment } : order
+        )
+      )
+    },
+    []
+  )
 
   // Функция для сортировки заказов
-  const sortOrders = (key: keyof Order) => {
-    let direction: 'ascending' | 'descending' = 'ascending'
-    if (
-      sortConfig &&
-      sortConfig.key === key &&
-      sortConfig.direction === 'ascending'
-    ) {
-      direction = 'descending'
-    }
-    const sortedOrders = [...filteredOrders].sort((a, b) => {
-      if (a[key] < b[key]) return direction === 'ascending' ? -1 : 1
-      if (a[key] > b[key]) return direction === 'ascending' ? 1 : -1
-      return 0
-    })
-    setFilteredOrders(sortedOrders)
-    setSortConfig({ key, direction })
-  }
+  const sortOrders = useCallback(
+    (key: keyof Order) => {
+      let direction: 'ascending' | 'descending' = 'ascending'
+      if (
+        sortConfig &&
+        sortConfig.key === key &&
+        sortConfig.direction === 'ascending'
+      ) {
+        direction = 'descending'
+      }
+      const sortedOrders = [...filteredOrders].sort((a, b) => {
+        if (a[key] < b[key]) return direction === 'ascending' ? -1 : 1
+        if (a[key] > b[key]) return direction === 'ascending' ? 1 : -1
+        return 0
+      })
+      setFilteredOrders(sortedOrders)
+      setSortConfig({ key, direction })
+    },
+    [filteredOrders, sortConfig]
+  )
 
   // Функция для выбора/отмены выбора всех заказов
-  const toggleSelectAll = (isSelected: boolean) => {
-    if (isSelected) {
-      const currentPageIds = getCurrentPageOrders().map(order => order.id)
-      setSelectedOrderIds(currentPageIds)
-    } else {
-      setSelectedOrderIds([])
-    }
-  }
+  const toggleSelectAll = useCallback(
+    (isSelected: boolean) => {
+      if (isSelected) {
+        const currentPageIds = getCurrentPageOrders().map(order => order.id)
+        setSelectedOrderIds(currentPageIds)
+      } else {
+        setSelectedOrderIds([])
+      }
+    },
+    [currentPage, filteredOrders]
+  )
 
   // Функция для выбора/отмены выбора одного заказа
-  const toggleSelectOrder = (orderId: number) => {
+  const toggleSelectOrder = useCallback((orderId: number) => {
     setSelectedOrderIds(prevSelected => {
       if (prevSelected.includes(orderId)) {
         return prevSelected.filter(id => id !== orderId)
@@ -462,7 +648,7 @@ const OrdersPageManger = ({
         return [...prevSelected, orderId]
       }
     })
-  }
+  }, [])
 
   // Фильтрация заказов по поисковому запросу, датам и статусу
   useEffect(() => {
@@ -498,7 +684,6 @@ const OrdersPageManger = ({
         '7': 'Отменен',
         '8': 'Корзина'
       }
-
       result = result.filter(order => order.status === statusMap[statusFilter])
     }
     setFilteredOrders(result)
@@ -507,38 +692,45 @@ const OrdersPageManger = ({
   }, [searchTerm, startDate, endDate, statusFilter])
 
   // Функция для получения заказов на текущей странице
-  const getCurrentPageOrders = () => {
+  const getCurrentPageOrders = useCallback(() => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
     const endIndex = startIndex + ITEMS_PER_PAGE
     return filteredOrders.slice(startIndex, endIndex)
-  }
+  }, [currentPage, filteredOrders])
 
   // Функция для изменения страницы
-  const changePage = (page: number) => {
-    if (page > 0 && page <= totalPages) {
-      setCurrentPage(page)
-      // Сбрасываем выбранные заказы при переходе на другую страницу
-      setSelectedOrderIds([])
-    }
-  }
+  const changePage = useCallback(
+    (page: number) => {
+      if (page > 0 && page <= totalPages) {
+        setCurrentPage(page)
+        // Сбрасываем выбранные заказы при переходе на другую страницу
+        setSelectedOrderIds([])
+        // Close any expanded order when changing page
+        setExpandedOrderId(null)
+      }
+    },
+    [totalPages]
+  )
 
   // Проверка, выбраны ли все заказы на текущей странице
-  const areAllCurrentPageOrdersSelected = () => {
+  const areAllCurrentPageOrdersSelected = useMemo(() => {
     const currentPageIds = getCurrentPageOrders().map(order => order.id)
     return (
       currentPageIds.length > 0 &&
       currentPageIds.every(id => selectedOrderIds.includes(id))
     )
-  }
+  }, [getCurrentPageOrders, selectedOrderIds])
 
   // Применение массовых операций к выбранным заказам
-  const applyBulkAction = () => {
+  const applyBulkAction = useCallback(() => {
+    if (bulkAction === '1' || selectedOrderIds.length === 0) return
+
     // Здесь будет логика для выполнения массовых операций
     alert(`Применение операции к заказам с ID: ${selectedOrderIds.join(', ')}`)
-  }
+  }, [selectedOrderIds, bulkAction])
 
   // Генерация номеров страниц для пагинации
-  const generatePageNumbers = () => {
+  const generatePageNumbers = useCallback(() => {
     const pageNumbers = []
     const maxVisiblePages = 6
 
@@ -568,56 +760,82 @@ const OrdersPageManger = ({
     }
 
     return pageNumbers
-  }
+  }, [currentPage, totalPages])
+
+  // Toggle mobile filters visibility
+  const toggleFilters = useCallback(() => {
+    setExpandedFilters(prev => !prev)
+  }, [])
+
+  // Toggle bulk operations visibility
+  const toggleBulkOperations = useCallback(() => {
+    setExpandedBulkOperations(prev => !prev)
+  }, [])
 
   return (
     <div className='orders-container'>
       <AdminHeader url='orders' name='Замовлення' lang={lang} />
+
+      {/* Bulk operations section - now at the top */}
+
       <div className='orders-header-container'>
         <div className='order-header'>
           <h3>Всього замовлень: {filteredOrders.length}</h3>
-          <div className='filters'>
-            <div className='start'>
-              Дата початку:{' '}
-              <input
-                type='date'
-                value={startDate}
-                onChange={e => setStartDate(e.target.value)}
-              />
+
+          {isMobile && (
+            <button className='toggle-filters-btn' onClick={toggleFilters}>
+              {expandedFilters ? 'Сховати фільтри' : 'Показати фільтри'}
+            </button>
+          )}
+
+          <div
+            className={`filters ${isMobile && !expandedFilters ? 'filters-hidden' : ''}`}
+          >
+            <div className='filter-row'>
+              <div className='start'>
+                <span className='filter-label'>Дата початку:</span>
+                <input
+                  type='date'
+                  value={startDate}
+                  onChange={e => setStartDate(e.target.value)}
+                />
+              </div>
+              <div className='finish'>
+                <span className='filter-label'>Дата закінчення:</span>
+                <input
+                  type='date'
+                  value={endDate}
+                  onChange={e => setEndDate(e.target.value)}
+                />
+              </div>
             </div>
-            <div className='finish'>
-              Дата закінчення:{' '}
-              <input
-                type='date'
-                value={endDate}
-                onChange={e => setEndDate(e.target.value)}
-              />
+
+            <div className='filter-row'>
+              <div className='status'>
+                <span className='filter-label'>Статус замовлення:</span>
+                <select
+                  value={statusFilter}
+                  onChange={e => setStatusFilter(e.target.value)}
+                >
+                  <option value='1'>Все оформленные</option>
+                  <option value='2'>В ожидании</option>
+                  <option value='3'>Проверка</option>
+                  <option value='4'>Оплата</option>
+                  <option value='5'>Наложка</option>
+                  <option value='6'>Завершен</option>
+                  <option value='7'>Отменен</option>
+                  <option value='8'>Корзина</option>
+                </select>
+              </div>
+              <div className='add' style={{ position: 'relative' }}>
+                <Link
+                  href={`orders/new-order`}
+                  style={{ position: 'absolute', inset: 0 }}
+                ></Link>
+                Додати замовлення
+              </div>
             </div>
-            <div className='status'>
-              Статус замовлення:{' '}
-              <select
-                value={statusFilter}
-                onChange={e => setStatusFilter(e.target.value)}
-              >
-                <option value='1' style={{}}>
-                  Все оформленные
-                </option>
-                <option value='2'>В ожидании</option>
-                <option value='3'>Проверка</option>
-                <option value='4'>Оплата</option>
-                <option value='5'>Наложка</option>
-                <option value='6'>Завершен</option>
-                <option value='7'>Отменен</option>
-                <option value='8'>Корзина</option>
-              </select>
-            </div>
-            <div className='add' style={{ position: 'relative' }}>
-              <Link
-                href={`orders/new-order`}
-                style={{ position: 'absolute', inset: 0 }}
-              ></Link>
-              Додати замовлення
-            </div>
+
             <div className='search'>
               <input
                 type='text'
@@ -632,121 +850,7 @@ const OrdersPageManger = ({
           </div>
         </div>
       </div>
-      <div className='list-reviews'>
-        <div className='review review-header'>
-          <input
-            type='checkbox'
-            checked={areAllCurrentPageOrdersSelected()}
-            onChange={e => toggleSelectAll(e.target.checked)}
-          />
-          <div className='id' onClick={() => sortOrders('id')}>
-            ID{' '}
-            {sortConfig?.key === 'id' &&
-              (sortConfig.direction === 'ascending' ? '↑' : '↓')}
-          </div>
-          <div className='date' onClick={() => sortOrders('date')}>
-            Дата{' '}
-            {sortConfig?.key === 'date' &&
-              (sortConfig.direction === 'ascending' ? '↑' : '↓')}
-          </div>
-          <div className='name' onClick={() => sortOrders('name')}>
-            Ім&apos;я{' '}
-            {sortConfig?.key === 'name' &&
-              (sortConfig.direction === 'ascending' ? '↑' : '↓')}
-          </div>
-          <div className='email' onClick={() => sortOrders('email')}>
-            E-mail{' '}
-            {sortConfig?.key === 'email' &&
-              (sortConfig.direction === 'ascending' ? '↑' : '↓')}
-          </div>
-          <div className='contact-info'>Контактна інформація</div>
-          <div className='order-list-basket'>Позиції замовлення</div>
-          <div className='coment-meneger' onClick={() => sortOrders('status')}>
-            Статус{' '}
-            {sortConfig?.key === 'status' &&
-              (sortConfig.direction === 'ascending' ? '↑' : '↓')}
-          </div>
-          <div className='status' style={{ textAlign: 'center' }}>
-            Коментар Менеджера
-          </div>
-          <div className='coment-meneger'>Бонус менеджера</div>
-          <div className='coment-meneger'>Загалом Зароблено</div>
-          <div className='coment-meneger' style={{ textAlign: 'center' }}>
-            Дії
-          </div>
-        </div>
-        {getCurrentPageOrders().map((order, index) => (
-          <div
-            className={`review ${selectedOrderIds.includes(order.id) ? 'selected' : ''}`}
-            style={{
-              backgroundColor: index % 2 == 0 ? '#2695691A' : '#A5A1A100'
-            }}
-            key={order.id}
-          >
-            <input
-              type='checkbox'
-              checked={selectedOrderIds.includes(order.id)}
-              onChange={() => toggleSelectOrder(order.id)}
-            />
-            <div className='id'>{order.id}</div>
-            <div className='date'>{order.date}</div>
-            <div className='name'>{order.name}</div>
-            <div className='email'>{order.email}</div>
-            <div className='contact-info'>
-              <div className='info'>
-                <p>Телефон:</p>
-                <span>{order.phone}</span>
-              </div>
-              <div className='info'>
-                <p>П.І.Б.:</p>
-                <span>{order.pib}</span>
-              </div>
-              <div className='info'>
-                <p>Вариант доставки:</p>
-                <span>{order.deliveryType}</span>
-              </div>
-              <div className='info'>
-                <p>Область:</p>
-                <span>{order.oblast}</span>
-              </div>
-              <div className='info'>
-                <p>Населений пункт:</p>
-                <span>{order.city}</span>
-              </div>
-              <div className='info'>
-                <p>Коментар:</p>
-                <span>{order.coment}</span>
-              </div>
-            </div>
-            <div className='order-list-basket'>
-              <div className='order-list-basket-header'>
-                <div className='title'>Заголовок</div>
-                <div className='price-with-one'>Ціна з шт.</div>
-                <div className='count'>Кол-во</div>
-                <div className='sum'>Сумма</div>
-              </div>
-              <div className='list-basket'>
-                <div className='title'>
-                  Полуперманентные красители прямого действия Elgon I-Light 100
-                  ml (100 ml) (28926)
-                </div>
-
-                <div className='price-with-one'>250 грн.</div>
-                <div className='count'>4 шт.</div>
-                <div className='sum'>1000 грн.</div>
-              </div>
-            </div>
-            <div className='coment-meneger'>{order.status}</div>
-            <textarea
-              className='status'
-              style={{ textAlign: 'center' }}
-              defaultValue={order.comentMeneger}
-            ></textarea>
-            <div className='coment-meneger'>{order.comentMeneger}</div>
-            <div className='coment-meneger'>{order.comentMeneger}</div>
-            <div className='coment-meneger'>Редагувати</div>
-          </div>
-        ))}
+      {isMobile && (
         <div className='selects-adn-input'>
           <select>
             <option value='1'>Массовые операции</option>
@@ -773,6 +877,7 @@ const OrdersPageManger = ({
               Установить статус заказа: В ожидании (обработка)
             </option>
           </select>
+
           <button
             onClick={applyBulkAction}
             disabled={selectedOrderIds.length === 0}
@@ -780,34 +885,212 @@ const OrdersPageManger = ({
             Застосувати
           </button>
         </div>
-        {totalPages <= 1 ? null : (
-          <div className='pagination'>
-            <div
-              className={`left ${currentPage === 1 ? 'disabled' : ''}`}
-              onClick={() => changePage(currentPage - 1)}
-            >
-              <LeftSVG />
+      )}
+
+      {isMobile ? (
+        <div className='mobile-orders-list'>
+          {getCurrentPageOrders().map(order => (
+            <OrderCard
+              key={order.id}
+              order={order}
+              isSelected={selectedOrderIds.includes(order.id)}
+              onToggleSelect={toggleSelectOrder}
+              expandedOrderId={expandedOrderId}
+              setExpandedOrderId={setExpandedOrderId}
+              handleCommentChange={handleCommentChange}
+            />
+          ))}
+
+          {getCurrentPageOrders().length === 0 && (
+            <div className='no-orders'>Немає замовлень для відображення</div>
+          )}
+        </div>
+      ) : (
+        <div className='list-reviews'>
+          <div className='review review-header'>
+            <input
+              type='checkbox'
+              checked={areAllCurrentPageOrdersSelected}
+              onChange={e => toggleSelectAll(e.target.checked)}
+            />
+            <div className='id' onClick={() => sortOrders('id')}>
+              ID{' '}
+              {sortConfig?.key === 'id' &&
+                (sortConfig.direction === 'ascending' ? '↑' : '↓')}
             </div>
-            {generatePageNumbers().map(pageNum => (
-              <div
-                key={pageNum}
-                className={`number ${pageNum === currentPage ? 'select' : ''}`}
-                onClick={() => changePage(pageNum)}
-              >
-                {pageNum}
-              </div>
-            ))}
+            <div className='date' onClick={() => sortOrders('date')}>
+              Дата{' '}
+              {sortConfig?.key === 'date' &&
+                (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+            </div>
+            <div className='name' onClick={() => sortOrders('name')}>
+              Ім&apos;я{' '}
+              {sortConfig?.key === 'name' &&
+                (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+            </div>
+            <div className='email' onClick={() => sortOrders('email')}>
+              E-mail{' '}
+              {sortConfig?.key === 'email' &&
+                (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+            </div>
+            <div className='contact-info'>Контактна інформація</div>
+            <div className='order-list-basket'>Позиції замовлення</div>
             <div
-              className={`right ${currentPage === totalPages ? 'disabled' : ''}`}
-              onClick={() => changePage(currentPage + 1)}
+              className='coment-meneger'
+              onClick={() => sortOrders('status')}
             >
-              <RightSVG />
+              Статус{' '}
+              {sortConfig?.key === 'status' &&
+                (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+            </div>
+            <div className='status' style={{ textAlign: 'center' }}>
+              Коментар Менеджера
+            </div>
+            <div className='coment-meneger'>Бонус менеджера</div>
+            <div className='coment-meneger'>Загалом Зароблено</div>
+            <div className='coment-meneger' style={{ textAlign: 'center' }}>
+              Дії
             </div>
           </div>
-        )}
-      </div>
+          {getCurrentPageOrders().map((order, index) => (
+            <div
+              className={`review ${selectedOrderIds.includes(order.id) ? 'selected' : ''}`}
+              style={{
+                backgroundColor: index % 2 == 0 ? '#2695691A' : '#A5A1A100'
+              }}
+              key={order.id}
+            >
+              <input
+                type='checkbox'
+                checked={selectedOrderIds.includes(order.id)}
+                onChange={() => toggleSelectOrder(order.id)}
+              />
+              <div className='id'>{order.id}</div>
+              <div className='date'>{order.date}</div>
+              <div className='name'>{order.name}</div>
+              <div className='email'>{order.email}</div>
+              <div className='contact-info'>
+                <div className='info'>
+                  <p>Телефон:</p>
+                  <span>{order.phone}</span>
+                </div>
+                <div className='info'>
+                  <p>П.І.Б.:</p>
+                  <span>{order.pib}</span>
+                </div>
+                <div className='info'>
+                  <p>Вариант доставки:</p>
+                  <span>{order.deliveryType}</span>
+                </div>
+                <div className='info'>
+                  <p>Область:</p>
+                  <span>{order.oblast}</span>
+                </div>
+                <div className='info'>
+                  <p>Населений пункт:</p>
+                  <span>{order.city}</span>
+                </div>
+                <div className='info'>
+                  <p>Коментар:</p>
+                  <span>{order.coment}</span>
+                </div>
+              </div>
+              <div className='order-list-basket'>
+                <div className='order-list-basket-header'>
+                  <div className='title'>Заголовок</div>
+                  <div className='price-with-one'>Ціна з шт.</div>
+                  <div className='count'>Кол-во</div>
+                  <div className='sum'>Сумма</div>
+                </div>
+                <div className='list-basket'>
+                  <div className='title'>
+                    Полуперманентные красители прямого действия Elgon I-Light
+                    100 ml (100 ml) (28926)
+                  </div>
+
+                  <div className='price-with-one'>250 грн.</div>
+                  <div className='count'>4 шт.</div>
+                  <div className='sum'>1000 грн.</div>
+                </div>
+              </div>
+              <div className='coment-meneger'>{order.status}</div>
+              <textarea
+                className='status'
+                style={{ textAlign: 'center' }}
+                defaultValue={order.comentMeneger}
+                onChange={e => handleCommentChange(order.id, e.target.value)}
+              ></textarea>
+              <div className='coment-meneger'>{order.comentMeneger}</div>
+              <div className='coment-meneger'>{order.comentMeneger}</div>
+              <div className='coment-meneger'>Редагувати</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {!isMobile && (
+        <div className='selects-adn-input'>
+          <select>
+            <option value='1'>Массовые операции</option>
+            <option value='2'> Удалить заказ</option>
+            <option value='3'>Установить статус заказа: Отменен</option>
+            <option value='4'>Установить статус заказа: Корзина</option>
+            <option value='5'>
+              Установить статус заказа: Оформить заказ (оформить заказ)
+            </option>
+            <option value='6'>
+              Установить статус заказа: Оформить заказ (завершено)
+            </option>
+            <option value='7'>
+              Установить статус заказа: Оформить заказ (оплата)
+            </option>
+            <option value='8'>
+              Установить статус заказа: Оформить заказ (доставка)
+            </option>
+            <option value='9'>Установить статус заказа: Выполнен</option>
+            <option value='10'>
+              Установить статус заказа: В ожидании (в ожидании)
+            </option>
+            <option value='11'>
+              Установить статус заказа: В ожидании (обработка)
+            </option>
+          </select>
+
+          <button
+            onClick={applyBulkAction}
+            disabled={selectedOrderIds.length === 0}
+          >
+            Застосувати
+          </button>
+        </div>
+      )}
+      {totalPages <= 1 ? null : (
+        <div className='pagination'>
+          <div
+            className={`left ${currentPage === 1 ? 'disabled' : ''}`}
+            onClick={() => changePage(currentPage - 1)}
+          >
+            <LeftSVG />
+          </div>
+          {generatePageNumbers().map(pageNum => (
+            <div
+              key={pageNum}
+              className={`number ${pageNum === currentPage ? 'select' : ''}`}
+              onClick={() => changePage(pageNum)}
+            >
+              {pageNum}
+            </div>
+          ))}
+          <div
+            className={`right ${currentPage === totalPages ? 'disabled' : ''}`}
+            onClick={() => changePage(currentPage + 1)}
+          >
+            <RightSVG />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 
-export default OrdersPageManger
+export default OrdersPageManager

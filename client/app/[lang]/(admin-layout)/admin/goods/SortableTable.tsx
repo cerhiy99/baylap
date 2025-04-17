@@ -27,7 +27,15 @@ interface SortConfig {
 
 // Memoized row component to prevent unnecessary re-renders
 const ProductRow = memo(
-  ({ product, index }: { product: Product; index: number }) => {
+  ({
+    product,
+    index,
+    getSortDirection
+  }: {
+    product: Product
+    index: number
+    getSortDirection: (key: keyof Product) => 'ascending' | 'descending' | null
+  }) => {
     return (
       <div
         className='review'
@@ -35,12 +43,30 @@ const ProductRow = memo(
           backgroundColor: index % 2 === 0 ? '#2695691A' : '#A5A1A100'
         }}
       >
-        <div className='name'>{product.name}</div>
-        <div className='time today'>{product.today}</div>
-        <div className='time week'>{product.week}</div>
-        <div className='time mouth'>{product.month}</div>
-        <div className='time year'>{product.year}</div>
-        <div className='time all-time'>{product.allTime}</div>
+        <div className='name'>
+          <span className='mobile-label'>Назва:</span>
+          {product.name}
+        </div>
+        <div className='time today'>
+          <span className='mobile-label'>Cьогодні:</span>
+          {product.today}
+        </div>
+        <div className='time week'>
+          <span className='mobile-label'>Тиждень:</span>
+          {product.week}
+        </div>
+        <div className='time mouth'>
+          <span className='mobile-label'>Місяць:</span>
+          {product.month}
+        </div>
+        <div className='time year'>
+          <span className='mobile-label'>Рік:</span>
+          {product.year}
+        </div>
+        <div className='time all-time'>
+          <span className='mobile-label'>Весь період:</span>
+          {product.allTime}
+        </div>
       </div>
     )
   }
@@ -143,60 +169,80 @@ export default function SortableTable({ goodsList }: { goodsList: Product[] }) {
 
   return (
     <div className='list-reviews'>
-      <div className='review review-header'>
+      <div className='review-header'>
         <div className='name'>Назва</div>
         <div
-          className={`time today ${
-            getSortDirection('today')
-              ? `sorted-${getSortDirection('today')}`
-              : ''
-          }`}
+          className={`time today ${getSortDirection('today') ? `sorted-${getSortDirection('today')}` : ''}`}
           onClick={() => requestSort('today')}
         >
           Cьогодні {renderSortArrow('today')}
         </div>
         <div
-          className={`time week ${
-            getSortDirection('week') ? `sorted-${getSortDirection('week')}` : ''
-          }`}
+          className={`time week ${getSortDirection('week') ? `sorted-${getSortDirection('week')}` : ''}`}
           onClick={() => requestSort('week')}
         >
           Тиждень {renderSortArrow('week')}
         </div>
         <div
-          className={`time mouth ${
-            getSortDirection('month')
-              ? `sorted-${getSortDirection('month')}`
-              : ''
-          }`}
+          className={`time mouth ${getSortDirection('month') ? `sorted-${getSortDirection('month')}` : ''}`}
           onClick={() => requestSort('month')}
         >
           Місяць {renderSortArrow('month')}
         </div>
         <div
-          className={`time year ${
-            getSortDirection('year') ? `sorted-${getSortDirection('year')}` : ''
-          }`}
+          className={`time year ${getSortDirection('year') ? `sorted-${getSortDirection('year')}` : ''}`}
           onClick={() => requestSort('year')}
         >
           Рік {renderSortArrow('year')}
         </div>
         <div
-          className={`time all-time ${
-            getSortDirection('allTime')
-              ? `sorted-${getSortDirection('allTime')}`
-              : ''
-          }`}
+          className={`time all-time ${getSortDirection('allTime') ? `sorted-${getSortDirection('allTime')}` : ''}`}
           onClick={() => requestSort('allTime')}
         >
           Весь період {renderSortArrow('allTime')}
         </div>
       </div>
+
+      <div className='mobile-sort-controls'>
+        <div className='mobile-sort-label'>Сортувати за:</div>
+        <select
+          onChange={e => requestSort(e.target.value as keyof Product)}
+          value={(sortConfig.key as string) || ''}
+        >
+          <option value=''>Виберіть поле</option>
+          <option value='today'>Cьогодні</option>
+          <option value='week'>Тиждень</option>
+          <option value='month'>Місяць</option>
+          <option value='year'>Рік</option>
+          <option value='allTime'>Весь період</option>
+        </select>
+
+        {sortConfig.key && (
+          <select
+            onChange={e =>
+              setSortConfig({
+                key: sortConfig.key,
+                direction: e.target.value as 'ascending' | 'descending' | null
+              })
+            }
+            value={sortConfig.direction || ''}
+          >
+            <option value='ascending'>За зростанням</option>
+            <option value='descending'>За спаданням</option>
+          </select>
+        )}
+      </div>
+
       {paginatedData.length === 0 ? (
         <div className='review emptyMessage'>No data available</div>
       ) : (
         paginatedData.map((product, index) => (
-          <ProductRow key={product.id} product={product} index={index} />
+          <ProductRow
+            key={product.id}
+            product={product}
+            index={index}
+            getSortDirection={getSortDirection}
+          />
         ))
       )}
       <Pagination

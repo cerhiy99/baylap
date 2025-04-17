@@ -30,6 +30,13 @@
       .select {
         border-bottom: 2px solid #269569;
       }
+
+      @media (max-width: 768px) {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px 0;
+        gap: 15px;
+      }
     }
     .admin-reviews-search {
       display: flex;
@@ -50,6 +57,22 @@
         right: 2px;
         top: 0px;
       }
+
+      @media (max-width: 768px) {
+        width: 100%;
+
+        input {
+          width: 100%;
+          margin-left: 0;
+          padding-left: 10px;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
     }
   }
   .list-reviews {
@@ -57,7 +80,110 @@
     display: flex;
     flex-direction: column;
     margin-top: 50px;
+
+    .scroll-hint {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      color: #666;
+
+      @media (max-width: 992px) {
+        display: flex;
+      }
+    }
+
+    .mobile-sort-controls {
+      display: none;
+      margin-bottom: 15px;
+      padding: 10px 15px;
+      background-color: #f5f5f5;
+      border-radius: 8px;
+
+      .mobile-sort-label {
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      select {
+        padding: 8px;
+        margin-right: 10px;
+        border: 1px solid #269569;
+        border-radius: 4px;
+        background-color: white;
+        margin-bottom: 8px;
+        min-width: 150px;
+      }
+
+      @media (max-width: 768px) {
+        display: block;
+      }
+    }
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+
+      @media (max-width: 768px) {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+    }
+
     .review-header {
+      display: flex;
+      flex-direction: row;
+      padding: 15px;
+      border-bottom: 1px solid #269569;
+      gap: 20px;
+
+      div {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+      }
+      .select-and-tema {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        width: 260px;
+      }
+      .tema {
+        width: 20.53%;
+      }
+      .author {
+        width: 4.89%;
+        min-width: 20px;
+      }
+      .published {
+        width: 52.79%;
+      }
+      .date {
+        width: 13.2%;
+      }
+      .operations {
+        width: 200px;
+      }
+      .count-orders {
+        width: 160px;
+      }
+      .date-register {
+        width: 150px;
+      }
+
+      .mobile-label {
+        display: none;
+        font-weight: 600;
+        margin-right: 5px;
+      }
+
       background-color: #a5a1a11a;
       div {
         font-size: 16px;
@@ -75,7 +201,20 @@
         flex-direction: row;
         gap: 5px;
       }
+
+      @media (max-width: 768px) {
+        display: none;
+      }
     }
+
+    .reviews-list {
+      @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+
     .review {
       display: flex;
       flex-direction: row;
@@ -117,6 +256,54 @@
       .date-register {
         width: 150px;
       }
+
+      .mobile-label {
+        display: none;
+        font-weight: 600;
+        margin-right: 5px;
+      }
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+        margin-bottom: 0;
+        border-bottom: 1px solid rgba(38, 149, 105, 0.3);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        div {
+          width: 100% !important;
+          -webkit-line-clamp: 2;
+          display: flex;
+          align-items: center;
+        }
+
+        .mobile-label {
+          display: inline;
+        }
+
+        .tema {
+          font-weight: 600;
+          font-size: 16px;
+          margin-bottom: 5px;
+          border-bottom: 1px dashed rgba(38, 149, 105, 0.3);
+          padding-bottom: 8px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        div {
+          // flex-direction: column;
+          align-items: flex-start;
+
+          .mobile-label {
+            margin-bottom: 4px;
+          }
+        }
+      }
     }
     .selects-adn-input {
       margin-top: 20px;
@@ -153,6 +340,16 @@
         width: 101px;
         border-radius: 7px;
       }
+
+      @media (max-width: 768px) {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      margin-top: 20px;
     }
   }
   .pagination {
@@ -175,6 +372,16 @@
     .select {
       background-color: #269569;
       color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+      gap: 8px;
+
+      div {
+        width: 36px;
+        height: 36px;
+      }
     }
   }
 }

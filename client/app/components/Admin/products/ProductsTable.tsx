@@ -220,17 +220,6 @@ export default function EnhancedProductsTable({
     }
   }
 
-  // Функция для выбора/отмены выбора одного товара
-  // const toggleSelectProduct = (productId: number) => {
-  //   setSelectedProductIds(prevSelected => {
-  //     if (prevSelected.includes(productId)) {
-  //       return prevSelected.filter(id => id !== productId)
-  //     } else {
-  //       return [...prevSelected, productId]
-  //     }
-  //   })
-  // }
-
   // Проверка, выбраны ли все товары на текущей странице
   const areAllProductsSelected = () => {
     return (
@@ -243,79 +232,60 @@ export default function EnhancedProductsTable({
 
   return (
     <div className='product-table-container'>
-      {/* {selectedProductIds.length > 0 && (
-        <div className='selected-actions'>
-          <span>Вибрано товарів: {selectedProductIds.length}</span>
-          <button className='action-button'>Редагувати</button>
-          <button className='action-button delete'>Видалити</button>
-        </div>
-      )} */}
-      <table className='product-table'>
-        <thead>
-          <tr>
-            {/* <th>
-              <input
-                type='checkbox'
-                checked={areAllProductsSelected()}
-                onChange={e => toggleSelectAll(e.target.checked)}
-              />
-            </th> */}
-            <th onClick={() => requestSort('id')}>
-              Артикул {getSortDirectionIcon('id')}
-            </th>
-            <th>Фото товару</th>
-            <th onClick={() => requestSort('name')}>
-              Назва товару {getSortDirectionIcon('name')}
-            </th>
-            <th onClick={() => requestSort('price')}>
-              Ціна {getSortDirectionIcon('price')}
-            </th>
-            <th onClick={() => requestSort('manufacturer')}>
-              Виробник {getSortDirectionIcon('manufacturer')}
-            </th>
-            <th onClick={() => requestSort('category')}>
-              Категорія {getSortDirectionIcon('category')}
-            </th>
-            <th>ДІЇ</th>
-          </tr>
-        </thead>
-        <tbody>
-          {displayedProducts.map((product, index) => (
-            <tr
-              key={product.id}
-              className={`${index % 2 === 1 ? 'alternate-row' : ''} ${
-                selectedProductIds.includes(product.id) ? 'selected-row' : ''
-              }`}
-            >
-              {/* <td>
-                <input
-                  type='checkbox'
-                  checked={selectedProductIds.includes(product.id)}
-                  onChange={() => toggleSelectProduct(product.id)}
-                />
-              </td> */}
-              <td>{product.id}</td>
-              <td className='product-image'>
-                <Image
-                  src={product.image || '/placeholder.svg'}
-                  alt={product.name}
-                  width={80}
-                  height={80}
-                />
-              </td>
-              <td className='product-name'>
-                <a href='#'>{product.name}</a>
-              </td>
-              <td>{product.price}</td>
-              <td>{product.manufacturer}</td>
-              <td>{product.category}</td>
-              <td>
-                <button className='edit-button'>Редагувати</button>
-              </td>
+      <div className='table-responsive'>
+        <table className='product-table'>
+          <thead className='desktop-only'>
+            <tr>
+              <th onClick={() => requestSort('id')}>
+                Артикул {getSortDirectionIcon('id')}
+              </th>
+              <th>Фото товару</th>
+              <th onClick={() => requestSort('name')}>
+                Назва товару {getSortDirectionIcon('name')}
+              </th>
+              <th onClick={() => requestSort('price')}>
+                Ціна {getSortDirectionIcon('price')}
+              </th>
+              <th onClick={() => requestSort('manufacturer')}>
+                Виробник {getSortDirectionIcon('manufacturer')}
+              </th>
+              <th onClick={() => requestSort('category')}>
+                Категорія {getSortDirectionIcon('category')}
+              </th>
+              <th>ДІЇ</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {displayedProducts.map((product, index) => (
+              <tr
+                key={product.id}
+                className={`${index % 2 === 1 ? 'alternate-row' : ''} ${
+                  selectedProductIds.includes(product.id) ? 'selected-row' : ''
+                }`}
+              >
+                <td data-label='Артикул'>{product.id}</td>
+                <td className='product-image' data-label='Фото товару'>
+                  <Image
+                    src={product.image || '/placeholder.svg'}
+                    alt={product.name}
+                    width={80}
+                    height={80}
+                  />
+                </td>
+                <td className='product-name' data-label='Назва товару'>
+                  <a href='#'>{product.name}</a>
+                </td>
+                <td data-label='Ціна'>{product.price}</td>
+                <td data-label='Виробник'>{product.manufacturer}</td>
+                <td data-label='Категорія'>{product.category}</td>
+                <td data-label='ДІЇ'>
+                  <button className='edit-button'>Редагувати</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

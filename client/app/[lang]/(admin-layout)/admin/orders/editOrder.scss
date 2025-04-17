@@ -261,3 +261,137 @@
     }
   }
 }
+/* Mobile styles - only apply to screens smaller than 768px */
+@media screen and (max-width: 767px) {
+  .container {
+    .content {
+      width: 100%;
+      padding: 0 10px;
+
+      .mobile-products-container {
+        margin-bottom: 20px;
+      }
+
+      .mobile-empty-message {
+        padding: 20px;
+        text-align: center;
+        color: #6c757d;
+        font-style: italic;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        background-color: #f8f9fa;
+      }
+
+      .mobile-product-card {
+        margin-bottom: 15px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        overflow: hidden;
+        background-color: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+        .mobile-product-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+          background-color: #f1f3f5;
+          border-bottom: 1px solid #e0e0e0;
+
+          .productLink {
+            font-weight: 500;
+          }
+
+          .removeBtn {
+            padding: 4px 8px;
+            font-size: 14px;
+            min-width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+
+        .mobile-product-details {
+          padding: 10px;
+        }
+
+        .mobile-product-info {
+          display: flex;
+          justify-content: space-between;
+          padding: 8px 0;
+          border-bottom: 1px solid #f1f3f5;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .mobile-label {
+            font-weight: 500;
+            color: #6c757d;
+          }
+
+          .mobile-total {
+            font-weight: 600;
+            color: #269569;
+          }
+
+          .mobile-quantity-input {
+            input {
+              width: 60px;
+              text-align: center;
+            }
+          }
+        }
+      }
+
+      .articleInput {
+        .label {
+          font-size: 18px;
+        }
+
+        input {
+          max-width: 100%;
+        }
+
+        .buttons {
+          flex-direction: column;
+
+          button {
+            width: 100%;
+            margin-bottom: 8px;
+          }
+        }
+      }
+
+      .section {
+        .sectionHeader {
+          font-size: 18px;
+        }
+
+        .sectionContent {
+          padding: 16px 10px;
+        }
+
+        .formGroup {
+          input,
+          select,
+          textarea {
+            max-width: 100%;
+          }
+
+          &.managerBonus {
+            flex-direction: column;
+            align-items: flex-start;
+
+            input {
+              width: 100%;
+              max-width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

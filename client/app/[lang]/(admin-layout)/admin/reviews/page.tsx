@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useState, useMemo, useCallback, memo } from 'react'
+import type React from 'react'
+import { useState, useMemo, useCallback, memo, useEffect } from 'react'
 import './Reviews.scss'
 import AdminHeader from '@/app/components/Admin/AdminHeader/AdminHeader'
 import SearchSVG from '@/app/assest/Admin/Search.svg'
-import { Locale } from '@/i18n.config'
+import type { Locale } from '@/i18n.config'
 import Pagination from '@/app/components/utils/Pagination'
 import Link from 'next/link'
 
@@ -50,7 +51,7 @@ const initialReviews = [
     id: 6,
     text: 'Заказала тушь, но получила не тот оттенок. Однако служба поддержки быстро решила вопрос, отправили замену без лишних вопросов. Спасибо!',
     author: 'Катерина',
-    published: 'Тушь для ресниц объемная L’Oréal Paris...',
+    published: "Тушь для ресниц объемная L'Oréal Paris...",
     date: '09.05.2024 | 16:40'
   },
   {
@@ -189,20 +190,33 @@ const ReviewRow = memo(
           backgroundColor: index % 2 === 0 ? '#2695691A' : '#A5A1A100'
         }}
       >
-        <input
-          type='checkbox'
-          checked={isSelected}
-          onChange={() => onSelect(review.id)}
-        />
+        <div className='review-checkbox'>
+          <input
+            type='checkbox'
+            checked={isSelected}
+            onChange={() => onSelect(review.id)}
+          />
+        </div>
         <div className='tema'>
+          <span className='mobile-label'>Тема:</span>
           <Link href={`/ru/select-goods/1`}>{review.text}</Link>
         </div>
-        <div className='author'>{review.author}</div>
+        <div className='author'>
+          <span className='mobile-label'>Автор:</span>
+          {review.author}
+        </div>
         <div className='published'>
+          <span className='mobile-label'>Опубліковано:</span>
           <Link href={`/ru/select-goods/1`}>{review.published}</Link>
         </div>
-        <div className='date'>{review.date}</div>
-        <div className='operations'>Редагувати</div>
+        <div className='date'>
+          <span className='mobile-label'>Дата оновлення:</span>
+          {review.date}
+        </div>
+        <div className='operations'>
+          <span className='mobile-label'>Операції:</span>
+          <span className='edit-link'>Редагувати</span>
+        </div>
       </div>
     )
   }
@@ -222,6 +236,23 @@ const ReviewsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
     key: null,
     direction: null
   })
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Check if we're on a mobile device
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    // Initial check
+    checkIfMobile()
+
+    // Add event listener for window resize
+    window.addEventListener('resize', checkIfMobile)
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkIfMobile)
+  }, [])
 
   // Filter reviews by search term and selected filter
   const filteredReviews = useMemo(() => {
@@ -372,6 +403,9 @@ const ReviewsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
     [sortConfig]
   )
 
+  const LOréal = "L'Oréal"
+  const Paris = 'Paris'
+
   return (
     <>
       <AdminHeader url='reviews' name='Коментарі' lang={lang} />
@@ -405,70 +439,100 @@ const ReviewsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
         </div>
 
         <div className='list-reviews'>
-          <div className='review review-header'>
-            <input
-              type='checkbox'
-              checked={allSelected}
-              onChange={handleSelectAll}
-            />
-            <div
-              className={`tema ${
-                getSortDirection('text')
-                  ? `sorted-${getSortDirection('text')}`
-                  : ''
-              }`}
-              onClick={() => handleRequestSort('text')}
-            >
-              Тема
-            </div>
-            <div
-              className={`author ${
-                getSortDirection('author')
-                  ? `sorted-${getSortDirection('author')}`
-                  : ''
-              }`}
-              onClick={() => handleRequestSort('author')}
-            >
-              Автор
-            </div>
-            <div
-              className={`published ${
-                getSortDirection('published')
-                  ? `sorted-${getSortDirection('published')}`
-                  : ''
-              }`}
-              onClick={() => handleRequestSort('published')}
-            >
-              Опубліковано
-            </div>
-            <div
-              className={`date ${
-                getSortDirection('date')
-                  ? `sorted-${getSortDirection('date')}`
-                  : ''
-              }`}
-              onClick={() => handleRequestSort('date')}
-            >
-              Дата оновлення
-            </div>
-            <div className='operations'>Операції</div>
-          </div>
+          {isMobile && (
+            <div className='mobile-sort-controls'>
+              <div className='mobile-sort-label'>Сортувати за:</div>
+              <select
+                onChange={e =>
+                  handleRequestSort(e.target.value as keyof Review)
+                }
+                value={(sortConfig.key as string) || ''}
+              >
+                <option value=''>Виберіть поле</option>
+                <option value='text'>Тема</option>
+                <option value='author'>Автор</option>
+                <option value='published'>Опубліковано</option>
+                <option value='date'>Дата оновлення</option>
+              </select>
 
-          {paginatedReviews.length === 0 ? (
-            <div className='review emptyMessage'>
-              Немає коментарів для відображення
+              {sortConfig.key && (
+                <select
+                  onChange={e =>
+                    setSortConfig({
+                      key: sortConfig.key,
+                      direction: e.target.value as
+                        | 'ascending'
+                        | 'descending'
+                        | null
+                    })
+                  }
+                  value={sortConfig.direction || ''}
+                >
+                  <option value='ascending'>За зростанням</option>
+                  <option value='descending'>За спаданням</option>
+                </select>
+              )}
             </div>
-          ) : (
-            paginatedReviews.map((review, index) => (
-              <ReviewRow
-                key={review.id}
-                review={review}
-                index={index}
-                isSelected={selectedReviews.includes(review.id)}
-                onSelect={handleSelectReview}
-              />
-            ))
           )}
+
+          <div className='table-container'>
+            <div className='review-header'>
+              <div className='review-checkbox'>
+                <input
+                  type='checkbox'
+                  checked={allSelected}
+                  onChange={handleSelectAll}
+                />
+              </div>
+              <div
+                className={`tema ${getSortDirection('text') ? `sorted-${getSortDirection('text')}` : ''}`}
+                onClick={() => handleRequestSort('text')}
+              >
+                Тема
+              </div>
+              <div
+                className={`author ${getSortDirection('author') ? `sorted-${getSortDirection('author')}` : ''}`}
+                onClick={() => handleRequestSort('author')}
+              >
+                Автор
+              </div>
+              <div
+                className={`published ${
+                  getSortDirection('published')
+                    ? `sorted-${getSortDirection('published')}`
+                    : ''
+                }`}
+                onClick={() => handleRequestSort('published')}
+              >
+                Опубліковано
+              </div>
+              <div
+                className={`date ${getSortDirection('date') ? `sorted-${getSortDirection('date')}` : ''}`}
+                onClick={() => handleRequestSort('date')}
+              >
+                Дата оновлення
+              </div>
+              <div className='operations'>Операції</div>
+            </div>
+
+            {paginatedReviews.length === 0 ? (
+              <div className='review emptyMessage'>
+                Немає коментарів для відображення
+              </div>
+            ) : (
+              <div className='reviews-list'>
+                {paginatedReviews.map((review, index) => (
+                  <ReviewRow
+                    key={review.id}
+                    review={review}
+                    index={index}
+                    isSelected={selectedReviews.includes(review.id)}
+                    onSelect={handleSelectReview}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
 
           <div className='selects-adn-input'>
             <select value={bulkAction} onChange={handleBulkActionChange}>
