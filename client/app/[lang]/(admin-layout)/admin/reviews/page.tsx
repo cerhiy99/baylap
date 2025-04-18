@@ -1,15 +1,4 @@
 'use client'
-
-import type React from 'react'
-import { useState, useMemo, useCallback, memo, useEffect } from 'react'
-import './Reviews.scss'
-import AdminHeader from '@/app/components/Admin/AdminHeader/AdminHeader'
-import SearchSVG from '@/app/assest/Admin/Search.svg'
-import type { Locale } from '@/i18n.config'
-import Pagination from '@/app/components/utils/Pagination'
-import Link from 'next/link'
-
-// Demo review data
 const initialReviews = [
   {
     id: 1,
@@ -154,6 +143,17 @@ const initialReviews = [
   }
 ]
 
+import type React from 'react'
+import { useState, useMemo, useCallback, memo, useEffect } from 'react'
+import './Reviews.scss'
+import AdminHeader from '@/app/components/Admin/AdminHeader/AdminHeader'
+import SearchSVG from '@/app/assest/Admin/Search.svg'
+import type { Locale } from '@/i18n.config'
+import Pagination from '@/app/components/utils/Pagination'
+import Link from 'next/link'
+
+// Demo review data
+
 // Define types
 interface Review {
   id: number
@@ -206,16 +206,16 @@ const ReviewRow = memo(
           {review.author}
         </div>
         <div className='published'>
-          <span className='mobile-label'>Опубліковано:</span>
+          <span className='mobile-label'>Опубликовано:</span>
           <Link href={`/ru/select-goods/1`}>{review.published}</Link>
         </div>
         <div className='date'>
-          <span className='mobile-label'>Дата оновлення:</span>
+          <span className='mobile-label'>Дата обновления:</span>
           {review.date}
         </div>
         <div className='operations'>
-          <span className='mobile-label'>Операції:</span>
-          <span className='edit-link'>Редагувати</span>
+          <span className='mobile-label'>Операции:</span>
+          <span className='edit-link'>Редактировать</span>
         </div>
       </div>
     )
@@ -408,7 +408,7 @@ const ReviewsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
 
   return (
     <>
-      <AdminHeader url='reviews' name='Коментарі' lang={lang} />
+      <AdminHeader url='reviews' name='Комментарии' lang={lang} />
       <div className='admin-reviews-container'>
         <div className='filter-container'>
           <div className='filters'>
@@ -416,13 +416,13 @@ const ReviewsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
               className={`filter ${selectedFilter === 'published' ? 'select' : ''}`}
               onClick={() => handleFilterChange('published')}
             >
-              Опубліковані коментарі
+              Опубликованные комментарии
             </div>
             <div
               className={`filter ${selectedFilter === 'unapproved' ? 'select' : ''}`}
               onClick={() => handleFilterChange('unapproved')}
             >
-              Несхвалені коментарі (1)
+              Неодобренные комментарии (1)
             </div>
             <div className='admin-reviews-search'>
               <input
@@ -441,18 +441,18 @@ const ReviewsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
         <div className='list-reviews'>
           {isMobile && (
             <div className='mobile-sort-controls'>
-              <div className='mobile-sort-label'>Сортувати за:</div>
+              <div className='mobile-sort-label'>Сортувати по:</div>
               <select
                 onChange={e =>
                   handleRequestSort(e.target.value as keyof Review)
                 }
                 value={(sortConfig.key as string) || ''}
               >
-                <option value=''>Виберіть поле</option>
+                <option value=''>Выберите поле</option>
                 <option value='text'>Тема</option>
                 <option value='author'>Автор</option>
-                <option value='published'>Опубліковано</option>
-                <option value='date'>Дата оновлення</option>
+                <option value='published'>Опубликовано</option>
+                <option value='date'>Дата обновления</option>
               </select>
 
               {sortConfig.key && (
@@ -468,8 +468,8 @@ const ReviewsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
                   }
                   value={sortConfig.direction || ''}
                 >
-                  <option value='ascending'>За зростанням</option>
-                  <option value='descending'>За спаданням</option>
+                  <option value='ascending'>По возрастанию</option>
+                  <option value='descending'>По убыванию</option>
                 </select>
               )}
             </div>
@@ -504,20 +504,20 @@ const ReviewsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
                 }`}
                 onClick={() => handleRequestSort('published')}
               >
-                Опубліковано
+                Опубликовано
               </div>
               <div
                 className={`date ${getSortDirection('date') ? `sorted-${getSortDirection('date')}` : ''}`}
                 onClick={() => handleRequestSort('date')}
               >
-                Дата оновлення
+                Дата обновления
               </div>
               <div className='operations'>Операції</div>
             </div>
 
             {paginatedReviews.length === 0 ? (
               <div className='review emptyMessage'>
-                Немає коментарів для відображення
+                Нет комментариев для отображения
               </div>
             ) : (
               <div className='reviews-list'>
@@ -536,16 +536,16 @@ const ReviewsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
 
           <div className='selects-adn-input'>
             <select value={bulkAction} onChange={handleBulkActionChange}>
-              <option value='0'>Масові операції</option>
-              <option value='1'>Видалити коментарій</option>
-              <option value='2'>Опублікувати коментарій</option>
-              <option value='3'>Зняти з публікації коментарій</option>
+              <option value='0'>Массовые операции</option>
+              <option value='1'>Удалить комментарии</option>
+              <option value='2'>Опубликовать комментарии</option>
+              <option value='3'>Снять комментарии из публикации</option>
             </select>
             <button
               onClick={handleApplyBulkAction}
               disabled={bulkAction === '0' || selectedReviews.length == 0}
             >
-              Застосувати
+              Применить
             </button>
           </div>
 

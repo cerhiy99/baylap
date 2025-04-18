@@ -451,7 +451,7 @@ const OrderCard = ({
 
       <div className='order-card-summary'>
         <div className='order-name'>
-          <span className='label'>Ім&apos;я:</span> {order.name}
+          <span className='label'>Имя:</span> {order.name}
         </div>
         <div className='order-date'>
           <span className='label'>Дата:</span> {order.date}
@@ -472,7 +472,7 @@ const OrderCard = ({
               <span className='label'>Телефон:</span> {order.phone}
             </div>
             <div className='info-row'>
-              <span className='label'>П.І.Б.:</span> {order.pib}
+              <span className='label'>Ф.И.О.:</span> {order.pib}
             </div>
           </div>
 
@@ -485,32 +485,32 @@ const OrderCard = ({
               <span className='label'>Область:</span> {order.oblast}
             </div>
             <div className='info-row'>
-              <span className='label'>Місто:</span> {order.city}
+              <span className='label'>город:</span> {order.city}
             </div>
             {order.department && (
               <div className='info-row'>
-                <span className='label'>Відділення:</span> {order.department}
+                <span className='label'>Отделение:</span> {order.department}
               </div>
             )}
           </div>
 
           <div className='details-section'>
-            <h4>Позиції замовлення</h4>
+            <h4>Позиции заказа</h4>
             <div className='order-items'>
               <div className='order-item'>
                 <div className='item-title'>
                   Полуперманентные красители прямого действия Elgon I-Light 100
-                  ml (100 ml) (28926)
+                  (100 мл) (28926)
                 </div>
                 <div className='item-details'>
                   <div className='item-price'>
-                    <span className='label'>Ціна:</span> 250 грн.
+                    <span className='label'>Цена:</span> 250 грн.
                   </div>
                   <div className='item-quantity'>
-                    <span className='label'>Кількість:</span> 4 шт.
+                    <span className='label'>Количество:</span> 4 шт.
                   </div>
                   <div className='item-total'>
-                    <span className='label'>Сума:</span> 1000 грн.
+                    <span className='label'>Сумма:</span> 1000 грн.
                   </div>
                 </div>
               </div>
@@ -518,17 +518,19 @@ const OrderCard = ({
           </div>
 
           <div className='details-section'>
-            <h4>Додаткова інформація</h4>
+            <h4>Дополнительная информация</h4>
             <div className='info-row'>
-              <span className='label'>Коментар:</span> {order.coment}
+              <span className='label'>Комментарий:</span> {order.coment}
             </div>
             <div className='info-row'>
-              <span className='label'>Менеджер:</span>{' '}
+              <span className='label'>Менеджер:</span>
+              {''}
               <input type='checkbox' checked={order.isMenedher} readOnly />
             </div>
             {order.comentMeneger && (
               <div className='info-row'>
-                <span className='label'>Коментар менеджера:</span>{' '}
+                <span className='label'>Комментарий менеджера:</span>
+                {''}
                 {order.comentMeneger}
               </div>
             )}
@@ -735,14 +737,14 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
 
   return (
     <div className='orders-container'>
-      <AdminHeader url='orders' name='Замовлення' lang={lang} />
+      <AdminHeader url='orders' name='Заказы' lang={lang} />
       <div className='orders-header-container'>
         <div className='order-header'>
-          <h3>Всього замовлень: {filteredOrders.length}</h3>
+          <h3>Всего заказов: {filteredOrders.length}</h3>
 
           {isMobile && (
             <button className='toggle-filters-btn' onClick={toggleFilters}>
-              {expandedFilters ? 'Сховати фільтри' : 'Показати фільтри'}
+              {expandedFilters ? 'Скрыть фильтры' : 'Показать фильтры'}
             </button>
           )}
 
@@ -751,7 +753,7 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
           >
             <div className='filter-row'>
               <div className='start'>
-                <span className='filter-label'>Дата початку:</span>
+                <span className='filter-label'>Дата начала:</span>
                 <input
                   type='date'
                   value={startDate}
@@ -759,7 +761,7 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
                 />
               </div>
               <div className='finish'>
-                <span className='filter-label'>Дата закінчення:</span>
+                <span className='filter-label'>Дата окончания:</span>
                 <input
                   type='date'
                   value={endDate}
@@ -770,7 +772,7 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
 
             <div className='filter-row'>
               <div className='status'>
-                <span className='filter-label'>Статус замовлення:</span>
+                <span className='filter-label'>Статус заказа:</span>
                 <select
                   value={statusFilter}
                   onChange={e => setStatusFilter(e.target.value)}
@@ -790,14 +792,14 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
                   href={`orders/new-order`}
                   style={{ position: 'absolute', inset: 0 }}
                 ></Link>
-                Додати замовлення
+                Добавить заказ
               </div>
             </div>
 
             <div className='search'>
               <input
                 type='text'
-                placeholder='Пошук по назві/артикулу товару, номеру телефону, E-mail'
+                placeholder='Поиск по названию/артикулу товара, номеру телефона, E-mail'
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
               />
@@ -859,7 +861,7 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
           ))}
 
           {getCurrentPageOrders().length === 0 && (
-            <div className='no-orders'>Немає замовлень для відображення</div>
+            <div className='no-orders'>Нет заказов для отображения</div>
           )}
         </div>
       ) : (
@@ -881,7 +883,7 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
                 (sortConfig.direction === 'ascending' ? '↑' : '↓')}
             </div>
             <div className='name' onClick={() => sortOrders('name')}>
-              Ім&apos;я{' '}
+              Имя{' '}
               {sortConfig?.key === 'name' &&
                 (sortConfig.direction === 'ascending' ? '↑' : '↓')}
             </div>
@@ -890,15 +892,15 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
               {sortConfig?.key === 'email' &&
                 (sortConfig.direction === 'ascending' ? '↑' : '↓')}
             </div>
-            <div className='contact-info'>Контактна інформація</div>
-            <div className='order-list-basket'>Позиції замовлення</div>
+            <div className='contact-info'>Контактная информация</div>
+            <div className='order-list-basket'>Позиции заказа</div>
             <div className='status' onClick={() => sortOrders('status')}>
               Статус{' '}
               {sortConfig?.key === 'status' &&
                 (sortConfig.direction === 'ascending' ? '↑' : '↓')}
             </div>
             <div className='meneger'>Менеджер</div>
-            <div className='coment-meneger'>Коментар менеджера</div>
+            <div className='coment-meneger'>Комментарий менеджера</div>
           </div>
           {getCurrentPageOrders().map((order, index) => (
             <div
@@ -923,7 +925,7 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
                   <span>{order.phone}</span>
                 </div>
                 <div className='info'>
-                  <p>П.І.Б.:</p>
+                  <p>Ф.И.О.:</p>
                   <span>{order.pib}</span>
                 </div>
                 <div className='info'>
@@ -935,25 +937,25 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
                   <span>{order.oblast}</span>
                 </div>
                 <div className='info'>
-                  <p>Населений пункт:</p>
+                  <p>Населенный пункт:</p>
                   <span>{order.city}</span>
                 </div>
                 <div className='info'>
-                  <p>Коментар:</p>
+                  <p>Комментарий:</p>
                   <span>{order.coment}</span>
                 </div>
               </div>
               <div className='order-list-basket'>
                 <div className='order-list-basket-header'>
                   <div className='title'>Заголовок</div>
-                  <div className='price-with-one'>Ціна з шт.</div>
+                  <div className='price-with-one'>Цена из шт.</div>
                   <div className='count'>Кол-во</div>
                   <div className='sum'>Сумма</div>
                 </div>
                 <div className='list-basket'>
                   <div className='title'>
-                    Полуперманентные красители прямого действия Elgon I-Light
-                    100 ml (100 ml) (28926)
+                    Полуперманентные красители Elgon I-Light 100 мл (100 мл)
+                    (28926)
                   </div>
 
                   <div className='price-with-one'>250 грн.</div>

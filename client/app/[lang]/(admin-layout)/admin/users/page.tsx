@@ -371,7 +371,7 @@ const users = [
 const page = ({ params: { lang } }: { params: { lang: Locale } }) => {
   return (
     <>
-      <AdminHeader url='reviews' name='Користувачі' lang={lang} />
+      <AdminHeader url='reviews' name='Пользователи' lang={lang} />
       <div className='admin-user-container'>
         <UserSortableTable usersList={users} />
       </div>

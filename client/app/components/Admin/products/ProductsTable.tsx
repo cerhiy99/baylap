@@ -239,20 +239,20 @@ export default function EnhancedProductsTable({
               <th onClick={() => requestSort('id')}>
                 Артикул {getSortDirectionIcon('id')}
               </th>
-              <th>Фото товару</th>
+              <th>Фото товара</th>
               <th onClick={() => requestSort('name')}>
-                Назва товару {getSortDirectionIcon('name')}
+                Название товара {getSortDirectionIcon('name')}
               </th>
               <th onClick={() => requestSort('price')}>
-                Ціна {getSortDirectionIcon('price')}
+                Цена {getSortDirectionIcon('price')}
               </th>
               <th onClick={() => requestSort('manufacturer')}>
-                Виробник {getSortDirectionIcon('manufacturer')}
+                Производитель {getSortDirectionIcon('manufacturer')}
               </th>
               <th onClick={() => requestSort('category')}>
-                Категорія {getSortDirectionIcon('category')}
+                Категория {getSortDirectionIcon('category')}
               </th>
-              <th>ДІЇ</th>
+              <th>ДЕЙСТВИЯ</th>
             </tr>
           </thead>
           <tbody>
@@ -264,7 +264,7 @@ export default function EnhancedProductsTable({
                 }`}
               >
                 <td data-label='Артикул'>{product.id}</td>
-                <td className='product-image' data-label='Фото товару'>
+                <td className='product-image' data-label='Фото товара'>
                   <Image
                     src={product.image || '/placeholder.svg'}
                     alt={product.name}
@@ -272,14 +272,14 @@ export default function EnhancedProductsTable({
                     height={80}
                   />
                 </td>
-                <td className='product-name' data-label='Назва товару'>
+                <td className='product-name' data-label='Название товара'>
                   <a href='#'>{product.name}</a>
                 </td>
-                <td data-label='Ціна'>{product.price}</td>
-                <td data-label='Виробник'>{product.manufacturer}</td>
-                <td data-label='Категорія'>{product.category}</td>
-                <td data-label='ДІЇ'>
-                  <button className='edit-button'>Редагувати</button>
+                <td data-label='Цена'>{product.price}</td>
+                <td data-label='Производитель'>{product.manufacturer}</td>
+                <td data-label='Категория'>{product.category}</td>
+                <td data-label='Действия'>
+                  <button className='edit-button'>Редактировать</button>
                 </td>
               </tr>
             ))}

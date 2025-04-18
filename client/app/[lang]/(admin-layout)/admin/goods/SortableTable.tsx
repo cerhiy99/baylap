@@ -8,7 +8,7 @@ import Pagination from '@/app/components/utils/Pagination'
 
 const PRODUCTS_PER_PAGE = 15
 
-// Define proper types for our data
+// Определяем правильные типы для наших данных
 interface Product {
   id: string | number
   name: string
@@ -17,7 +17,7 @@ interface Product {
   month: number
   year: number
   allTime: number
-  [key: string]: any // Allow indexing with any string
+  [key: string]: any // Позволяет индексировать любой строкой
 }
 
 interface SortConfig {
@@ -25,7 +25,7 @@ interface SortConfig {
   direction: 'ascending' | 'descending' | null
 }
 
-// Memoized row component to prevent unnecessary re-renders
+// Мемоизированный компонент строки для предотвращения ненужных перерендеров
 const ProductRow = memo(
   ({
     product,
@@ -44,27 +44,27 @@ const ProductRow = memo(
         }}
       >
         <div className='name'>
-          <span className='mobile-label'>Назва:</span>
+          <span className='mobile-label'>Название:</span>
           {product.name}
         </div>
         <div className='time today'>
-          <span className='mobile-label'>Cьогодні:</span>
+          <span className='mobile-label'>Сегодня:</span>
           {product.today}
         </div>
         <div className='time week'>
-          <span className='mobile-label'>Тиждень:</span>
+          <span className='mobile-label'>Неделя:</span>
           {product.week}
         </div>
         <div className='time mouth'>
-          <span className='mobile-label'>Місяць:</span>
+          <span className='mobile-label'>Месяц:</span>
           {product.month}
         </div>
         <div className='time year'>
-          <span className='mobile-label'>Рік:</span>
+          <span className='mobile-label'>Год:</span>
           {product.year}
         </div>
         <div className='time all-time'>
-          <span className='mobile-label'>Весь період:</span>
+          <span className='mobile-label'>Весь период:</span>
           {product.allTime}
         </div>
       </div>
@@ -72,7 +72,7 @@ const ProductRow = memo(
   }
 )
 
-// Add display name for better debugging
+// Добавляем отображаемое имя для лучшей отладки
 ProductRow.displayName = 'ProductRow'
 
 export default function SortableTable({ goodsList }: { goodsList: Product[] }) {
@@ -83,7 +83,7 @@ export default function SortableTable({ goodsList }: { goodsList: Product[] }) {
   })
   const [currentPage, setCurrentPage] = useState(1)
 
-  // Memoize sorted products to avoid recomputing on every render
+  // Мемоизируем отсортированные продукты, чтобы избежать пересчета при каждом рендере
   const sortedProducts = useMemo(() => {
     const sortableProducts = [...products]
 
@@ -102,19 +102,19 @@ export default function SortableTable({ goodsList }: { goodsList: Product[] }) {
     return sortableProducts
   }, [products, sortConfig.key, sortConfig.direction])
 
-  // Memoize paginated data to avoid recalculating on every render
+  // Мемоизируем данные с пагинацией, чтобы избежать пересчета при каждом рендере
   const paginatedData = useMemo(() => {
     const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE
     return sortedProducts.slice(startIndex, startIndex + PRODUCTS_PER_PAGE)
   }, [currentPage, sortedProducts])
 
-  // Memoize total pages calculation
+  // Мемоизируем вычисление общего количества страниц
   const totalPages = useMemo(
     () => Math.ceil(products.length / PRODUCTS_PER_PAGE),
     [products.length]
   )
 
-  // Memoize request sort handler to avoid recreation on every render
+  // Мемоизируем обработчик запроса сортировки, чтобы избежать повторного создания при каждом рендере
   const requestSort = useCallback((key: keyof Product) => {
     setSortConfig(prevConfig => {
       let direction: 'ascending' | 'descending' | null = 'ascending'
@@ -130,16 +130,16 @@ export default function SortableTable({ goodsList }: { goodsList: Product[] }) {
       return { key, direction }
     })
 
-    // Reset to first page when sorting changes
+    // Сброс на первую страницу при изменении сортировки
     setCurrentPage(1)
   }, [])
 
-  // Use a stable callback function for pagination
+  // Используем стабильную функцию обратного вызова для пагинации
   const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page)
   }, [])
 
-  // Memoize getSortDirection to avoid recreation on every render
+  // Мемоизируем getSortDirection, чтобы избежать повторного создания при каждом рендере
   const getSortDirection = useCallback(
     (key: keyof Product) => {
       return sortConfig.key === key ? sortConfig.direction : null
@@ -147,7 +147,7 @@ export default function SortableTable({ goodsList }: { goodsList: Product[] }) {
     [sortConfig.key, sortConfig.direction]
   )
 
-  // Memoize renderSortArrow to avoid recreation on every render
+  // Мемоизируем renderSortArrow, чтобы избежать повторного создания при каждом рендере
   const renderSortArrow = useCallback(
     (key: keyof Product) => {
       const direction = getSortDirection(key)
@@ -161,60 +161,60 @@ export default function SortableTable({ goodsList }: { goodsList: Product[] }) {
     [getSortDirection]
   )
 
-  // Update products state when goodsList prop changes
+  // Обновляем состояние продуктов, когда изменяется свойство goodsList
   useEffect(() => {
     setProducts(goodsList || [])
-    setCurrentPage(1) // Reset to first page when data changes
+    setCurrentPage(1) // Сброс на первую страницу при изменении данных
   }, [goodsList])
 
   return (
     <div className='list-reviews'>
       <div className='review-header'>
-        <div className='name'>Назва</div>
+        <div className='name'>Название</div>
         <div
           className={`time today ${getSortDirection('today') ? `sorted-${getSortDirection('today')}` : ''}`}
           onClick={() => requestSort('today')}
         >
-          Cьогодні {renderSortArrow('today')}
+          Сегодня {renderSortArrow('today')}
         </div>
         <div
           className={`time week ${getSortDirection('week') ? `sorted-${getSortDirection('week')}` : ''}`}
           onClick={() => requestSort('week')}
         >
-          Тиждень {renderSortArrow('week')}
+          Неделя {renderSortArrow('week')}
         </div>
         <div
           className={`time mouth ${getSortDirection('month') ? `sorted-${getSortDirection('month')}` : ''}`}
           onClick={() => requestSort('month')}
         >
-          Місяць {renderSortArrow('month')}
+          Месяц {renderSortArrow('month')}
         </div>
         <div
           className={`time year ${getSortDirection('year') ? `sorted-${getSortDirection('year')}` : ''}`}
           onClick={() => requestSort('year')}
         >
-          Рік {renderSortArrow('year')}
+          Год {renderSortArrow('year')}
         </div>
         <div
           className={`time all-time ${getSortDirection('allTime') ? `sorted-${getSortDirection('allTime')}` : ''}`}
           onClick={() => requestSort('allTime')}
         >
-          Весь період {renderSortArrow('allTime')}
+          Весь период {renderSortArrow('allTime')}
         </div>
       </div>
 
       <div className='mobile-sort-controls'>
-        <div className='mobile-sort-label'>Сортувати за:</div>
+        <div className='mobile-sort-label'>Сортировать по:</div>
         <select
           onChange={e => requestSort(e.target.value as keyof Product)}
           value={(sortConfig.key as string) || ''}
         >
-          <option value=''>Виберіть поле</option>
-          <option value='today'>Cьогодні</option>
-          <option value='week'>Тиждень</option>
-          <option value='month'>Місяць</option>
-          <option value='year'>Рік</option>
-          <option value='allTime'>Весь період</option>
+          <option value=''>Выберите поле</option>
+          <option value='today'>Сегодня</option>
+          <option value='week'>Неделя</option>
+          <option value='month'>Месяц</option>
+          <option value='year'>Год</option>
+          <option value='allTime'>Весь период</option>
         </select>
 
         {sortConfig.key && (
@@ -227,14 +227,14 @@ export default function SortableTable({ goodsList }: { goodsList: Product[] }) {
             }
             value={sortConfig.direction || ''}
           >
-            <option value='ascending'>За зростанням</option>
-            <option value='descending'>За спаданням</option>
+            <option value='ascending'>По возрастанию</option>
+            <option value='descending'>По убыванию</option>
           </select>
         )}
       </div>
 
       {paginatedData.length === 0 ? (
-        <div className='review emptyMessage'>No data available</div>
+        <div className='review emptyMessage'>Данные отсутствуют</div>
       ) : (
         paginatedData.map((product, index) => (
           <ProductRow

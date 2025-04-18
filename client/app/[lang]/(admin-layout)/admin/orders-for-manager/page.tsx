@@ -369,7 +369,6 @@ const initialOrders = [
     comentMeneger: ''
   }
 ]
-
 import AdminHeader from '@/app/components/Admin/AdminHeader/AdminHeader'
 import type { Locale } from '@/i18n.config'
 import { useState, useEffect, useCallback, useMemo } from 'react'
@@ -405,7 +404,7 @@ interface SortConfig {
 
 const ITEMS_PER_PAGE = 15
 
-// Order card component for mobile view
+// Компонент карточки заказа для мобильного представления
 const OrderCard = ({
   order,
   isSelected,
@@ -443,7 +442,7 @@ const OrderCard = ({
           className='expand-button'
           onClick={() => setExpandedOrderId(isExpanded ? null : order.id)}
           aria-label={
-            isExpanded ? 'Collapse order details' : 'Expand order details'
+            isExpanded ? 'Свернуть детали заказа' : 'Развернуть детали заказа'
           }
         >
           {isExpanded ? 'Закрыть' : 'Открыть'}
@@ -452,20 +451,20 @@ const OrderCard = ({
 
       <div className='order-card-summary'>
         <div className='order-name'>
-          <span className='label'>Ім&apos;я:</span> {order.name}
+          <span className='label'>Имя:</span> {order.name}
         </div>
         <div className='order-date'>
           <span className='label'>Дата:</span> {order.date}
         </div>
         <div className='order-sum'>
-          <span className='label'>Сума:</span> {order.sum} грн.
+          <span className='label'>Сумма:</span> {order.sum} грн.
         </div>
       </div>
 
       {isExpanded && (
         <div className='order-card-details'>
           <div className='details-section'>
-            <h4>Контактна інформація</h4>
+            <h4>Контактная информация</h4>
             <div className='info-row'>
               <span className='label'>E-mail:</span> {order.email}
             </div>
@@ -473,7 +472,7 @@ const OrderCard = ({
               <span className='label'>Телефон:</span> {order.phone}
             </div>
             <div className='info-row'>
-              <span className='label'>П.І.Б.:</span> {order.pib}
+              <span className='label'>Ф.И.О.:</span> {order.pib}
             </div>
           </div>
 
@@ -486,17 +485,17 @@ const OrderCard = ({
               <span className='label'>Область:</span> {order.oblast}
             </div>
             <div className='info-row'>
-              <span className='label'>Місто:</span> {order.city}
+              <span className='label'>Город:</span> {order.city}
             </div>
             {order.department && (
               <div className='info-row'>
-                <span className='label'>Відділення:</span> {order.department}
+                <span className='label'>Отделение:</span> {order.department}
               </div>
             )}
           </div>
 
           <div className='details-section'>
-            <h4>Позиції замовлення</h4>
+            <h4>Позиции заказа</h4>
             <div className='order-items'>
               <div className='order-item'>
                 <div className='item-title'>
@@ -505,13 +504,13 @@ const OrderCard = ({
                 </div>
                 <div className='item-details'>
                   <div className='item-price'>
-                    <span className='label'>Ціна:</span> 250 грн.
+                    <span className='label'>Цена:</span> 250 грн.
                   </div>
                   <div className='item-quantity'>
-                    <span className='label'>Кількість:</span> 4 шт.
+                    <span className='label'>Количество:</span> 4 шт.
                   </div>
                   <div className='item-total'>
-                    <span className='label'>Сума:</span> 1000 грн.
+                    <span className='label'>Сумма:</span> 1000 грн.
                   </div>
                 </div>
               </div>
@@ -519,19 +518,19 @@ const OrderCard = ({
           </div>
 
           <div className='details-section'>
-            <h4>Коментар клієнта</h4>
+            <h4>Комментарий клиента</h4>
             <div className='info-row'>{order.coment}</div>
           </div>
 
           <div className='details-section'>
-            <h4>Інформація менеджера</h4>
+            <h4>Информация менеджера</h4>
             <div className='info-row'>
-              <span className='label'>Коментар менеджера:</span>
+              <span className='label'>Комментарий менеджера:</span>
               <textarea
                 className='manager-comment'
                 defaultValue={order.comentMeneger}
                 onChange={e => handleCommentChange(order.id, e.target.value)}
-                placeholder='Введіть коментар'
+                placeholder='Введите комментарий'
               ></textarea>
             </div>
             <div className='info-row'>
@@ -539,11 +538,11 @@ const OrderCard = ({
               {order.comentMeneger}
             </div>
             <div className='info-row'>
-              <span className='label'>Загалом зароблено:</span>{' '}
+              <span className='label'>Всего заработано:</span>{' '}
               {order.comentMeneger}
             </div>
             <div className='action-buttons'>
-              <button className='edit-button'>Редагувати</button>
+              <button className='edit-button'>Редактировать</button>
             </div>
           </div>
         </div>
@@ -576,19 +575,19 @@ const OrdersPageManager = ({
     useState<boolean>(false)
   const [bulkAction, setBulkAction] = useState<string>('1')
 
-  // Check if we're on a mobile device
+  // Проверяем, находимся ли мы на мобильном устройстве
   useEffect(() => {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 992)
     }
 
-    // Initial check
+    // Начальная проверка
     checkIfMobile()
 
-    // Add event listener for window resize
+    // Добавляем слушатель события изменения размера окна
     window.addEventListener('resize', checkIfMobile)
 
-    // Cleanup
+    // Очистка
     return () => window.removeEventListener('resize', checkIfMobile)
   }, [])
 
@@ -705,7 +704,7 @@ const OrdersPageManager = ({
         setCurrentPage(page)
         // Сбрасываем выбранные заказы при переходе на другую страницу
         setSelectedOrderIds([])
-        // Close any expanded order when changing page
+        // Закрываем развернутый заказ при смене страницы
         setExpandedOrderId(null)
       }
     },
@@ -762,29 +761,29 @@ const OrdersPageManager = ({
     return pageNumbers
   }, [currentPage, totalPages])
 
-  // Toggle mobile filters visibility
+  // Переключение видимости фильтров на мобильных устройствах
   const toggleFilters = useCallback(() => {
     setExpandedFilters(prev => !prev)
   }, [])
 
-  // Toggle bulk operations visibility
+  // Переключение видимости массовых операций
   const toggleBulkOperations = useCallback(() => {
     setExpandedBulkOperations(prev => !prev)
   }, [])
 
   return (
     <div className='orders-container'>
-      <AdminHeader url='orders' name='Замовлення' lang={lang} />
+      <AdminHeader url='orders' name='Заказы' lang={lang} />
 
-      {/* Bulk operations section - now at the top */}
+      {/* Секция массовых операций - теперь вверху */}
 
       <div className='orders-header-container'>
         <div className='order-header'>
-          <h3>Всього замовлень: {filteredOrders.length}</h3>
+          <h3>Всего заказов: {filteredOrders.length}</h3>
 
           {isMobile && (
             <button className='toggle-filters-btn' onClick={toggleFilters}>
-              {expandedFilters ? 'Сховати фільтри' : 'Показати фільтри'}
+              {expandedFilters ? 'Скрыть фильтры' : 'Показать фильтры'}
             </button>
           )}
 
@@ -793,7 +792,7 @@ const OrdersPageManager = ({
           >
             <div className='filter-row'>
               <div className='start'>
-                <span className='filter-label'>Дата початку:</span>
+                <span className='filter-label'>Дата начала:</span>
                 <input
                   type='date'
                   value={startDate}
@@ -801,7 +800,7 @@ const OrdersPageManager = ({
                 />
               </div>
               <div className='finish'>
-                <span className='filter-label'>Дата закінчення:</span>
+                <span className='filter-label'>Дата окончания:</span>
                 <input
                   type='date'
                   value={endDate}
@@ -812,7 +811,7 @@ const OrdersPageManager = ({
 
             <div className='filter-row'>
               <div className='status'>
-                <span className='filter-label'>Статус замовлення:</span>
+                <span className='filter-label'>Статус заказа:</span>
                 <select
                   value={statusFilter}
                   onChange={e => setStatusFilter(e.target.value)}
@@ -832,14 +831,14 @@ const OrdersPageManager = ({
                   href={`orders/new-order`}
                   style={{ position: 'absolute', inset: 0 }}
                 ></Link>
-                Додати замовлення
+                Добавить заказ
               </div>
             </div>
 
             <div className='search'>
               <input
                 type='text'
-                placeholder='Пошук по назві/артикулу товару, номеру телефону, E-mail'
+                placeholder='Поиск по названию/артикулу товара, номеру телефона, E-mail'
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
               />
@@ -882,7 +881,7 @@ const OrdersPageManager = ({
             onClick={applyBulkAction}
             disabled={selectedOrderIds.length === 0}
           >
-            Застосувати
+            Применить
           </button>
         </div>
       )}
@@ -902,7 +901,7 @@ const OrdersPageManager = ({
           ))}
 
           {getCurrentPageOrders().length === 0 && (
-            <div className='no-orders'>Немає замовлень для відображення</div>
+            <div className='no-orders'>Нет заказов для отображения</div>
           )}
         </div>
       ) : (
@@ -924,7 +923,7 @@ const OrdersPageManager = ({
                 (sortConfig.direction === 'ascending' ? '↑' : '↓')}
             </div>
             <div className='name' onClick={() => sortOrders('name')}>
-              Ім&apos;я{' '}
+              Имя{' '}
               {sortConfig?.key === 'name' &&
                 (sortConfig.direction === 'ascending' ? '↑' : '↓')}
             </div>
@@ -933,8 +932,8 @@ const OrdersPageManager = ({
               {sortConfig?.key === 'email' &&
                 (sortConfig.direction === 'ascending' ? '↑' : '↓')}
             </div>
-            <div className='contact-info'>Контактна інформація</div>
-            <div className='order-list-basket'>Позиції замовлення</div>
+            <div className='contact-info'>Контактная информация</div>
+            <div className='order-list-basket'>Позиции заказа</div>
             <div
               className='coment-meneger'
               onClick={() => sortOrders('status')}
@@ -944,12 +943,12 @@ const OrdersPageManager = ({
                 (sortConfig.direction === 'ascending' ? '↑' : '↓')}
             </div>
             <div className='status' style={{ textAlign: 'center' }}>
-              Коментар Менеджера
+              Комментарий менеджера
             </div>
             <div className='coment-meneger'>Бонус менеджера</div>
-            <div className='coment-meneger'>Загалом Зароблено</div>
+            <div className='coment-meneger'>Всего заработано</div>
             <div className='coment-meneger' style={{ textAlign: 'center' }}>
-              Дії
+              Действия
             </div>
           </div>
           {getCurrentPageOrders().map((order, index) => (
@@ -975,7 +974,7 @@ const OrdersPageManager = ({
                   <span>{order.phone}</span>
                 </div>
                 <div className='info'>
-                  <p>П.І.Б.:</p>
+                  <p>Ф.И.О.:</p>
                   <span>{order.pib}</span>
                 </div>
                 <div className='info'>
@@ -987,18 +986,18 @@ const OrdersPageManager = ({
                   <span>{order.oblast}</span>
                 </div>
                 <div className='info'>
-                  <p>Населений пункт:</p>
+                  <p>Населенный пункт:</p>
                   <span>{order.city}</span>
                 </div>
                 <div className='info'>
-                  <p>Коментар:</p>
+                  <p>Комментарий:</p>
                   <span>{order.coment}</span>
                 </div>
               </div>
               <div className='order-list-basket'>
                 <div className='order-list-basket-header'>
                   <div className='title'>Заголовок</div>
-                  <div className='price-with-one'>Ціна з шт.</div>
+                  <div className='price-with-one'>Цена за шт.</div>
                   <div className='count'>Кол-во</div>
                   <div className='sum'>Сумма</div>
                 </div>
@@ -1022,7 +1021,7 @@ const OrdersPageManager = ({
               ></textarea>
               <div className='coment-meneger'>{order.comentMeneger}</div>
               <div className='coment-meneger'>{order.comentMeneger}</div>
-              <div className='coment-meneger'>Редагувати</div>
+              <div className='coment-meneger'>Редактировать</div>
             </div>
           ))}
         </div>
@@ -1060,7 +1059,7 @@ const OrdersPageManager = ({
             onClick={applyBulkAction}
             disabled={selectedOrderIds.length === 0}
           >
-            Застосувати
+            Применить
           </button>
         </div>
       )}

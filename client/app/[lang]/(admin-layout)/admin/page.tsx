@@ -103,14 +103,14 @@ const ProductsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
 
   return (
     <div>
-      <AdminHeader url='/' name='Товари' lang={lang} />
+      <AdminHeader url='/' name='Товары' lang={lang} />
       <div className='admin-items-container'>
         <div className='filter-container'>
           <div className='filters'>
             <div className='select filter'>
-              Категорії:
+              Категории:
               <select value={categoryFilter} onChange={handleCategoryChange}>
-                <option value=''>Усі категорії</option>
+                <option value=''>Все категории</option>
                 {categories.map((category, index) => (
                   <option key={index} value={category}>
                     {category}
@@ -119,12 +119,12 @@ const ProductsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
               </select>
             </div>
             <div className='filter'>
-              Виробник:
+              Производитель:
               <select
                 value={manufacturerFilter}
                 onChange={handleManufacturerChange}
               >
-                <option value=''>Усі виробники</option>
+                <option value=''>Все производители</option>
                 {manufacturers.map((manufacturer, index) => (
                   <option key={index} value={manufacturer}>
                     {manufacturer}
@@ -136,7 +136,7 @@ const ProductsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
             <div className='admin-items-search'>
               <input
                 type='text'
-                placeholder='Пошук товарів...'
+                placeholder='Поиск товаров...'
                 value={searchTerm}
                 onChange={handleSearch}
               />

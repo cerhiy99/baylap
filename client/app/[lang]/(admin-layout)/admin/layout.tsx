@@ -47,25 +47,25 @@ export default function RootLayout({
               {isRole === 'admin' && (
                 <>
                   <div className='goods-dropdown-container'>
-                    <Link href={`/${lang}/admin/goods`}>Товари</Link>
+                    <Link href={`/${lang}/admin/goods`}>Товары</Link>
                     <div className='goods-dropdown'>
                       <Link href={`/${lang}/admin/add-product`}>
-                        Добавити товар
+                        Добавить товар
                       </Link>
                     </div>
                   </div>
 
-                  <Link href={`/${lang}/admin/category`}>Категорії</Link>
-                  <Link href={`/${lang}/admin/orders`}>Замовлення</Link>
+                  <Link href={`/${lang}/admin/category`}>Категории</Link>
+                  <Link href={`/${lang}/admin/orders`}>Заказы</Link>
                 </>
               )}
               <Link href={`/${lang}/admin/orders-for-manager`}>
-                Замовлення для менеджера
+                Заказы для менеджера
               </Link>
               {isRole === 'admin' && (
                 <>
-                  <Link href={`/${lang}/admin/reviews`}>Коментарі</Link>
-                  <Link href={`/${lang}/admin/users`}>Користувачі</Link>
+                  <Link href={`/${lang}/admin/reviews`}>Комментарии</Link>
+                  <Link href={`/${lang}/admin/users`}>Пользователи</Link>
                 </>
               )}
             </div>
@@ -73,10 +73,10 @@ export default function RootLayout({
 
           <div className='right'>
             <Link href={'#'} className='admin-greeting'>
-              Добрий день, {isRole === 'admin' ? 'Admin' : 'Manager'}
+              Добрый день, {isRole === 'admin' ? 'Admin' : 'Manager'}
             </Link>
             <div className='right__wrapper'>
-              <Link href={`/${lang}/admin/exit`}>Вихід</Link>
+              <Link href={`/${lang}/admin/exit`}>Выход</Link>
               <ExitSVG color='white' />
             </div>
           </div>
@@ -88,40 +88,26 @@ export default function RootLayout({
         <div className='mobile-menu-content'>
           {isRole === 'admin' && (
             <>
-              {/* <div className='mobile-menu-item'>
-                <Link href={`/${lang}/admin/goods`} onClick={toggleMobileMenu}>
-                  Товари
-                </Link>
-                <div className='mobile-submenu'>
-                  <Link
-                    href={`/${lang}/admin/add-product`}
-                    onClick={toggleMobileMenu}
-                  >
-                    Добавити товар
-                  </Link>
-                </div>
-              </div> */}
-
               <Link
                 href={`/${lang}/admin`}
                 onClick={toggleMobileMenu}
                 className='mobile-menu-item'
               >
-                Головна панель
+                Главная панель
               </Link>
               <Link
                 href={`/${lang}/admin/goods`}
                 onClick={toggleMobileMenu}
                 className='mobile-menu-item'
               >
-                Товари
+                Товары
               </Link>
               <Link
                 href={`/${lang}/admin/add-product`}
                 onClick={toggleMobileMenu}
                 className='mobile-menu-item'
               >
-                Добавити товар
+                Добавить товар
               </Link>
 
               <Link
@@ -129,21 +115,14 @@ export default function RootLayout({
                 className='mobile-menu-item'
                 onClick={toggleMobileMenu}
               >
-                Категорії
+                Категории
               </Link>
               <Link
                 href={`/${lang}/admin/orders`}
                 className='mobile-menu-item'
                 onClick={toggleMobileMenu}
               >
-                Замовлення
-              </Link>
-              <Link
-                href={`/${lang}`}
-                onClick={toggleMobileMenu}
-                className='mobile-menu-item'
-              >
-                Перейти на сайт
+                Заказы
               </Link>
             </>
           )}
@@ -152,8 +131,9 @@ export default function RootLayout({
             className='mobile-menu-item'
             onClick={toggleMobileMenu}
           >
-            Замовлення для менеджера
+            Заказы для менеджера
           </Link>
+
           {isRole === 'admin' && (
             <>
               <Link
@@ -161,24 +141,31 @@ export default function RootLayout({
                 className='mobile-menu-item'
                 onClick={toggleMobileMenu}
               >
-                Коментарі
+                Комментарии
               </Link>
               <Link
                 href={`/${lang}/admin/users`}
                 className='mobile-menu-item'
                 onClick={toggleMobileMenu}
               >
-                Користувачі
+                Пользователи
               </Link>
             </>
           )}
+          <Link
+            href={`/${lang}`}
+            onClick={toggleMobileMenu}
+            className='mobile-menu-item'
+          >
+            Перейти на сайт
+          </Link>
           <div className='mobile-menu-footer'>
             <Link
               href={`/${lang}/admin/exit`}
               className='mobile-menu-item exit-link'
               onClick={toggleMobileMenu}
             >
-              Вихід <ExitSVG color='white' />
+              Выход <ExitSVG color='white' />
             </Link>
           </div>
         </div>

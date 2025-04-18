@@ -152,9 +152,7 @@ export default function EditOrderPage({ params }: OrderPageProps) {
   const renderMobileProductList = () => {
     if (products.length === 0) {
       return (
-        <div className='mobile-empty-message'>
-          Позиції замовлення не знайдені.
-        </div>
+        <div className='mobile-empty-message'>Позиции заказа не найдены.</div>
       )
     }
 
@@ -173,15 +171,15 @@ export default function EditOrderPage({ params }: OrderPageProps) {
         </div>
         <div className='mobile-product-details'>
           <div className='mobile-product-info'>
-            <span className='mobile-label'>Артикул:</span>
+            <span className='mobile-label'>Статья:</span>
             <span>{product.article}</span>
           </div>
           <div className='mobile-product-info'>
-            <span className='mobile-label'>Ціна:</span>
+            <span className='mobile-label'>Цена:</span>
             <span>{product.price} грн</span>
           </div>
           <div className='mobile-product-info'>
-            <span className='mobile-label'>К-сть:</span>
+            <span className='mobile-label'>Кол-во:</span>
             <div className='mobile-quantity-input'>
               <input
                 type='number'
@@ -197,7 +195,7 @@ export default function EditOrderPage({ params }: OrderPageProps) {
             </div>
           </div>
           <div className='mobile-product-info'>
-            <span className='mobile-label'>Разом:</span>
+            <span className='mobile-label'>Вместе:</span>
             <span className='mobile-total'>
               {calculateTotal(product.price, product.quantity)} грн
             </span>
@@ -220,19 +218,19 @@ export default function EditOrderPage({ params }: OrderPageProps) {
             <table className='table'>
               <thead>
                 <tr>
-                  <th>Видалити</th>
-                  <th>Назва товару</th>
+                  <th>Удалить</th>
+                  <th>Название товара</th>
                   <th>Артикул</th>
-                  <th>Ціна</th>
-                  <th>К-сть</th>
-                  <th>Разом</th>
+                  <th>Цена</th>
+                  <th>Кол-во</th>
+                  <th>Вместе</th>
                 </tr>
               </thead>
               <tbody>
                 {products.length === 0 ? (
                   <tr>
                     <td colSpan={6} className='emptyMessage'>
-                      Позиції замовлення не знайдені.
+                      Позиции заказа не найдены.
                     </td>
                   </tr>
                 ) : (
@@ -277,7 +275,7 @@ export default function EditOrderPage({ params }: OrderPageProps) {
           )}
 
           <div className='articleInput'>
-            <label className='label'>Артикул товару</label>
+            <label className='label'>Артикул товарф</label>
             <input
               type='text'
               value={articleInput}
@@ -285,23 +283,23 @@ export default function EditOrderPage({ params }: OrderPageProps) {
               placeholder='Введіть артикул товару'
             />
             <div className='description'>
-              Введіть артикул товару, щоб додавити його до замовлення.
+              Введите артикул товара, чтобы добавить его к заказу.
             </div>
             <div className='buttons'>
               <button className='buttons__addBtn' onClick={handleAddProduct}>
-                Додати товар
+                Добавить тоавр
               </button>
               <button
                 className='buttons__cancelBtn'
                 onClick={() => setArticleInput('')}
               >
-                Скасувати
+                Отменить
               </button>
             </div>
           </div>
 
           <div className='section'>
-            <div className='sectionHeader'>Інформація о доставке</div>
+            <div className='sectionHeader'>Информация о доставке</div>
             <div className='sectionContent'>
               <div className='formGroup'>
                 <label className='label'>Телефон</label>
@@ -315,7 +313,7 @@ export default function EditOrderPage({ params }: OrderPageProps) {
               </div>
 
               <div className='formGroup'>
-                <label className='label'>П.І.Б</label>
+                <label className='label'>Ф.И.О.</label>
                 <input
                   type='text'
                   name='fullName'
@@ -326,7 +324,7 @@ export default function EditOrderPage({ params }: OrderPageProps) {
               </div>
 
               <div className='formGroup'>
-                <label className='label'>Варіант доставки</label>
+                <label className='label'>Вариант доставки</label>
                 <select
                   name='deliveryMethod'
                   value={formData.deliveryMethod}
@@ -334,12 +332,12 @@ export default function EditOrderPage({ params }: OrderPageProps) {
                 >
                   <option value='Нова пошта'>Нова пошта</option>
                   <option value='Укрпошта'>Укрпошта</option>
-                  <option value='Самовивіз'>Самовивіз</option>
+                  <option value='Самовивіз'>Самовывоз</option>
                 </select>
               </div>
 
               <div className='formGroup'>
-                <label className='label'>Місто</label>
+                <label className='label'>Город</label>
                 <input
                   type='text'
                   name='city'
@@ -361,7 +359,7 @@ export default function EditOrderPage({ params }: OrderPageProps) {
               </div>
 
               <div className='formGroup'>
-                <label className='label'>Коментарій</label>
+                <label className='label'>Комментарий</label>
                 <textarea
                   name='comment'
                   value={formData.comment}
@@ -378,19 +376,17 @@ export default function EditOrderPage({ params }: OrderPageProps) {
                     checked={formData.showBillingRecord}
                     onChange={handleCheckboxChange}
                   />
-                  <label htmlFor='showBillingRecord'>
-                    Видалити обліковий запис
-                  </label>
+                  <label htmlFor='showBillingRecord'>Удалить аккаунт</label>
                 </div>
               </div>
             </div>
           </div>
 
           <div className='section managerSection'>
-            <div className='sectionHeader'>Коментарій менеджера</div>
+            <div className='sectionHeader'>Комментарий менеджера</div>
             <div className='sectionContent'>
               <div className='formGroup'>
-                <label className='label'>Коментарій</label>
+                <label className='label'>Комментарий</label>
                 <textarea
                   name='managerComment'
                   value={formData.managerComment}
@@ -406,7 +402,7 @@ export default function EditOrderPage({ params }: OrderPageProps) {
                   checked={formData.managerApproved}
                   onChange={handleCheckboxChange}
                 />
-                <label htmlFor='managerApproved'>Так</label>
+                <label htmlFor='managerApproved'>Да</label>
               </div>
 
               <div className='formGroup managerBonus'>
@@ -423,7 +419,7 @@ export default function EditOrderPage({ params }: OrderPageProps) {
           </div>
 
           <div className='section'>
-            <div className='sectionHeader'>Стан замовлення</div>
+            <div className='sectionHeader'>Состояние заказа</div>
             <div className='sectionContent'>
               <div className='formGroup'>
                 <label className='label'>Статус</label>
@@ -432,12 +428,12 @@ export default function EditOrderPage({ params }: OrderPageProps) {
                   value={formData.status}
                   onChange={handleInputChange}
                 >
-                  <option value=''>Виберіть статус</option>
-                  <option value='new'>Новий</option>
-                  <option value='processing'>В обробці</option>
-                  <option value='shipped'>Відправлено</option>
+                  <option value=''>Выберите статус</option>
+                  <option value='new'>Новый</option>
+                  <option value='processing'>В обработке</option>
+                  <option value='shipped'>Отправлено</option>
                   <option value='delivered'>Доставлено</option>
-                  <option value='cancelled'>Скасовано</option>
+                  <option value='cancelled'>Отменено</option>
                 </select>
               </div>
             </div>

@@ -17,10 +17,10 @@ const AdminHeader = ({ lang, url, name }: Props) => {
       <div className='admin-header'>
         <div className='bread-crumb'>
           <Link href={`/${lang}`}>
-            <MainSVG /> Головна
+            <MainSVG /> Главная
           </Link>
           <Link href={`/${lang}/admin`}>
-            <NextSVG /> Адміністрування
+            <NextSVG /> Администрирование
           </Link>
           <Link href={`/${lang}/admin/${url}`}>
             <NextSVG /> {name}

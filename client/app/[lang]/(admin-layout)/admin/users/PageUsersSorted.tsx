@@ -35,7 +35,7 @@ const UserRow = memo(({ user, index }: { user: User; index: number }) => {
       }}
     >
       <div className='tema'>
-        <span className='mobile-label'>Імя:</span>
+        <span className='mobile-label'>Имя:</span>
         {user.name}
       </div>
       <div className='date'>
@@ -43,19 +43,19 @@ const UserRow = memo(({ user, index }: { user: User; index: number }) => {
         {user.email}
       </div>
       <div className='operations'>
-        <span className='mobile-label'>Остання активність:</span>
+        <span className='mobile-label'>Последняя активность:</span>
         {user.stayActive}
       </div>
       <div className='date-register'>
-        <span className='mobile-label'>Дата реєстрації:</span>
+        <span className='mobile-label'>Дата регистрации:</span>
         {user.dateRegister}
       </div>
       <div className='count-orders'>
-        <span className='mobile-label'>К-ть замовленнь:</span>
+        <span className='mobile-label'>Кол-во заказов:</span>
         {user.countOrders}
       </div>
       <div className='operations'>
-        <span className='mobile-label'>Сума витрат:</span>
+        <span className='mobile-label'>Сумма затрат:</span>
         {user.sumOrders} грн.
       </div>
     </div>
@@ -181,18 +181,18 @@ export default function UserSortableTable({
   return (
     <div className='list-reviews'>
       <div className='mobile-sort-controls'>
-        <div className='mobile-sort-label'>Сортувати за:</div>
+        <div className='mobile-sort-label'>Сортировать по:</div>
         <select
           onChange={e => requestSort(e.target.value as keyof User)}
           value={(sortConfig.key as string) || ''}
         >
-          <option value=''>Виберіть поле</option>
-          <option value='name'>Імя</option>
+          <option value=''>Выберите поле</option>
+          <option value='name'>Имя</option>
           <option value='email'>E-mail</option>
-          <option value='stayActive'>Остання активність</option>
-          <option value='dateRegister'>Дата реєстрації</option>
-          <option value='countOrders'>К-ть замовленнь</option>
-          <option value='sumOrders'>Сума витрат</option>
+          <option value='stayActive'>Последняя активность</option>
+          <option value='dateRegister'>Дата регистрации</option>
+          <option value='countOrders'>Кол-во заказов</option>
+          <option value='sumOrders'>Сумма затрат</option>
         </select>
 
         {sortConfig.key && (
@@ -205,8 +205,8 @@ export default function UserSortableTable({
             }
             value={sortConfig.direction || ''}
           >
-            <option value='ascending'>За зростанням</option>
-            <option value='descending'>За спаданням</option>
+            <option value='ascending'>По возрастанию</option>
+            <option value='descending'>По убыванию</option>
           </select>
         )}
       </div>
@@ -217,7 +217,7 @@ export default function UserSortableTable({
             className={`tema ${getSortDirection('name') ? `sorted-${getSortDirection('name')}` : ''}`}
             onClick={() => requestSort('name')}
           >
-            Імя {renderSortArrow('name')}
+            Имя {renderSortArrow('name')}
           </div>
           <div
             className={`date ${getSortDirection('email') ? `sorted-${getSortDirection('email')}` : ''}`}
@@ -233,7 +233,7 @@ export default function UserSortableTable({
             }`}
             onClick={() => requestSort('stayActive')}
           >
-            Остання активність {renderSortArrow('stayActive')}
+            Последняя активность {renderSortArrow('stayActive')}
           </div>
           <div
             className={`up date-register ${
@@ -243,7 +243,7 @@ export default function UserSortableTable({
             }`}
             onClick={() => requestSort('dateRegister')}
           >
-            Дата реєстрації {renderSortArrow('dateRegister')}
+            Дата регистрации {renderSortArrow('dateRegister')}
           </div>
           <div
             className={`up count-orders ${
@@ -253,17 +253,17 @@ export default function UserSortableTable({
             }`}
             onClick={() => requestSort('countOrders')}
           >
-            К-ть замовленнь {renderSortArrow('countOrders')}
+            Кол-во заказов {renderSortArrow('countOrders')}
           </div>
           <div
             className={`up operations ${getSortDirection('sumOrders') ? `sorted-${getSortDirection('sumOrders')}` : ''}`}
             onClick={() => requestSort('sumOrders')}
           >
-            Сума витрат {renderSortArrow('sumOrders')}
+            Сумма расходов {renderSortArrow('sumOrders')}
           </div>
         </div>
         {paginatedData.length === 0 ? (
-          <div className='review emptyMessage'>No data available</div>
+          <div className='review emptyMessage'>Нет доступных данных</div>
         ) : (
           <div className='reviews-list'>
             {paginatedData.map((user, index) => (

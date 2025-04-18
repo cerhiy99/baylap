@@ -287,11 +287,11 @@ const page = ({ params: { lang } }: { params: { lang: Locale } }) => {
         <div className='filter-container'>
           <div className='filters'>
             <div className='select filter'>
-              Дата початку:
+              Дата начала:
               <input type='date' />
             </div>
             <div className='filter'>
-              Дата кінця: <input type='date' />
+              Дата конца: <input type='date' />
             </div>
 
             <div className='admin-reviews-search'>
