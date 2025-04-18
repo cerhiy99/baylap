@@ -558,6 +558,15 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
   const [expandedOrderId, setExpandedOrderId] = useState<number | null>(null)
   const [expandedFilters, setExpandedFilters] = useState<boolean>(false)
 
+  const handleOrderChange = <K extends keyof Order>(
+    id: number,
+    key: K,
+    value: Order[K]
+  ) => {
+    setFilteredOrders(prev =>
+      prev.map(order => (order.id === id ? { ...order, [key]: value } : order))
+    )
+  }
   // Check if we're on a mobile device
   useEffect(() => {
     const checkIfMobile = () => {
@@ -968,9 +977,9 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
                 <input
                   type='checkbox'
                   checked={order.isMenedher}
-                  onChange={() => {
-                    // Логика для изменения статуса менеджера
-                  }}
+                  onChange={() =>
+                    handleOrderChange(order.id, 'isMenedher', !order.isMenedher)
+                  }
                 />
               </div>
               <div className='coment-meneger'>{order.comentMeneger}</div>

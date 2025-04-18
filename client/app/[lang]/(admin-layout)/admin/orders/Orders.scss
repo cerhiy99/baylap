@@ -44,6 +44,9 @@
         padding-bottom: 20px;
         align-items: center;
 
+        @media (max-width: 1570px) {
+          flex-wrap: wrap;
+        }
         &.filters-hidden {
           display: none;
         }
@@ -54,9 +57,7 @@
           align-items: center;
           .start {
           }
-          @media (max-width: 1570px) {
-            flex-wrap: wrap;
-          }
+
           @media (max-width: 991px) {
             flex-direction: column;
             align-items: flex-start;
@@ -159,7 +160,7 @@
             height: 100%;
             padding-left: 10px;
 
-            @media (max-width: 991px) {
+            @media (max-width: 1570px) {
               margin-left: 0;
             }
           }

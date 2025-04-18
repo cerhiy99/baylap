@@ -252,7 +252,7 @@ export default function EnhancedProductsTable({
               <th onClick={() => requestSort('category')}>
                 Категория {getSortDirectionIcon('category')}
               </th>
-              <th>ДЕЙСТВИЯ</th>
+              <th>Действия</th>
             </tr>
           </thead>
           <tbody>

@@ -578,7 +578,7 @@ const OrdersPageManager = ({
   // Проверяем, находимся ли мы на мобильном устройстве
   useEffect(() => {
     const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 992)
+      setIsMobile(window.innerWidth < 1440)
     }
 
     // Начальная проверка
@@ -1021,7 +1021,10 @@ const OrdersPageManager = ({
               ></textarea>
               <div className='coment-meneger'>{order.comentMeneger}</div>
               <div className='coment-meneger'>{order.comentMeneger}</div>
-              <div className='coment-meneger'>Редактировать</div>
+              <div className='coment-meneger'>
+                {' '}
+                <button className='edit-button'>Редактировать</button>
+              </div>
             </div>
           ))}
         </div>

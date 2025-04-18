@@ -215,7 +215,8 @@ const ReviewRow = memo(
         </div>
         <div className='operations'>
           <span className='mobile-label'>Операции:</span>
-          <span className='edit-link'>Редактировать</span>
+          {/* <span className='edit-link'>Редактировать</span> */}
+          <button className='edit-button'>Редактировать</button>
         </div>
       </div>
     )
@@ -512,7 +513,7 @@ const ReviewsPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
               >
                 Дата обновления
               </div>
-              <div className='operations'>Операції</div>
+              <div className='operations'>Операции</div>
             </div>
 
             {paginatedReviews.length === 0 ? (
