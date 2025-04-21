@@ -781,7 +781,9 @@ const OrdersPage = ({ params: { lang } }: { params: { lang: Locale } }) => {
 
             <div className='filter-row'>
               <div className='status'>
-                <span className='filter-label'>Статус заказа:</span>
+                <span className='filter-label status__label'>
+                  Статус заказа:
+                </span>
                 <select
                   value={statusFilter}
                   onChange={e => setStatusFilter(e.target.value)}

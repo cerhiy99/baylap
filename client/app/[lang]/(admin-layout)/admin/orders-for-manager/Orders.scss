@@ -163,6 +163,9 @@
             min-width: 140px;
           }
         }
+        .status__label {
+          white-space: nowrap;
+        }
 
         input[type='date'] {
           border-radius: 5px;
