@@ -5,7 +5,7 @@ import type React from 'react'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-import '../editOrder.scss'
+import '../../editOrder.scss'
 
 import type { Locale } from '@/i18n.config'
 import AdminHeader from '@/app/components/Admin/AdminHeader/AdminHeader'

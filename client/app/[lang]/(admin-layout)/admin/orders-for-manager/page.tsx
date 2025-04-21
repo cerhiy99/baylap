@@ -377,6 +377,7 @@ import LeftSVG from '@/app/assest/Admin/Left.svg'
 import RightSVG from '@/app/assest/Admin/Right.svg'
 import SearchSVG from '@/app/assest/Admin/Search.svg'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 interface Order {
   id: number
@@ -421,6 +422,7 @@ const OrderCard = ({
   handleCommentChange: (id: number, comment: string) => void
 }) => {
   const isExpanded = expandedOrderId === order.id
+  const router = useRouter()
 
   return (
     <div className={`order-card ${isSelected ? 'selected' : ''}`}>
@@ -542,7 +544,14 @@ const OrderCard = ({
               {order.comentMeneger}
             </div>
             <div className='action-buttons'>
-              <button className='edit-button'>Редактировать</button>
+              <button
+                className='edit-button'
+                onClick={() =>
+                  router.push(`/ru/admin/orders/edit-order/${order.id}`)
+                }
+              >
+                Редактировать
+              </button>
             </div>
           </div>
         </div>
@@ -770,6 +779,8 @@ const OrdersPageManager = ({
   const toggleBulkOperations = useCallback(() => {
     setExpandedBulkOperations(prev => !prev)
   }, [])
+
+  const router = useRouter()
 
   return (
     <div className='orders-container'>
@@ -1023,7 +1034,14 @@ const OrdersPageManager = ({
               <div className='coment-meneger'>{order.comentMeneger}</div>
               <div className='coment-meneger'>
                 {' '}
-                <button className='edit-button'>Редактировать</button>
+                <button
+                  className='edit-button'
+                  onClick={() =>
+                    router.push(`/ru/admin/orders/edit-order/${order.id}`)
+                  }
+                >
+                  Редактировать
+                </button>
               </div>
             </div>
           ))}
